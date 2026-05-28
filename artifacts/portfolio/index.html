@@ -120,7 +120,8 @@
       display: flex; flex-direction: column;
       justify-content: center; align-items: flex-start;
       padding: 100px 64px 80px;
-      position: relative; overflow: hidden;
+      position: relative; overflow: hidden; isolation: isolate;
+      background: var(--black);
     }
     .blob {
       position: absolute; border-radius: 50%;
@@ -300,9 +301,10 @@
 
     /* ── SERVICES ───────────────────────────────────── */
     #services {
-      background: var(--surface);
+      background: #0A0A0A;
       border-top: 1px solid var(--border);
       border-bottom: 1px solid var(--border);
+      position: relative; overflow: hidden; isolation: isolate;
     }
     .svc-grid {
       display: grid; grid-template-columns: repeat(3,1fr);
@@ -334,7 +336,7 @@
     }
 
     /* ── ABOUT ──────────────────────────────────────── */
-    #about { padding-top: 120px; }
+    #about { padding-top: 120px; position: relative; overflow: hidden; isolation: isolate; background: var(--black); }
     .about-grid {
       display: grid; grid-template-columns: 1fr 1fr;
       gap: 88px; margin-top: 60px; align-items: start;
@@ -386,7 +388,7 @@
     .t-period { font-size: 11.5px; color: var(--muted); letter-spacing: .5px; }
 
     /* ── CONTACT ────────────────────────────────────── */
-    #contact { text-align: center; padding: 120px 64px; }
+    #contact { text-align: center; padding: 120px 64px; position: relative; overflow: hidden; isolation: isolate; background: #050505; }
     .contact-sub {
       font-family: var(--heading); font-size: clamp(30px,5vw,64px);
       letter-spacing: 2px; color: var(--dim); margin: 18px 0 64px;
@@ -450,6 +452,62 @@
       color: var(--muted); text-decoration: none; cursor: none; transition: color .2s;
     }
     .f-links a:hover { color: var(--white); }
+
+    /* ── SECTION TEXTURES ──────────────────────────── */
+    /* shared pseudo reset */
+    #hero::before, #hero::after,
+    #services::before,
+    #about::before, #about::after,
+    #contact::before {
+      content: ''; position: absolute; inset: 0;
+      pointer-events: none; z-index: -1;
+    }
+    /* HERO — noise grain */
+    #hero::before {
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)'/%3E%3C/svg%3E");
+      background-repeat: repeat;
+      background-size: 300px 300px;
+      opacity: 0.04;
+    }
+    /* HERO — dot grid */
+    #hero::after {
+      background-image: radial-gradient(circle, #2A2A2A 1px, transparent 1px);
+      background-size: 28px 28px;
+      opacity: 0.4;
+    }
+    /* SERVICES — diagonal lines */
+    #services::before {
+      background-image: repeating-linear-gradient(
+        45deg,
+        transparent,
+        transparent 40px,
+        rgba(192,192,192,0.03) 40px,
+        rgba(192,192,192,0.03) 41px
+      );
+    }
+    /* ABOUT — noise grain */
+    #about::before {
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)'/%3E%3C/svg%3E");
+      background-repeat: repeat;
+      background-size: 300px 300px;
+      opacity: 0.03;
+    }
+    /* ABOUT — top-right silver glow */
+    #about::after {
+      background: radial-gradient(ellipse 600px 400px at 90% 10%, rgba(192,192,192,0.04) 0%, transparent 70%);
+    }
+    /* CONTACT — carbon fiber grid */
+    #contact::before {
+      background-image:
+        repeating-linear-gradient(
+          0deg, transparent, transparent 2px,
+          rgba(255,255,255,0.015) 2px, rgba(255,255,255,0.015) 3px
+        ),
+        repeating-linear-gradient(
+          90deg, transparent, transparent 2px,
+          rgba(255,255,255,0.015) 2px, rgba(255,255,255,0.015) 3px
+        );
+    }
 
     /* ── QUOTE BLOCKS ───────────────────────────────── */
     .quote-block {
