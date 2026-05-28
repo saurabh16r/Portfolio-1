@@ -1,0 +1,308 @@
+Convert this portfolio into a full-stack Node.js + Express app 
+with a password-protected Admin CMS panel.
+
+TECH STACK:
+- Node.js + Express backend
+- Replit DB for data storage (import with: 
+  const Database = require("@replit/database"))
+- Frontend: same HTML/CSS/JS design system 
+  (black, silver, Bebas Neue, DM Sans)
+- All portfolio pages served dynamically from Express
+
+---
+
+FILE STRUCTURE:
+/
+├── server.js          (Express app, all routes)
+├── package.json
+├── /public
+│   ├── index.html     (now template, data injected)
+│   ├── style.css
+│   └── admin/
+│       ├── index.html (admin dashboard)
+│       └── admin.css
+├── /views
+│   ├── project.html   (dynamic case study template)
+└── .env               (ADMIN_PASSWORD=yourpassword)
+
+---
+
+SERVER ROUTES:
+
+GET  /                    → serve portfolio homepage, 
+                            inject projects from DB
+GET  /project/:slug       → serve case study page, 
+                            inject project data from DB
+GET  /admin               → redirect to /admin/login 
+                            if not authenticated
+GET  /admin/login         → serve login page
+POST /admin/login         → check password from .env, 
+                            set session cookie, 
+                            redirect to /admin/dashboard
+GET  /admin/dashboard     → main CMS dashboard (protected)
+POST /api/projects        → create new project
+PUT  /api/projects/:id    → update project
+DELETE /api/projects/:id  → delete project
+POST /api/upload          → handle image upload, 
+                            return image URL
+GET  /admin/logout        → clear session, 
+                            redirect to login
+
+Use express-session for auth. 
+Session secret from .env: SESSION_SECRET=randomstring
+If session not found on any /admin route → 
+redirect to /admin/login
+
+---
+
+DATABASE SCHEMA:
+Store all projects as JSON array under key "projects" in 
+Replit DB. Each project object:
+
+{
+  id: "uuid-string",
+  slug: "aeron",
+  title: "Aeron",
+  tagline: "Reimagining fashion e-commerce",
+  category: "E-Commerce",
+  visible: true,
+  thumbnail_gradient: "linear-gradient(135deg, #1a1a1a, #2d2d2d)",
+  thumbnail_url: "",
+  role: "UI/UX Designer & Framer Developer",
+  timeline: "3 weeks",
+  tools: ["Figma", "Framer"],
+  type: "E-Commerce · Mobile App",
+  overview: {
+    challenge: "paragraph text here",
+    my_role: ["bullet 1", "bullet 2", "bullet 3"]
+  },
+  research: [
+    { number: "01", heading: "insight title", 
+      description: "2 line desc" },
+    { number: "02", heading: "insight title", 
+      description: "2 line desc" },
+    { number: "03", heading: "insight title", 
+      description: "2 line desc" }
+  ],
+  solution_features: [
+    { title: "Feature name", 
+      description: "paragraph", 
+      image_url: "" },
+  ],
+  results: [
+    { number: "3x", label: "Engagement increase" },
+    { number: "40%", label: "Faster checkout" },
+    { number: "92%", label: "User satisfaction" }
+  ],
+  learnings: {
+    worked: ["point 1", "point 2", "point 3"],
+    improve: ["point 1", "point 2", "point 3"]
+  },
+  order: 1
+}
+
+Also store separately in DB:
+- "services" key → array of service objects
+- "profile" key → about text, tagline, photo_url
+- "settings" key → site title, meta description
+
+---
+
+ADMIN DASHBOARD DESIGN:
+Same black/silver theme as portfolio.
+Sidebar navigation (left, fixed):
+  - Dashboard (overview stats)
+  - Projects
+  - Services  
+  - Profile
+  - Settings
+  - Logout
+
+Sidebar: #0A0A0A background, silver active indicator,
+DM Sans 14px nav items.
+Main content area: #000000 background.
+
+---
+
+DASHBOARD PAGE (/admin/dashboard):
+Show 4 stat cards:
+  - Total Projects
+  - Visible Projects  
+  - Total Case Studies
+  - Last Updated (timestamp)
+Cards: same style as portfolio service cards.
+Below: quick actions — "Add New Project" button (silver).
+
+---
+
+PROJECTS PAGE (/admin/projects):
+
+Top: "Projects" heading + "Add New Project" button (right)
+
+Project list table:
+Columns: Thumbnail | Title | Category | Visible | Order | Actions
+Each row:
+  - Small gradient thumbnail (40x40px, border-radius 4px)
+  - Project title + slug in gray below
+  - Category tag pill
+  - Visible toggle (silver toggle switch — 
+    ON = silver, OFF = #333)
+  - Order number (editable inline on click)
+  - Actions: Edit (pencil icon) | Delete (trash icon)
+    Both in silver, hover turns white.
+
+Rows: #0D0D0D background, 1px #1A1A1A border-bottom.
+Hover row: background #111111.
+
+Drag to reorder rows (use dragstart/dragover/drop 
+native HTML5 drag events to reorder and save order).
+
+---
+
+ADD / EDIT PROJECT PAGE:
+Full form with all fields from the schema above.
+Sections separated by thin silver dividers with 
+section headings in Bebas Neue.
+
+BASIC INFO section:
+  - Title (text input)
+  - Slug (auto-generated from title, editable)
+  - Tagline (text input)
+  - Category (select: E-Commerce, FinTech, 
+    Landing Page, Brand Website, Mobile App, Dashboard)
+  - Type (text input)
+  - Timeline (text input)
+  - Tools (tag input — type and press Enter to add, 
+    click × to remove tag)
+  - Visible (toggle)
+  - Order (number input)
+
+THUMBNAIL section:
+  - Gradient picker: 2 color inputs for gradient start/end
+    Live preview of gradient in a 200x120px rectangle
+  - OR upload image (file input)
+  - Preview updates live
+
+CASE STUDY CONTENT section:
+Tabs at top: Overview | Research | Process | Solution 
+             | Results | Learnings
+
+  OVERVIEW TAB:
+    - Challenge (textarea, 4 rows)
+    - My Role (dynamic list — add/remove bullet points
+      with + button and × to remove)
+
+  RESEARCH TAB:
+    - 3 insight cards (fixed)
+    - Each: Number (text), Heading (text), 
+      Description (textarea 2 rows)
+
+  SOLUTION TAB:
+    - Dynamic list of features (add/remove with + button)
+    - Each feature: Title, Description, Image upload
+    - Drag to reorder features
+
+  RESULTS TAB:
+    - 3 result stats (fixed)
+    - Each: Number (text, e.g. "3x"), Label (text)
+
+  LEARNINGS TAB:
+    - "What worked" — dynamic bullet list
+    - "What I'd improve" — dynamic bullet list
+
+SAVE button: fixed bottom-right of page, 
+silver background, black text, "Save Project".
+On save: POST or PUT to API, show success toast 
+notification (slides in from bottom: 
+"✓ Project saved successfully").
+
+---
+
+SERVICES PAGE (/admin/services):
+Edit the 3 service cards:
+  - Icon (emoji input)
+  - Title
+  - Description
+  - Starting price
+  - Visible toggle
+Same save + toast pattern.
+
+---
+
+PROFILE PAGE (/admin/profile):
+  - Hero tagline (text)
+  - About bio (textarea)
+  - Photo upload (preview shown)
+  - Skills (tag input)
+  - Email, Phone, LinkedIn, Behance (text inputs)
+Save button same pattern.
+
+---
+
+SETTINGS PAGE (/admin/settings):
+  - Site title (meta title)
+  - Meta description
+  - Change admin password 
+    (current password + new password + confirm)
+Save button same pattern.
+
+---
+
+LOGIN PAGE (/admin/login):
+Centered card on black background.
+"SR" monogram large in Bebas Neue at top.
+"Admin Access" heading.
+Password input (silver border, black bg).
+Login button (full width, silver).
+Wrong password: shake animation on card + 
+red-tinted error message "Incorrect password".
+No username — password only.
+
+---
+
+IMAGE HANDLING:
+For image uploads, convert to base64 and store 
+directly in Replit DB. 
+Max file size warning: show alert if file > 2MB.
+Display upload preview immediately after selection 
+using FileReader API before saving.
+
+---
+
+PORTFOLIO RENDERING:
+In index.html (served by Express), replace all 
+hardcoded project cards with a template literal loop 
+over projects from DB where visible === true, 
+sorted by order field.
+
+In project.html (case study), use the slug from 
+URL params to fetch the right project from DB 
+and inject all fields into the template.
+
+Use a simple templating approach — 
+replace {{placeholders}} in HTML strings server-side 
+before sending response.
+
+---
+
+SECURITY:
+- Admin password stored in .env, never in DB
+- All /admin/* and /api/* routes check session
+- If no valid session → redirect to /admin/login
+- Add basic rate limiting on login route: 
+  max 5 attempts, then 5 min lockout
+  (store attempt count in memory object)
+
+---
+
+PACKAGE.JSON dependencies needed:
+  express, @replit/database, express-session, 
+  uuid, dotenv, multer
+
+Run command: node server.js
+Port: 3000
+
+Seed the DB on first run if "projects" key is empty — 
+insert the Aeron and Finovo projects with full 
+placeholder data so the portfolio isn't empty 
+on first load.
