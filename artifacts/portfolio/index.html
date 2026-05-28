@@ -451,6 +451,50 @@
     }
     .f-links a:hover { color: var(--white); }
 
+    /* ── QUOTE BLOCKS ───────────────────────────────── */
+    .quote-block {
+      padding: 80px 64px;
+      display: flex; flex-direction: column; align-items: center;
+      text-align: center; background: var(--black);
+    }
+    .quote-rule {
+      width: 60px; height: 1px;
+      background: var(--silver); margin: 28px 0;
+    }
+    .quote-main {
+      font-family: var(--heading);
+      font-size: clamp(2rem, 6vw, 5rem);
+      color: var(--silver);
+      letter-spacing: 2px;
+      line-height: 1.1;
+      max-width: 900px;
+    }
+    .quote-sm-block {
+      padding: 64px 64px 0;
+      display: flex; flex-direction: column; align-items: center;
+      text-align: center; background: var(--black);
+    }
+    .quote-sm {
+      font-family: var(--body);
+      font-style: italic;
+      font-size: 18px;
+      font-weight: 300;
+      color: var(--dim);
+      max-width: 560px;
+      line-height: 1.7;
+      margin-bottom: 12px;
+    }
+    .quote-attr {
+      font-size: 13px;
+      color: var(--muted);
+      letter-spacing: 1px;
+    }
+    @media (max-width: 920px) {
+      .quote-block { padding: 60px 28px; }
+      .quote-sm-block { padding: 48px 28px 0; }
+      .quote-sm { font-size: 16px; }
+    }
+
     /* ── BACK TO TOP ────────────────────────────────── */
     #btt {
       position: fixed; bottom: 40px; right: 44px; z-index: 900;
@@ -559,6 +603,13 @@
       <span>BRAND WEBSITES</span><span class="mq-sep">·</span>
       <span>FAST DELIVERY</span><span class="mq-sep">·</span>
     </div>
+  </div>
+
+  <!-- ── QUOTE 1 ── -->
+  <div class="quote-block">
+    <div class="quote-rule"></div>
+    <p class="quote-main">"Good design is not how it looks — it's how it feels."</p>
+    <div class="quote-rule"></div>
   </div>
 
   <!-- ── WORK ── -->
@@ -716,6 +767,12 @@
       </div>
     </div>
   </section>
+
+  <!-- ── QUOTE 2 ── -->
+  <div class="quote-sm-block">
+    <p class="quote-sm">"Great websites don't happen by accident. Let's make yours intentional."</p>
+    <span class="quote-attr">— Saurabh Rathore</span>
+  </div>
 
   <!-- ── CONTACT ── -->
   <section id="contact">
