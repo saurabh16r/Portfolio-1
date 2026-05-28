@@ -1,0 +1,839 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Saurabh Rathore — Framer Designer &amp; Developer</title>
+  <meta name="description" content="I build fast, beautiful Framer websites for businesses, agencies and brands. Based in India." />
+  <meta name="robots" content="index, follow" />
+  <meta property="og:title" content="Saurabh Rathore — Framer Designer &amp; Developer" />
+  <meta property="og:description" content="I build fast, beautiful Framer websites for businesses, agencies and brands. Based in India." />
+  <meta property="og:type" content="website" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Saurabh Rathore — Framer Designer &amp; Developer" />
+  <meta name="twitter:description" content="I build fast, beautiful Framer websites for businesses, agencies and brands. Based in India." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --black:   #000000;
+      --surface: #0D0D0D;
+      --border:  #1A1A1A;
+      --silver:  #C0C0C0;
+      --white:   #FFFFFF;
+      --dim:     #666666;
+      --muted:   #333333;
+      --heading: 'Bebas Neue', sans-serif;
+      --body:    'DM Sans', sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--black);
+      color: var(--silver);
+      font-family: var(--body);
+      font-weight: 400;
+      line-height: 1.6;
+      overflow-x: hidden;
+      cursor: none;
+    }
+
+    /* ── CURSOR ─────────────────────────────────────── */
+    #cur {
+      position: fixed; width: 10px; height: 10px;
+      background: var(--silver); border-radius: 50%;
+      pointer-events: none; z-index: 10000;
+      transform: translate(-50%,-50%);
+      transition: width .18s, height .18s, background .18s;
+      mix-blend-mode: difference;
+    }
+    #cur-ring {
+      position: fixed; width: 34px; height: 34px;
+      border: 1px solid rgba(192,192,192,.35); border-radius: 50%;
+      pointer-events: none; z-index: 9999;
+      transform: translate(-50%,-50%);
+      transition: width .2s, height .2s;
+    }
+
+    /* ── SCROLLBAR ──────────────────────────────────── */
+    ::-webkit-scrollbar { width: 3px; }
+    ::-webkit-scrollbar-track { background: var(--black); }
+    ::-webkit-scrollbar-thumb { background: var(--muted); }
+    ::-webkit-scrollbar-thumb:hover { background: var(--silver); }
+    ::selection { background: var(--silver); color: var(--black); }
+
+    /* ── NAVBAR ─────────────────────────────────────── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+      padding: 22px 64px;
+      display: flex; align-items: center; justify-content: space-between;
+      transition: background .35s, backdrop-filter .35s, border-bottom .35s;
+    }
+    nav.scrolled {
+      background: rgba(0,0,0,.88);
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-logo {
+      font-family: var(--heading); font-size: 30px; letter-spacing: 6px;
+      color: var(--white); text-decoration: none; cursor: none;
+    }
+    .nav-logo em { color: var(--silver); font-style: normal; }
+    .nav-links { display: flex; gap: 44px; list-style: none; }
+    .nav-links a {
+      color: var(--dim); text-decoration: none;
+      font-size: 11px; font-weight: 500; letter-spacing: 2.5px; text-transform: uppercase;
+      transition: color .2s; cursor: none;
+    }
+    .nav-links a:hover { color: var(--white); }
+    .hamburger {
+      display: none; flex-direction: column; gap: 6px;
+      cursor: none; background: none; border: none; padding: 4px;
+    }
+    .hamburger span {
+      display: block; width: 24px; height: 1px; background: var(--silver);
+      transition: transform .3s, opacity .3s;
+    }
+    .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .hamburger.open span:nth-child(2) { opacity: 0; }
+    .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+    .mob-menu {
+      display: none; position: fixed; inset: 0;
+      background: rgba(0,0,0,.97); z-index: 999;
+      flex-direction: column; align-items: center; justify-content: center; gap: 52px;
+    }
+    .mob-menu.open { display: flex; }
+    .mob-menu a {
+      font-family: var(--heading); font-size: 56px; letter-spacing: 4px;
+      color: var(--dim); text-decoration: none; transition: color .2s; cursor: none;
+    }
+    .mob-menu a:hover { color: var(--white); }
+
+    /* ── HERO ───────────────────────────────────────── */
+    #hero {
+      min-height: 100vh;
+      display: flex; flex-direction: column;
+      justify-content: center; align-items: flex-start;
+      padding: 100px 64px 80px;
+      position: relative; overflow: hidden;
+    }
+    .blob {
+      position: absolute; border-radius: 50%;
+      filter: blur(110px); pointer-events: none;
+    }
+    .blob-a {
+      width: 640px; height: 640px;
+      background: rgba(192,192,192,.045);
+      top: -140px; right: -180px;
+      animation: bfloat 12s ease-in-out infinite;
+    }
+    .blob-b {
+      width: 420px; height: 420px;
+      background: rgba(192,192,192,.03);
+      bottom: 60px; left: -80px;
+      animation: bfloat 16s ease-in-out infinite reverse;
+    }
+    @keyframes bfloat {
+      0%,100% { transform: translate(0,0) scale(1); }
+      40%  { transform: translate(28px,-28px) scale(1.04); }
+      70%  { transform: translate(-18px,18px) scale(.97); }
+    }
+
+    .hero-eyebrow {
+      font-size: 11px; letter-spacing: 4px; text-transform: uppercase;
+      color: var(--dim); margin-bottom: 28px;
+      opacity: 0; transform: translateY(18px);
+      animation: rise .6s ease forwards .15s;
+    }
+    .hero-h {
+      font-family: var(--heading); line-height: .88; margin-bottom: 36px;
+    }
+    .hl1 {
+      display: block; font-size: clamp(88px, 14vw, 210px);
+      color: var(--white); letter-spacing: -2px;
+      opacity: 0; transform: translateY(64px);
+      animation: rise .75s cubic-bezier(.16,1,.3,1) forwards .35s;
+    }
+    .hl2 {
+      display: block; font-size: clamp(42px, 7vw, 108px);
+      color: transparent;
+      -webkit-text-stroke: 1.2px var(--silver);
+      letter-spacing: 5px;
+      opacity: 0; transform: translateY(64px);
+      animation: rise .75s cubic-bezier(.16,1,.3,1) forwards .55s;
+    }
+    .hero-sub {
+      font-size: clamp(15px,2vw,18px); color: var(--dim);
+      max-width: 500px; margin-bottom: 52px; font-weight: 300;
+      opacity: 0; transform: translateY(18px);
+      animation: rise .6s ease forwards .75s;
+    }
+    .hero-btns {
+      display: flex; gap: 14px; flex-wrap: wrap;
+      opacity: 0; transform: translateY(18px);
+      animation: rise .6s ease forwards .92s;
+    }
+    @keyframes rise { to { opacity:1; transform:translateY(0); } }
+
+    .btn-fill {
+      background: var(--silver); color: var(--black);
+      border: 1px solid var(--silver);
+      padding: 13px 38px; font-family: var(--body);
+      font-size: 11px; font-weight: 600; letter-spacing: 2.5px;
+      text-transform: uppercase; text-decoration: none; cursor: none;
+      transition: background .2s, border-color .2s;
+    }
+    .btn-fill:hover { background: var(--white); border-color: var(--white); }
+    .btn-ghost {
+      background: transparent; color: var(--silver);
+      border: 1px solid var(--silver);
+      padding: 13px 38px; font-family: var(--body);
+      font-size: 11px; font-weight: 600; letter-spacing: 2.5px;
+      text-transform: uppercase; text-decoration: none; cursor: none;
+      transition: background .2s, color .2s;
+    }
+    .btn-ghost:hover { background: var(--silver); color: var(--black); }
+
+    .scroll-hint {
+      position: absolute; bottom: 44px; left: 64px;
+      display: flex; flex-direction: column; align-items: center; gap: 8px;
+      opacity: 0; animation: rise .5s ease forwards 1.15s;
+    }
+    .scroll-hint span { font-size: 9px; letter-spacing: 3px; text-transform: uppercase; color: var(--muted); }
+    .scroll-line {
+      width: 1px; height: 44px;
+      background: linear-gradient(to bottom, var(--muted), transparent);
+      animation: pulse 2.2s ease-in-out infinite;
+    }
+    @keyframes pulse { 0%,100% { opacity:1; transform:scaleY(1); } 50% { opacity:.35; transform:scaleY(.5); } }
+
+    /* ── MARQUEE ────────────────────────────────────── */
+    .mq-wrap {
+      overflow: hidden; background: var(--surface);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      padding: 17px 0; white-space: nowrap;
+    }
+    .mq-track {
+      display: inline-block;
+      animation: mqroll 26s linear infinite;
+    }
+    .mq-track:hover { animation-play-state: paused; }
+    .mq-track span {
+      font-family: var(--heading); font-size: 17px;
+      letter-spacing: 5px; color: var(--silver);
+      padding: 0 28px;
+    }
+    .mq-sep { color: var(--muted) !important; padding: 0 8px !important; letter-spacing: 2px !important; }
+    @keyframes mqroll { 0% { transform:translateX(0); } 100% { transform:translateX(-50%); } }
+
+    /* ── SHARED SECTION ─────────────────────────────── */
+    section { padding: 120px 64px; }
+    .s-num { font-family: var(--heading); font-size: 10px; letter-spacing: 4px; color: rgba(192,192,192,.18); margin-bottom: 6px; }
+    .s-tag { font-size: 10px; letter-spacing: 4px; text-transform: uppercase; color: var(--muted); margin-bottom: 18px; }
+    .s-head {
+      font-family: var(--heading); font-size: clamp(48px,7vw,86px);
+      letter-spacing: 2px; color: var(--white); line-height: .96;
+      opacity: 0; transform: translateY(44px);
+      transition: opacity .85s ease, transform .85s ease;
+    }
+    .s-head.in { opacity:1; transform:translateY(0); }
+
+    /* ── WORK ───────────────────────────────────────── */
+    #work { padding-bottom: 60px; }
+    .work-grid {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 2px; margin-top: 64px;
+    }
+    .card {
+      background: var(--surface); border: 1px solid var(--border);
+      overflow: hidden; cursor: none;
+      transition: border-color .3s, transform .35s cubic-bezier(.16,1,.3,1);
+    }
+    .card:hover { border-color: var(--silver); transform: scale(1.012); }
+    .card-thumb {
+      height: 260px; display: flex; align-items: center; justify-content: center;
+      position: relative; overflow: hidden;
+    }
+    .card-thumb::before {
+      content: '';  position: absolute; inset: 0;
+      background: repeating-linear-gradient(45deg, transparent, transparent 38px, rgba(192,192,192,.014) 38px, rgba(192,192,192,.014) 39px);
+    }
+    .card-thumb-label {
+      font-family: var(--heading); font-size: clamp(32px,5vw,60px);
+      letter-spacing: 5px; color: rgba(255,255,255,.1); z-index: 1;
+      transition: color .3s; text-align: center; padding: 0 16px;
+    }
+    .card:hover .card-thumb-label { color: rgba(255,255,255,.2); }
+    .t1 { background: linear-gradient(140deg,#0D0D0D,#181818,#0f0f0f); }
+    .t2 { background: linear-gradient(140deg,#0a0a0a,#161616,#0D0D0D); }
+    .t3 { background: linear-gradient(140deg,#0D0D0D,#191919,#111); }
+    .t4 { background: linear-gradient(140deg,#0a0a0a,#141414,#0e0e0e); }
+    .t5 { background: linear-gradient(140deg,#0c0c0c,#171717,#0D0D0D); }
+    .t6 { background: linear-gradient(140deg,#0a0a0a,#1a1a1a,#111); }
+    .card-body { padding: 28px 32px 34px; }
+    .card-tag {
+      display: inline-block; font-size: 9px; letter-spacing: 2.5px;
+      text-transform: uppercase; color: var(--silver);
+      background: var(--black); border: 1px solid var(--border);
+      padding: 4px 12px; margin-bottom: 16px;
+      transition: border-color .2s;
+    }
+    .card:hover .card-tag { border-color: var(--silver); }
+    .card-name {
+      font-family: var(--heading); font-size: 30px;
+      letter-spacing: 2px; color: var(--white); margin-bottom: 10px; line-height: 1;
+    }
+    .card-desc { font-size: 13px; color: var(--dim); margin-bottom: 22px; line-height: 1.65; }
+    .card-link {
+      font-size: 11px; letter-spacing: 2.5px; text-transform: uppercase;
+      color: var(--silver); text-decoration: none;
+      display: inline-flex; align-items: center; gap: 8px; cursor: none;
+      transition: color .2s, gap .25s;
+    }
+    .card-link:hover { color: var(--white); gap: 14px; }
+
+    /* ── SERVICES ───────────────────────────────────── */
+    #services {
+      background: var(--surface);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+    .svc-grid {
+      display: grid; grid-template-columns: repeat(3,1fr);
+      gap: 0; margin-top: 64px;
+      border: 1px solid var(--border);
+    }
+    .svc-card {
+      padding: 52px 44px;
+      background: var(--black);
+      border-right: 1px solid var(--border);
+      transition: background .3s; cursor: none;
+    }
+    .svc-card:last-child { border-right: none; }
+    .svc-card:hover { background: #080808; }
+    .svc-n {
+      font-family: var(--heading); font-size: 52px;
+      color: rgba(192,192,192,.1); line-height: 1; margin-bottom: 28px;
+    }
+    .svc-icon { font-size: 30px; display: block; margin-bottom: 20px; filter: grayscale(1); }
+    .svc-name {
+      font-family: var(--heading); font-size: 26px;
+      letter-spacing: 2px; color: var(--white); margin-bottom: 18px; line-height: 1.05;
+    }
+    .svc-desc { font-size: 13.5px; color: var(--dim); margin-bottom: 0; line-height: 1.75; }
+    .svc-price {
+      font-size: 11px; letter-spacing: 2px; text-transform: uppercase;
+      color: var(--silver); border-top: 1px solid var(--border);
+      padding-top: 22px; margin-top: 24px;
+    }
+
+    /* ── ABOUT ──────────────────────────────────────── */
+    #about { padding-top: 120px; }
+    .about-grid {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 88px; margin-top: 60px; align-items: start;
+    }
+    .about-bio {
+      font-size: 15px; color: var(--dim); line-height: 1.95;
+      margin-top: 28px;
+    }
+    .skills-label { font-size: 10px; letter-spacing: 3px; text-transform: uppercase; color: var(--muted); margin-top: 44px; margin-bottom: 16px; }
+    .pills { display: flex; flex-wrap: wrap; gap: 8px; }
+    .pill {
+      font-size: 10px; letter-spacing: 2px; text-transform: uppercase;
+      color: var(--silver); background: var(--border);
+      border: 1px solid var(--border); padding: 6px 16px;
+      transition: border-color .2s, background .2s;
+    }
+    .pill:hover { border-color: var(--silver); background: transparent; }
+    .exp-label { font-size: 10px; letter-spacing: 3px; text-transform: uppercase; color: var(--muted); margin-bottom: 32px; }
+    .timeline { position: relative; padding-left: 30px; }
+    .timeline::before {
+      content: ''; position: absolute; left: 0; top: 8px; bottom: 8px;
+      width: 1px; background: linear-gradient(to bottom, var(--silver), var(--border) 80%);
+    }
+    .t-item { position: relative; padding-bottom: 52px; }
+    .t-item:last-child { padding-bottom: 0; }
+    .t-dot {
+      position: absolute; left: -36px; top: 7px;
+      width: 12px; height: 12px; border-radius: 50%;
+      border: 1px solid var(--silver); background: var(--black);
+    }
+    .t-item.live .t-dot {
+      background: var(--silver);
+      box-shadow: 0 0 14px rgba(192,192,192,.45);
+    }
+    .t-type { font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--muted); margin-bottom: 8px; }
+    .t-header { display: flex; align-items: center; gap: 10px; margin-bottom: 6px; }
+    .t-company { font-family: var(--heading); font-size: 22px; letter-spacing: 2px; color: var(--white); }
+    .t-badge {
+      font-size: 8px; letter-spacing: 2.5px; text-transform: uppercase;
+      color: var(--silver); border: 1px solid var(--silver);
+      padding: 2px 9px; display: inline-flex; align-items: center; gap: 5px;
+    }
+    .t-badge-dot {
+      width: 5px; height: 5px; border-radius: 50%; background: var(--white);
+      animation: lpulse 2s ease-in-out infinite;
+    }
+    @keyframes lpulse { 0%,100% { opacity:1; } 50% { opacity:.25; } }
+    .t-role { font-size: 13.5px; color: var(--silver); margin-bottom: 4px; font-weight: 500; }
+    .t-period { font-size: 11.5px; color: var(--muted); letter-spacing: .5px; }
+
+    /* ── CONTACT ────────────────────────────────────── */
+    #contact { text-align: center; padding: 120px 64px; }
+    .contact-sub {
+      font-family: var(--heading); font-size: clamp(30px,5vw,64px);
+      letter-spacing: 2px; color: var(--dim); margin: 18px 0 64px;
+      opacity: 0; transform: translateY(32px);
+      transition: opacity .8s ease .15s, transform .8s ease .15s;
+    }
+    .contact-sub.in { opacity:1; transform:translateY(0); }
+    .c-cards {
+      display: flex; gap: 20px; justify-content: center;
+      margin-bottom: 64px; flex-wrap: wrap;
+    }
+    .c-card {
+      background: var(--surface); border: 1px solid var(--border);
+      padding: 32px 40px; min-width: 230px; text-align: left;
+      cursor: none; text-decoration: none; display: block;
+      transition: border-color .3s, background .25s;
+    }
+    .c-card:hover { border-color: var(--silver); background: var(--black); }
+    .c-lbl { font-size: 9px; letter-spacing: 3px; text-transform: uppercase; color: var(--muted); margin-bottom: 12px; }
+    .c-val { font-size: 13.5px; color: var(--silver); font-weight: 500; transition: color .2s; }
+    .c-card:hover .c-val { color: var(--white); }
+    .form-wrap { max-width: 540px; margin: 0 auto; text-align: left; }
+    .fg { margin-bottom: 20px; }
+    .fg label { display: block; font-size: 9px; letter-spacing: 3px; text-transform: uppercase; color: var(--muted); margin-bottom: 9px; }
+    .fg input, .fg textarea {
+      width: 100%; background: var(--surface); border: 1px solid var(--border);
+      color: var(--silver); font-family: var(--body); font-size: 14px;
+      padding: 13px 18px; outline: none; transition: border-color .2s; resize: vertical;
+    }
+    .fg input::placeholder, .fg textarea::placeholder { color: var(--muted); }
+    .fg input:focus, .fg textarea:focus {
+      border-color: var(--silver);
+      box-shadow: 0 0 0 1px rgba(192,192,192,.08);
+    }
+    .fg textarea { height: 120px; }
+    .btn-send {
+      background: var(--silver); color: var(--black);
+      border: 1px solid var(--silver);
+      padding: 14px 40px; font-family: var(--body);
+      font-size: 11px; font-weight: 600; letter-spacing: 2.5px;
+      text-transform: uppercase; cursor: none; width: 100%;
+      transition: background .2s;
+    }
+    .btn-send:hover { background: var(--white); border-color: var(--white); }
+    .form-ok {
+      display: none; text-align: center; padding: 40px;
+      border: 1px solid var(--silver); background: var(--surface);
+    }
+    .form-ok p { font-size: 13px; color: var(--silver); letter-spacing: 1px; }
+
+    /* ── FOOTER ─────────────────────────────────────── */
+    footer {
+      border-top: 1px solid var(--border); padding: 28px 64px;
+      display: flex; align-items: center; justify-content: space-between;
+      background: var(--surface);
+    }
+    .f-copy { font-size: 11.5px; color: var(--muted); letter-spacing: 1px; }
+    .f-links { display: flex; gap: 24px; }
+    .f-links a {
+      font-size: 11px; letter-spacing: 2px; text-transform: uppercase;
+      color: var(--muted); text-decoration: none; cursor: none; transition: color .2s;
+    }
+    .f-links a:hover { color: var(--white); }
+
+    /* ── BACK TO TOP ────────────────────────────────── */
+    #btt {
+      position: fixed; bottom: 40px; right: 44px; z-index: 900;
+      width: 44px; height: 44px;
+      border: 1px solid var(--border); background: var(--surface);
+      display: flex; align-items: center; justify-content: center;
+      text-decoration: none; cursor: none;
+      opacity: 0; transform: translateY(16px);
+      transition: opacity .3s, transform .3s, border-color .2s;
+    }
+    #btt.show { opacity:1; transform:translateY(0); }
+    #btt:hover { border-color: var(--silver); }
+    #btt svg { width: 16px; height: 16px; stroke: var(--silver); fill: none; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
+
+    /* ── REVEAL ─────────────────────────────────────── */
+    .rev { opacity:0; transform:translateY(44px); transition: opacity .85s ease, transform .85s ease; }
+    .rev.in { opacity:1; transform:translateY(0); }
+    .d1 { transition-delay:.1s; }
+    .d2 { transition-delay:.2s; }
+    .d3 { transition-delay:.3s; }
+
+    /* ── RESPONSIVE ─────────────────────────────────── */
+    @media (max-width: 920px) {
+      nav { padding: 20px 28px; }
+      .nav-links { display: none; }
+      .hamburger { display: flex; }
+      #hero { padding: 120px 28px 80px; }
+      .scroll-hint { left: 28px; }
+      section { padding: 80px 28px; }
+      #contact { padding: 80px 28px; }
+      .work-grid { grid-template-columns: 1fr; }
+      .svc-grid { grid-template-columns: 1fr; }
+      .svc-card { border-right: none; border-bottom: 1px solid var(--border); }
+      .svc-card:last-child { border-bottom: none; }
+      .about-grid { grid-template-columns: 1fr; gap: 48px; }
+      .c-cards { flex-direction: column; align-items: center; }
+      .c-card { width: 100%; max-width: 380px; }
+      footer { padding: 24px 28px; flex-direction: column; gap: 12px; text-align: center; }
+      #btt { bottom: 24px; right: 24px; }
+    }
+  </style>
+</head>
+<body>
+
+  <div id="cur"></div>
+  <div id="cur-ring"></div>
+
+  <!-- ── NAVBAR ── -->
+  <nav id="nav">
+    <a class="nav-logo" href="#">S<em>R</em></a>
+    <ul class="nav-links">
+      <li><a href="#work">Work</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#services">Services</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <button class="hamburger" id="hbg" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <!-- ── MOBILE MENU ── -->
+  <div class="mob-menu" id="mmenu">
+    <a href="#work"     onclick="cmob()">Work</a>
+    <a href="#about"    onclick="cmob()">About</a>
+    <a href="#services" onclick="cmob()">Services</a>
+    <a href="#contact"  onclick="cmob()">Contact</a>
+  </div>
+
+  <!-- ── HERO ── -->
+  <section id="hero">
+    <div class="blob blob-a"></div>
+    <div class="blob blob-b"></div>
+    <p class="hero-eyebrow">Based in India &nbsp;·&nbsp; Available for Projects</p>
+    <h1 class="hero-h">
+      <span class="hl1">FRAMER</span>
+      <span class="hl2">DESIGNER &amp; DEVELOPER</span>
+    </h1>
+    <p class="hero-sub">I build fast, beautiful Framer websites for businesses that want to stand out.</p>
+    <div class="hero-btns">
+      <a href="#work" class="btn-fill">See My Work</a>
+      <a href="#contact" class="btn-ghost">Let's Talk</a>
+    </div>
+    <div class="scroll-hint">
+      <span>Scroll</span>
+      <div class="scroll-line"></div>
+    </div>
+  </section>
+
+  <!-- ── MARQUEE ── -->
+  <div class="mq-wrap">
+    <div class="mq-track">
+      <span>FRAMER DEVELOPMENT</span><span class="mq-sep">·</span>
+      <span>UI/UX DESIGN</span><span class="mq-sep">·</span>
+      <span>LANDING PAGES</span><span class="mq-sep">·</span>
+      <span>BRAND WEBSITES</span><span class="mq-sep">·</span>
+      <span>FAST DELIVERY</span><span class="mq-sep">·</span>
+      <span>FRAMER DEVELOPMENT</span><span class="mq-sep">·</span>
+      <span>UI/UX DESIGN</span><span class="mq-sep">·</span>
+      <span>LANDING PAGES</span><span class="mq-sep">·</span>
+      <span>BRAND WEBSITES</span><span class="mq-sep">·</span>
+      <span>FAST DELIVERY</span><span class="mq-sep">·</span>
+      <span>FRAMER DEVELOPMENT</span><span class="mq-sep">·</span>
+      <span>UI/UX DESIGN</span><span class="mq-sep">·</span>
+      <span>LANDING PAGES</span><span class="mq-sep">·</span>
+      <span>BRAND WEBSITES</span><span class="mq-sep">·</span>
+      <span>FAST DELIVERY</span><span class="mq-sep">·</span>
+    </div>
+  </div>
+
+  <!-- ── WORK ── -->
+  <section id="work">
+    <div class="s-num">01</div>
+    <p class="s-tag">Selected Projects</p>
+    <h2 class="s-head">Selected Work</h2>
+    <div class="work-grid">
+
+      <div class="card rev">
+        <div class="card-thumb t1"><span class="card-thumb-label">AERON</span></div>
+        <div class="card-body">
+          <span class="card-tag">E-Commerce</span>
+          <h3 class="card-name">Aeron</h3>
+          <p class="card-desc">Fashion e-commerce UI · AR try-ons, 360° views, next-gen shopping experience</p>
+          <a href="#" class="card-link">View Project <span>→</span></a>
+        </div>
+      </div>
+
+      <div class="card rev d1">
+        <div class="card-thumb t2"><span class="card-thumb-label">FINOVO</span></div>
+        <div class="card-body">
+          <span class="card-tag">FinTech</span>
+          <h3 class="card-name">Finovo</h3>
+          <p class="card-desc">Gen Z finance app · Budgeting, saving &amp; investing made effortless</p>
+          <a href="#" class="card-link">View Project <span>→</span></a>
+        </div>
+      </div>
+
+      <div class="card rev d2">
+        <div class="card-thumb t3"><span class="card-thumb-label">PROJECT III</span></div>
+        <div class="card-body">
+          <span class="card-tag">Landing Page</span>
+          <h3 class="card-name">Project 03</h3>
+          <p class="card-desc">High-converting landing page · Clean, fast, built to convert visitors into clients</p>
+          <a href="#" class="card-link">View Project <span>→</span></a>
+        </div>
+      </div>
+
+      <div class="card rev d3">
+        <div class="card-thumb t4"><span class="card-thumb-label">PROJECT IV</span></div>
+        <div class="card-body">
+          <span class="card-tag">Brand Website</span>
+          <h3 class="card-name">Project 04</h3>
+          <p class="card-desc">Multi-page brand website · Crafted for identity, storytelling, and lasting impression</p>
+          <a href="#" class="card-link">View Project <span>→</span></a>
+        </div>
+      </div>
+
+      <div class="card rev">
+        <div class="card-thumb t5"><span class="card-thumb-label">PROJECT V</span></div>
+        <div class="card-body">
+          <span class="card-tag">Mobile App</span>
+          <h3 class="card-name">Project 05</h3>
+          <p class="card-desc">Mobile-first UI design · Sleek interactions, pixel-perfect screens, native feel</p>
+          <a href="#" class="card-link">View Project <span>→</span></a>
+        </div>
+      </div>
+
+      <div class="card rev d1">
+        <div class="card-thumb t6"><span class="card-thumb-label">PROJECT VI</span></div>
+        <div class="card-body">
+          <span class="card-tag">Dashboard</span>
+          <h3 class="card-name">Project 06</h3>
+          <p class="card-desc">Data dashboard UI · Dense, scannable, ruthlessly clear — every pixel earns its place</p>
+          <a href="#" class="card-link">View Project <span>→</span></a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ── SERVICES ── -->
+  <section id="services">
+    <div class="s-num">02</div>
+    <p class="s-tag">Offerings</p>
+    <h2 class="s-head">What I Build</h2>
+    <div class="svc-grid">
+      <div class="svc-card rev">
+        <span class="svc-n">01</span>
+        <span class="svc-icon">🖥</span>
+        <h3 class="svc-name">Landing Pages</h3>
+        <p class="svc-desc">High-converting, fast-loading Framer pages that make visitors stay. Delivered in 5–7 days. Sharp, purposeful, no filler.</p>
+        <div class="svc-price">Starting at ₹8,000</div>
+      </div>
+      <div class="svc-card rev d1">
+        <span class="svc-n">02</span>
+        <span class="svc-icon">🌐</span>
+        <h3 class="svc-name">Business Websites</h3>
+        <p class="svc-desc">Multi-page Framer websites for showrooms, studios &amp; brands. Built for presence, performance, and lasting impact.</p>
+        <div class="svc-price">Starting at ₹18,000</div>
+      </div>
+      <div class="svc-card rev d2">
+        <span class="svc-n">03</span>
+        <span class="svc-icon">🤝</span>
+        <h3 class="svc-name">Agency Whitelabel</h3>
+        <p class="svc-desc">I build Framer projects under your agency's name. Seamless, reliable, and completely discreet. Your client, your brand, my craft.</p>
+        <div class="svc-price">Let's talk pricing</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── ABOUT ── -->
+  <section id="about">
+    <div class="s-num">03</div>
+    <p class="s-tag">The Designer</p>
+    <h2 class="s-head">About Me</h2>
+    <div class="about-grid">
+      <div>
+        <p class="about-bio rev">
+          I'm Saurabh Rathore, a Framer Designer &amp; Developer based in India. Currently working full-time at Deven as a UI/UX Designer &amp; Framer Developer, I've built real products across startups and agencies. I completed my BCA (2025), interned at Zaalima Development (Top Performer) and Deven before joining full-time. I specialise in turning ideas into fast, beautiful Framer websites — for businesses, agencies, and brands that take design seriously.
+        </p>
+        <div class="skills-label rev d1">Skills &amp; Tools</div>
+        <div class="pills rev d2">
+          <span class="pill">Framer</span>
+          <span class="pill">Figma</span>
+          <span class="pill">UI/UX Design</span>
+          <span class="pill">Prototyping</span>
+          <span class="pill">Web Design</span>
+          <span class="pill">Interaction Design</span>
+        </div>
+      </div>
+      <div>
+        <div class="exp-label rev">Experience</div>
+        <div class="timeline rev d1">
+          <div class="t-item live">
+            <div class="t-dot"></div>
+            <div class="t-type">Full-time · Deven</div>
+            <div class="t-header">
+              <span class="t-company">DEVEN</span>
+              <span class="t-badge"><span class="t-badge-dot"></span> Live</span>
+            </div>
+            <div class="t-role">UI/UX Designer &amp; Framer Developer</div>
+            <div class="t-period">May 2026 – Present</div>
+          </div>
+          <div class="t-item">
+            <div class="t-dot"></div>
+            <div class="t-type">Internship · Deven</div>
+            <div class="t-header">
+              <span class="t-company">DEVEN</span>
+            </div>
+            <div class="t-role">UI/UX &amp; Framer Developer Intern</div>
+            <div class="t-period">Feb 2026 – Apr 2026</div>
+          </div>
+          <div class="t-item">
+            <div class="t-dot"></div>
+            <div class="t-type">Internship · Zaalima Development</div>
+            <div class="t-header">
+              <span class="t-company">ZAALIMA DEVELOPMENT</span>
+            </div>
+            <div class="t-role">UI/UX Designer · Top Performer</div>
+            <div class="t-period">Apr 2025 – Jul 2025</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── CONTACT ── -->
+  <section id="contact">
+    <div class="s-num">04</div>
+    <p class="s-tag">Start a Conversation</p>
+    <h2 class="s-head">Let's Work Together</h2>
+    <p class="contact-sub">Got a project in mind?</p>
+
+    <div class="c-cards">
+      <a href="mailto:thisissaurabhrathore@gmail.com" class="c-card rev">
+        <div class="c-lbl">Email</div>
+        <div class="c-val">thisissaurabhrathore@gmail.com</div>
+      </a>
+      <a href="https://wa.me/917298422436" target="_blank" rel="noopener" class="c-card rev d1">
+        <div class="c-lbl">WhatsApp</div>
+        <div class="c-val">+91 72984 22436</div>
+      </a>
+    </div>
+
+    <div class="form-wrap rev d1">
+      <div id="cform">
+        <div class="fg">
+          <label for="fn">Name</label>
+          <input type="text" id="fn" placeholder="Your name" autocomplete="off" />
+        </div>
+        <div class="fg">
+          <label for="fe">Email</label>
+          <input type="email" id="fe" placeholder="your@email.com" autocomplete="off" />
+        </div>
+        <div class="fg">
+          <label for="fm">Message</label>
+          <textarea id="fm" placeholder="Tell me about your project…"></textarea>
+        </div>
+        <button class="btn-send" type="button" onclick="sendForm()">Send Message</button>
+      </div>
+      <div class="form-ok" id="fok">
+        <p>✦ &nbsp; Message received. I'll be in touch shortly.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── FOOTER ── -->
+  <footer>
+    <span class="f-copy">© 2025 Saurabh Rathore</span>
+    <div class="f-links">
+      <a href="https://www.linkedin.com/in/saurabh-singh-rathore-04a982332/" target="_blank" rel="noopener">LinkedIn</a>
+      <a href="https://www.behance.net/ankitrathore29" target="_blank" rel="noopener">Behance</a>
+    </div>
+  </footer>
+
+  <a href="#" id="btt" aria-label="Back to top">
+    <svg viewBox="0 0 24 24"><polyline points="18 15 12 9 6 15"></polyline></svg>
+  </a>
+
+  <script>
+    /* ── CURSOR ── */
+    var cur = document.getElementById('cur'),
+        ring = document.getElementById('cur-ring'),
+        mx = -200, my = -200, rx = -200, ry = -200;
+    document.addEventListener('mousemove', function(e) { mx = e.clientX; my = e.clientY; });
+    (function tick() {
+      cur.style.left = mx + 'px'; cur.style.top = my + 'px';
+      rx += (mx - rx) * 0.13; ry += (my - ry) * 0.13;
+      ring.style.left = rx + 'px'; ring.style.top = ry + 'px';
+      requestAnimationFrame(tick);
+    })();
+    document.querySelectorAll('a,button,.card,.svc-card,.c-card').forEach(function(el) {
+      el.addEventListener('mouseenter', function() {
+        cur.style.width = '18px'; cur.style.height = '18px'; cur.style.background = '#fff';
+        ring.style.width = '46px'; ring.style.height = '46px';
+      });
+      el.addEventListener('mouseleave', function() {
+        cur.style.width = '10px'; cur.style.height = '10px'; cur.style.background = '#C0C0C0';
+        ring.style.width = '34px'; ring.style.height = '34px';
+      });
+    });
+
+    /* ── NAVBAR ── */
+    var nav = document.getElementById('nav');
+    window.addEventListener('scroll', function() {
+      nav.classList.toggle('scrolled', window.scrollY > 80);
+    }, { passive: true });
+
+    /* ── HAMBURGER ── */
+    var hbg = document.getElementById('hbg'), mm = document.getElementById('mmenu');
+    hbg.addEventListener('click', function() {
+      hbg.classList.toggle('open'); mm.classList.toggle('open');
+    });
+    function cmob() { hbg.classList.remove('open'); mm.classList.remove('open'); }
+
+    /* ── INTERSECTION OBSERVER ── */
+    var obs = new IntersectionObserver(function(entries) {
+      entries.forEach(function(e) { if (e.isIntersecting) { e.target.classList.add('in'); } });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.s-head, .contact-sub, .rev').forEach(function(el) { obs.observe(el); });
+
+    /* ── BACK TO TOP ── */
+    var btt = document.getElementById('btt');
+    window.addEventListener('scroll', function() {
+      btt.classList.toggle('show', window.scrollY > 400);
+    }, { passive: true });
+
+    /* ── SMOOTH ANCHORS ── */
+    document.querySelectorAll('a[href^="#"]').forEach(function(a) {
+      a.addEventListener('click', function(e) {
+        var t = document.querySelector(a.getAttribute('href'));
+        if (t) { e.preventDefault(); t.scrollIntoView({ behavior: 'smooth' }); }
+      });
+    });
+
+    /* ── FORM ── */
+    function sendForm() {
+      if (!document.getElementById('fn').value.trim() ||
+          !document.getElementById('fe').value.trim() ||
+          !document.getElementById('fm').value.trim()) return;
+      document.getElementById('cform').style.display = 'none';
+      document.getElementById('fok').style.display = 'block';
+    }
+  </script>
+</body>
+</html>
