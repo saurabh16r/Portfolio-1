@@ -1,6 +1,6 @@
 kind = "web"
-previewPath = "/"
-title = "Saurabh Rathore — Portfolio"
+previewPath = "/portfolio-vite"
+title = "Saurabh Rathore — Portfolio (Vite Dev)"
 version = "1.0.0"
 id = "artifacts/portfolio"
 router = "path"
@@ -11,7 +11,7 @@ version = "1.0.0"
 
 [[services]]
 name = "web"
-paths = [ "/" ]
+paths = [ "/portfolio-vite" ]
 localPort = 21113
 
 [services.development]
@@ -28,4 +28,4 @@ to = "/index.html"
 
 [services.env]
 PORT = "21113"
-BASE_PATH = "/"
+BASE_PATH = "/portfolio-vite"

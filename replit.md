@@ -1,45 +1,82 @@
-# [Project name]
+# Saurabh Rathore — Portfolio + Admin CMS
 
-_Replace the heading above with the project's name, and this line with one sentence describing what this app does for users._
+A full-stack personal portfolio with a password-protected Admin CMS panel. Express serves all pages server-side with data injected from Replit DB.
 
 ## Run & Operate
 
-- `pnpm --filter @workspace/api-server run dev` — run the API server (port 5000)
+- `pnpm --filter @workspace/api-server run dev` — run the full site (port 8080, served at `/`)
 - `pnpm run typecheck` — full typecheck across all packages
-- `pnpm run build` — typecheck + build all packages
-- `pnpm --filter @workspace/api-spec run codegen` — regenerate API hooks and Zod schemas from the OpenAPI spec
-- `pnpm --filter @workspace/db run push` — push DB schema changes (dev only)
-- Required env: `DATABASE_URL` — Postgres connection string
 
 ## Stack
 
 - pnpm workspaces, Node.js 24, TypeScript 5.9
-- API: Express 5
-- DB: PostgreSQL + Drizzle ORM
-- Validation: Zod (`zod/v4`), `drizzle-zod`
-- API codegen: Orval (from OpenAPI spec)
-- Build: esbuild (CJS bundle)
+- Server: Express 5 (api-server artifact, port 8080, path `/`)
+- DB: Replit DB (`@replit/database` v3) — wraps responses in `{ ok, value }`, unwrap in `lib/db.ts`
+- Session: `express-session` with `SESSION_SECRET` env var
+- Build: esbuild (ESM bundle via `build.mjs`)
 
 ## Where things live
 
-_Populate as you build — short repo map plus pointers to the source-of-truth file for DB schema, API contracts, theme files, etc._
+- `artifacts/api-server/src/app.ts` — Express app setup, route mounting
+- `artifacts/api-server/src/lib/db.ts` — Replit DB typed wrapper (unwraps `{ ok, value }` responses)
+- `artifacts/api-server/src/lib/seed.ts` — seeds Aeron + Finovo on first run
+- `artifacts/api-server/src/views/portfolio.ts` — homepage + case study HTML templates
+- `artifacts/api-server/src/views/admin.ts` — full admin CMS HTML templates
+- `artifacts/api-server/src/routes/portfolio.ts` — `GET /`, `GET /project/:slug`
+- `artifacts/api-server/src/routes/admin.ts` — `GET/POST /admin/*`
+- `artifacts/api-server/src/routes/apiProjects.ts` — `POST/PUT/DELETE /api/projects`, services, profile, settings
+- `artifacts/portfolio/` — legacy Vite static site (now at `/portfolio-vite`, not used in production)
 
-## Architecture decisions
+## Routes
 
-_Populate as you build — non-obvious choices a reader couldn't infer from the code (3-5 bullets)._
+| Route | Description |
+|---|---|
+| `GET /` | Portfolio homepage (dynamic, DB-injected) |
+| `GET /project/:slug` | Case study page (dynamic) |
+| `GET /admin/login` | Login page |
+| `POST /admin/login` | Authenticate (rate-limited: 5 attempts / 5 min lockout) |
+| `GET /admin/dashboard` | CMS overview stats |
+| `GET /admin/projects` | Manage projects (drag-to-reorder, toggle visibility) |
+| `GET /admin/projects/new` | Create new project |
+| `GET /admin/projects/:id/edit` | Edit project |
+| `GET /admin/services` | Edit service cards |
+| `GET /admin/profile` | Edit about/bio/skills/contact |
+| `GET /admin/settings` | Site meta + password change |
+| `GET /admin/logout` | End session |
+| `POST /api/projects` | Create project |
+| `PUT /api/projects/:id` | Update project |
+| `DELETE /api/projects/:id` | Delete project |
+| `POST /api/projects/reorder` | Reorder projects |
+| `PUT /api/services` | Save services |
+| `PUT /api/profile` | Save profile |
+| `PUT /api/settings` | Save settings |
 
-## Product
+## DB Schema (Replit DB keys)
 
-_Describe the high-level user-facing capabilities of this app once they exist._
+- `"projects"` → `Project[]` array
+- `"services"` → `Service[]` array
+- `"profile"` → `Profile` object
+- `"settings"` → `SiteSettings` object
 
-## User preferences
+## Environment Variables
 
-_Populate as you build — explicit user instructions worth remembering across sessions._
+- `SESSION_SECRET` — session signing secret (set via Replit Secrets) ✅
+- `ADMIN_PASSWORD` — admin panel password (default: `admin123`, change via Settings page or Replit Secrets)
+
+## Architecture Decisions
+
+- `@replit/database` v3 returns `{ ok: true, value: T }` — must unwrap in `db.ts` `get()` function
+- Admin HTML is server-side rendered template strings (no client framework) for simplicity
+- Rate limiting is in-memory (Map) — resets on server restart, acceptable for single-server deployment
+- Images stored as URLs (not base64 in DB) — max file size warning shown on upload
 
 ## Gotchas
 
-_Populate as you build — sharp edges, "always run X before Y" rules._
+- `@replit/database` v3 `get()` returns `{ ok: boolean, value: T }` — see `lib/db.ts` `get()` unwrap logic
+- Run `pnpm --filter @workspace/api-server run dev` (not `pnpm dev` at root)
+- The portfolio Vite artifact now lives at `/portfolio-vite` (not used — kept for dev reference)
+- Session `secure: true` is only set in `NODE_ENV=production`
 
-## Pointers
+## User Preferences
 
-- See the `pnpm-workspace` skill for workspace structure, TypeScript setup, and package details
+_Populate as you build — explicit user instructions worth remembering across sessions._
