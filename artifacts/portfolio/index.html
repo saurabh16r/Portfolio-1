@@ -878,7 +878,9 @@
     /* ── SMOOTH ANCHORS ── */
     document.querySelectorAll('a[href^="#"]').forEach(function(a) {
       a.addEventListener('click', function(e) {
-        var t = document.querySelector(a.getAttribute('href'));
+        var href = a.getAttribute('href');
+        if (!href || href === '#') return;
+        var t = document.querySelector(href);
         if (t) { e.preventDefault(); t.scrollIntoView({ behavior: 'smooth' }); }
       });
     });
