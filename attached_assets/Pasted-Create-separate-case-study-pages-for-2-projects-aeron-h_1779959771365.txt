@@ -1,0 +1,124 @@
+Create separate case study pages for 2 projects — 
+aeron.html and finovo.html. 
+Both pages must match the exact same design system as 
+index.html — black background, silver accents, 
+Bebas Neue headings, DM Sans body, same navbar and footer.
+
+Each case study page structure:
+
+1. BACK BUTTON
+Fixed top-left (below navbar): "← Back to Work" 
+in silver, 13px DM Sans. Links back to index.html#work
+
+2. CASE STUDY HERO
+Full-width section, min-height 70vh.
+Left side: 
+  - Small label: "Case Study" in silver, 12px, letter-spacing 0.2em
+  - Giant project name in Bebas Neue, 8vw
+  - One-line tagline in DM Sans, 20px, color #666
+  - Meta row with 4 pills: Role · Timeline · Tools · Type
+    Each pill: #1A1A1A background, silver border, 13px text
+Right side:
+  - Large project mockup placeholder (gradient rectangle 
+    with project name centered, same as work card gradient)
+
+3. OVERVIEW SECTION
+Two columns:
+  Left: heading "The Challenge" + 2-3 paragraph description
+  Right: heading "My Role" + bullet points of responsibilities
+  
+  Below: a thin full-width silver divider line (1px, opacity 0.15)
+
+4. RESEARCH SECTION  
+Heading: "Research & Discovery"
+3 insight cards in a row — each card has:
+  - A large number (01, 02, 03) in Bebas Neue, silver, 48px
+  - Short insight heading
+  - 2-line description
+  Cards: #0D0D0D background, 1px #1A1A1A border
+
+5. PROCESS SECTION
+Heading: "Design Process"
+A horizontal 4-step timeline with connecting line:
+  Discover → Define → Design → Deliver
+Each step: circle with number, label below, 
+2-line description. Silver connecting line between circles.
+Active/completed steps in white, future steps in #333.
+
+Below timeline: 2x2 grid of wireframe/screen placeholders
+Each placeholder: #0D0D0D card, aspect-ratio 16/9, 
+centered label "Screen [N] — [description]" in silver.
+On hover: silver border, scale(1.01)
+
+6. SOLUTION SECTION
+Heading: "The Solution"
+Alternating layout (left-right-left):
+  Row 1: text left, mockup right
+  Row 2: mockup left, text right  
+  Row 3: text left, mockup right
+Each text block: feature name in Bebas Neue 32px + 
+2 paragraph description.
+Each mockup: gradient placeholder card, aspect-ratio 4/3.
+
+7. RESULTS SECTION
+Heading: "Results & Impact"
+3 large stat cards in a row:
+  Each card: giant number in Bebas Neue 72px (silver), 
+  label below in DM Sans 14px (#666)
+  Example stats:
+    Aeron: "3x" · Engagement increase
+            "40%" · Faster checkout flow  
+            "92%" · User satisfaction score
+  Cards: #0D0D0D, subtle silver border, 
+  number animates counting up when scrolled into view 
+  (Intersection Observer + JS counter animation)
+
+8. LEARNINGS SECTION
+Heading: "What I Learned"
+2 columns:
+  Left: "What worked" — 3 bullet points with ✓ in silver
+  Right: "What I'd improve" — 3 bullet points with → in silver
+
+9. NEXT PROJECT BANNER
+Full-width dark card at bottom:
+  Left: "Next Project →" label + next project name in 
+  Bebas Neue 48px
+  Right: arrow button (silver circle with →)
+  Hover: entire card gets silver border
+  Links to the next case study page.
+
+---
+
+FOR AERON specifically use:
+- Tagline: "Reimagining fashion e-commerce for the next generation"
+- Role: UI/UX Designer & Framer Developer
+- Timeline: 3 weeks
+- Tools: Figma · Framer · Prototyping
+- Type: E-Commerce · Mobile App
+- Gradient: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%)
+- Challenge text: "Fashion shoppers abandon carts because 
+  they can't visualise how clothes look on them. Aeron 
+  solves this with AR try-ons and 360° product views, 
+  making online shopping feel like in-store."
+
+FOR FINOVO specifically use:
+- Tagline: "Making money management effortless for Gen Z"
+- Role: UI/UX Designer
+- Timeline: 2 weeks  
+- Tools: Figma · Prototyping · User Research
+- Type: FinTech · Mobile App
+- Gradient: linear-gradient(135deg, #111111 0%, #222222 100%)
+- Challenge text: "Gen Z avoids finance apps because they 
+  feel complicated and boring. Finovo redesigns the entire 
+  experience to feel like a social app — simple, visual, 
+  and actually enjoyable to use."
+
+---
+
+In index.html, update each project card's "View Project →" 
+button to "View Case Study →" and link to the respective 
+.html file. Open in same tab.
+
+All animations, textures, and hover effects must match 
+index.html exactly — same grain texture, same dot grid 
+in hero, same card hover behaviour.
