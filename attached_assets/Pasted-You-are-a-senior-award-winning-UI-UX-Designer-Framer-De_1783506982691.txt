@@ -1,0 +1,499 @@
+You are a senior award-winning UI/UX Designer, Framer Developer, Motion Designer, and Frontend Engineer.
+
+Your task is NOT to redesign from scratch.
+
+Instead, transform my existing portfolio into a world-class premium portfolio while preserving all current content, projects, navigation, links, and functionality.
+
+The final result should feel comparable to websites from Framer, Linear, Apple, Stripe, Vercel, Locomotive, and Awwwards winners.
+
+Overall Design Direction
+
+Design Style:
+
+Ultra premium
+Modern
+Bold
+Minimal
+Dark luxury
+High-end startup aesthetic
+Editorial typography
+Motion-first
+Immersive scrolling
+Sophisticated interactions
+
+Avoid:
+
+Generic templates
+Cheap gradients
+Excessive colors
+Heavy glassmorphism
+Cartoon animations
+Over-designed UI
+Slow animations
+
+The website should feel expensive.
+
+Keep Existing Content
+
+Do NOT remove:
+
+Hero section
+Projects
+About
+Services
+Contact
+Navigation
+
+Only redesign and enhance them.
+
+Color Palette
+
+Use:
+
+Background:
+#050505
+
+Secondary Background:
+#0D0D0D
+
+Cards:
+#111111
+
+Primary Text:
+#FFFFFF
+
+Secondary Text:
+rgba(255,255,255,.72)
+
+Border:
+rgba(255,255,255,.08)
+
+Accent:
+White only
+
+No colorful gradients.
+
+Typography
+
+Create a stronger visual hierarchy.
+
+Use oversized typography.
+
+Hero title should dominate the screen.
+
+Recommended pairing:
+
+Heading:
+Bebas Neue / Anton / Neue Montreal Condensed
+
+Body:
+Inter
+
+Increase whitespace.
+
+Improve spacing throughout the site.
+
+Hero Section
+
+Completely enhance the hero.
+
+Requirements:
+
+Massive typography
+Animated headline reveal
+Mouse spotlight effect
+Animated grain background
+Subtle moving grid
+Floating glow
+Smooth parallax
+Magnetic CTA buttons
+Scroll indicator animation
+Availability badge with pulse animation
+Animated "Built in India • Available Worldwide"
+
+Animate each headline line independently.
+
+Example sequence:
+
+Fade
+
+↓
+
+Blur
+
+↓
+
+Slide Up
+
+↓
+
+Scale
+
+↓
+
+Settle
+
+Background Effects
+
+Across the whole website implement:
+
+Animated grain
+
+Moving radial glow
+
+Subtle vignette
+
+Noise overlay
+
+Large soft blurred circles
+
+Moving light gradients
+
+Very subtle grid
+
+Everything must remain lightweight.
+
+Cursor
+
+Create a premium custom cursor.
+
+Requirements:
+
+Small white dot
+
+Outer ring
+
+Smooth interpolation
+
+Hover effects
+
+Cursor grows over buttons
+
+Cursor changes over projects
+
+Cursor sticks to CTA buttons
+
+Cursor displays:
+
+View Project
+
+on project hover.
+
+Disable on mobile.
+
+Navigation
+
+Improve navbar.
+
+Requirements:
+
+Blur background on scroll
+
+Smooth appearance
+
+Animated underline
+
+Active section indicator
+
+Magnetic links
+
+Shrink slightly while scrolling
+
+Smooth transitions.
+
+Buttons
+
+Replace all standard buttons.
+
+Create premium magnetic buttons.
+
+Hover:
+
+Button expands
+
+Arrow slides
+
+Background fills
+
+Border glows slightly
+
+Cursor magnetism
+
+Spring animation
+
+Selected Work
+
+Completely upgrade project cards.
+
+Each project card should include:
+
+Image zoom
+
+Mouse tilt
+
+Moving spotlight
+
+Category animation
+
+Title reveal
+
+Arrow animation
+
+Scale effect
+
+Shadow depth
+
+Card lift
+
+When hovering:
+
+Card rotates slightly
+
+Image scales
+
+Text slides
+
+Arrow follows cursor
+
+Background glow appears
+
+Project Transitions
+
+Instead of instant page navigation:
+
+Implement smooth page transitions.
+
+Fade
+
+Scale
+
+Blur
+
+Slide
+
+between pages.
+
+Scroll Animations
+
+Every section should animate naturally.
+
+Use stagger animations.
+
+Reveal with:
+
+Opacity
+
+Translate Y
+
+Blur
+
+Scale
+
+Use Intersection Observer.
+
+Do NOT animate everything simultaneously.
+
+About Section
+
+Redesign into a premium layout.
+
+Include:
+
+Large portrait/image placeholder
+
+Animated timeline
+
+Experience cards
+
+Skill chips
+
+Years of experience
+
+Projects completed
+
+Technologies
+
+Availability
+
+Hover interactions
+
+Timeline should animate while scrolling.
+
+Services
+
+Redesign service cards.
+
+Hover effects:
+
+Lift
+
+Rotate slightly
+
+Glow
+
+Animated icon
+
+Number animation
+
+CTA animation
+
+Cards should feel premium.
+
+Contact Section
+
+Create an unforgettable ending.
+
+Large typography.
+
+Animated background.
+
+Grid overlay.
+
+Mouse spotlight.
+
+Floating glow.
+
+Improve form design.
+
+Inputs should animate on focus.
+
+Button should feel premium.
+
+Add:
+
+Response time
+
+Availability
+
+Email
+
+Phone
+
+Social links
+
+Micro Interactions
+
+Implement throughout:
+
+Magnetic elements
+
+Hover sounds ready structure (optional)
+
+Smooth easing
+
+Text underline animations
+
+Image zoom
+
+Button ripples
+
+Section transitions
+
+Link animations
+
+Loading animations
+
+Card tilt
+
+Cursor interactions
+
+Motion Guidelines
+
+Animation duration:
+
+300–900ms
+
+Easing:
+
+ease-out
+
+or spring
+
+Never linear.
+
+Animations should feel premium.
+
+Performance
+
+Maintain 60 FPS.
+
+Use:
+
+requestAnimationFrame
+
+Intersection Observer
+
+CSS transforms
+
+Opacity animations
+
+Avoid layout shifts.
+
+Optimize animations.
+
+Do not block rendering.
+
+Mobile Optimization
+
+Ensure every animation works well.
+
+Reduce heavy effects.
+
+Disable:
+
+Cursor
+
+Large parallax
+
+Heavy blur
+
+Mouse interactions
+
+Keep premium feel.
+
+Accessibility
+
+Respect prefers-reduced-motion.
+
+Keyboard accessible.
+
+Maintain color contrast.
+
+Semantic HTML.
+
+Code Quality
+
+Refactor existing code.
+
+Do NOT create duplicate components.
+
+Reuse existing sections.
+
+Use reusable animation utilities.
+
+Comment complex logic.
+
+Keep clean architecture.
+
+Final Goal
+
+The final website should feel like an award-winning premium Framer portfolio that impresses startup founders, agencies, and recruiters within the first 5 seconds.
+
+The experience should be memorable, elegant, cinematic, and highly interactive while remaining fast, responsive, and production-ready.
+
+Bonus Features (Implement if feasible)
+Smooth page loader with logo animation.
+Animated section progress indicator on the side.
+Floating "Back to Top" button with morphing animation.
+Infinite marquee showcasing skills and services.
+Testimonial section with auto-scrolling cards.
+"My Process" section with animated steps.
+Interactive tech stack icons with hover effects.
+Scroll-triggered number counters for experience, projects, and client satisfaction.
+Ambient background audio toggle (muted by default).
+Dark-mode refinement using layered lighting rather than pure black.
+SEO optimization (meta tags, Open Graph, structured data).
+Lazy loading and image optimization.
+Lighthouse score target: 95+ for Performance, Accessibility, Best Practices, and SEO.
+
+Important: Do not replace or remove any existing functionality. Enhance the current portfolio incrementally, ensuring every animation and visual improvement feels intentional, smooth, and premium.
