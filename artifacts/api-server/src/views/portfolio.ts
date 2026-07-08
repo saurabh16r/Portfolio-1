@@ -186,6 +186,34 @@ footer{border-top:1px solid var(--border);padding:28px 64px;display:flex;align-i
 .f-links a{font-size:10px;letter-spacing:2.5px;text-transform:uppercase;color:var(--muted);text-decoration:none;cursor:none;transition:color .2s;}
 .f-links a:hover{color:var(--white);}
 
+/* PROCESS */
+#process{padding:120px 64px;background:var(--bg);border-top:1px solid var(--border);position:relative;overflow:hidden;}
+#process::before{content:'';position:absolute;inset:0;background-image:radial-gradient(circle,rgba(255,255,255,.03) 1px,transparent 1px);background-size:40px 40px;pointer-events:none;z-index:0;}
+.process-inner{position:relative;z-index:1;}
+.process-steps{margin-top:72px;display:flex;flex-direction:column;gap:0;}
+.process-step{display:grid;grid-template-columns:80px 1fr 1fr;gap:48px;align-items:start;padding:48px 0;border-top:1px solid var(--border);position:relative;cursor:default;}
+.process-step:last-child{border-bottom:1px solid var(--border);}
+.process-step::after{content:'';position:absolute;bottom:0;left:0;width:0;height:1px;background:rgba(255,255,255,.2);transition:width .6s cubic-bezier(.16,1,.3,1);}
+.process-step:hover::after{width:100%;}
+.ps-num{font-family:var(--heading);font-size:72px;color:rgba(255,255,255,.06);line-height:1;letter-spacing:-2px;transition:color .4s ease;}
+.process-step:hover .ps-num{color:rgba(255,255,255,.14);}
+.ps-left{display:flex;flex-direction:column;gap:12px;}
+.ps-tag{font-size:9px;letter-spacing:5px;text-transform:uppercase;color:var(--muted);transition:color .3s;}
+.process-step:hover .ps-tag{color:rgba(255,255,255,.4);}
+.ps-title{font-family:var(--heading);font-size:clamp(32px,3.5vw,48px);letter-spacing:2px;color:var(--white);line-height:.95;transition:letter-spacing .4s ease;}
+.process-step:hover .ps-title{letter-spacing:3px;}
+.ps-right{padding-top:8px;}
+.ps-desc{font-size:14px;color:var(--dim);line-height:1.85;max-width:420px;}
+.ps-deliverables{margin-top:20px;display:flex;flex-wrap:wrap;gap:6px;}
+.ps-chip{font-size:9px;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.3);border:1px solid var(--border);padding:5px 12px;border-radius:100px;transition:border-color .3s,color .3s;}
+.process-step:hover .ps-chip{border-color:rgba(255,255,255,.15);color:rgba(255,255,255,.5);}
+@media(max-width:900px){
+  #process{padding:80px 24px;}
+  .process-step{grid-template-columns:48px 1fr;grid-template-rows:auto auto;gap:16px 24px;}
+  .ps-num{font-size:48px;}
+  .ps-right{grid-column:2;}
+}
+
 /* BACK TO TOP */
 #btt{position:fixed;bottom:40px;right:40px;z-index:999;width:44px;height:44px;border:1px solid var(--border);background:var(--card);display:flex;align-items:center;justify-content:center;cursor:none;opacity:0;visibility:hidden;transition:opacity .3s,visibility .3s,transform .3s,border-color .3s;border-radius:1px;transform:translateY(12px);}
 #btt.show{opacity:1;visibility:visible;transform:translateY(0);}
@@ -599,6 +627,105 @@ export function homePage(projects: Project[], services: Service[], profile: Prof
   </div>
   <div class="srv-grid stagger">
     ${serviceCards}
+  </div>
+</section>
+
+<section id="process">
+  <div class="process-inner">
+    <div class="section-header">
+      <div>
+        <p class="section-tag">How I Work</p>
+        <h2 class="section-title rev">MY PROCESS</h2>
+      </div>
+    </div>
+    <div class="process-steps">
+
+      <div class="process-step rev">
+        <div class="ps-num">01</div>
+        <div class="ps-left">
+          <span class="ps-tag">Week 1</span>
+          <h3 class="ps-title">DISCOVER</h3>
+        </div>
+        <div class="ps-right">
+          <p class="ps-desc">Deep dive into your business goals, users, and competitive landscape. I ask the uncomfortable questions to uncover what really needs solving — not just what looks good.</p>
+          <div class="ps-deliverables">
+            <span class="ps-chip">Brief</span>
+            <span class="ps-chip">Stakeholder Interviews</span>
+            <span class="ps-chip">Competitor Audit</span>
+            <span class="ps-chip">Goals &amp; KPIs</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="process-step rev d1">
+        <div class="ps-num">02</div>
+        <div class="ps-left">
+          <span class="ps-tag">Week 1–2</span>
+          <h3 class="ps-title">RESEARCH</h3>
+        </div>
+        <div class="ps-right">
+          <p class="ps-desc">User research, behavioural patterns, and information architecture. Data-backed decisions — every design choice has a reason grounded in how real users think and move.</p>
+          <div class="ps-deliverables">
+            <span class="ps-chip">User Personas</span>
+            <span class="ps-chip">Journey Maps</span>
+            <span class="ps-chip">IA Diagrams</span>
+            <span class="ps-chip">Insights Report</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="process-step rev d2">
+        <div class="ps-num">03</div>
+        <div class="ps-left">
+          <span class="ps-tag">Week 2–3</span>
+          <h3 class="ps-title">DESIGN</h3>
+        </div>
+        <div class="ps-right">
+          <p class="ps-desc">From rough wireframes to pixel-perfect high-fidelity screens. I work in Figma and iterate fast — you see progress weekly, not a big reveal at the end.</p>
+          <div class="ps-deliverables">
+            <span class="ps-chip">Wireframes</span>
+            <span class="ps-chip">Design System</span>
+            <span class="ps-chip">Hi-Fi Screens</span>
+            <span class="ps-chip">Responsive Specs</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="process-step rev d3">
+        <div class="ps-num">04</div>
+        <div class="ps-left">
+          <span class="ps-tag">Week 3–4</span>
+          <h3 class="ps-title">PROTOTYPE</h3>
+        </div>
+        <div class="ps-right">
+          <p class="ps-desc">Bring designs to life with interactive prototypes and micro-interactions. Test assumptions before a single line of code is written — saving time, money, and embarrassment.</p>
+          <div class="ps-deliverables">
+            <span class="ps-chip">Figma Prototype</span>
+            <span class="ps-chip">Motion Specs</span>
+            <span class="ps-chip">Usability Testing</span>
+            <span class="ps-chip">Iteration Rounds</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="process-step rev d4">
+        <div class="ps-num">05</div>
+        <div class="ps-left">
+          <span class="ps-tag">Week 4+</span>
+          <h3 class="ps-title">DELIVER</h3>
+        </div>
+        <div class="ps-right">
+          <p class="ps-desc">Production-ready Framer build or developer handoff with obsessive attention to detail. Animations, interactions, and responsive behaviour — all implemented, not just designed.</p>
+          <div class="ps-deliverables">
+            <span class="ps-chip">Framer Build</span>
+            <span class="ps-chip">Dev Handoff</span>
+            <span class="ps-chip">Component Docs</span>
+            <span class="ps-chip">Launch Support</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
   </div>
 </section>
 
