@@ -1,1 +1,0 @@
-- [Replit DB v3 response shape](replit-db-v3.md) — `get()` returns `{ ok: true, value: T }`, not `T` directly; must unwrap in db.ts
