@@ -1,5 +1,5 @@
 import React, { Suspense } from "react";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { HelmetProvider } from "react-helmet-async";
 import { HomePage } from "@/pages/Home/HomePage";
@@ -50,6 +50,12 @@ function AppRouter() {
           <Route path="/writing" element={<WritingPage />} />
           <Route path="/writing/:slug" element={<ArticlePage />} />
           
+          {/* Admin Route Aliases */}
+          <Route path="/admin/login" element={<Navigate to="/studio/login" replace />} />
+          <Route path="/admin" element={<Navigate to="/studio" replace />} />
+          <Route path="/admin/dashboard" element={<Navigate to="/studio" replace />} />
+          <Route path="/admin/*" element={<Navigate to="/studio" replace />} />
+
           {/* Studio Admin Routes */}
           <Route path="/studio/login" element={<Login />} />
           <Route path="/studio" element={
