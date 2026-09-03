@@ -34,9 +34,6 @@ if (process.env.NODE_ENV === "production") {
 const app = express();
 const PORT = process.env.PORT || 5000;
 
-// Connect to MongoDB
-connectDB();
-
 // Middlewares
 app.use(express.json());
 
@@ -151,6 +148,16 @@ app.get("/", (req, res) => {
   res.json({ message: "Portfolio Studio CMS API is running." });
 });
 
-app.listen(PORT, () => {
-  console.log(`Server is running in ${process.env.NODE_ENV || "development"} mode on port ${PORT}`);
-});
+async function startServer() {
+  try {
+    await connectDB();
+    app.listen(PORT, () => {
+      console.log(`Server is running in ${process.env.NODE_ENV || "development"} mode on port ${PORT}`);
+    });
+  } catch (error) {
+    console.error("FATAL ERROR: Failed to start server because MongoDB connection failed.");
+    process.exit(1);
+  }
+}
+
+startServer();
