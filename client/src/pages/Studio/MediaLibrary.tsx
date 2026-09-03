@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { api, getImageUrl } from "../../services/api.js";
+import { api, getImageUrl, API_URL } from "../../services/api.js";
 import { Image, Upload, Copy, Trash2, RefreshCw, Check, ShieldAlert } from "lucide-react";
 
 interface MediaItemType {
@@ -84,8 +84,8 @@ export function MediaLibrary() {
   };
 
   const handleCopyUrl = (url: string, id: string) => {
-    // Resolve absolute URL if it is a relative path upload (for local server fallback)
-    const absoluteUrl = url.startsWith("/") ? `${window.location.origin.replace("3000", "5000")}${url}` : url;
+    // Resolve absolute URL if it is a relative path upload
+    const absoluteUrl = url.startsWith("/") ? `${API_URL}${url}` : url;
     
     navigator.clipboard.writeText(absoluteUrl).then(() => {
       setCopiedId(id);

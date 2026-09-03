@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { api } from "../../services/api.js";
+import { api, API_URL } from "../../services/api.js";
 import { Save, Search, ShieldAlert, Globe, ExternalLink } from "lucide-react";
 
 export function SEOManager() {
@@ -292,7 +292,7 @@ export function SEOManager() {
                   <p className="text-[9px] text-white/30 tracking-wide mt-0.5">Google Sitemap indices</p>
                 </div>
                 <a
-                  href="http://localhost:5000/sitemap.xml"
+                  href={`${API_URL}/sitemap.xml`}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex h-7 w-7 items-center justify-center rounded-full border border-white/10 text-white/50 hover:text-white hover:bg-white/5 transition-colors"
@@ -307,7 +307,7 @@ export function SEOManager() {
                   <p className="text-[9px] text-white/30 tracking-wide mt-0.5">Search crawler configuration</p>
                 </div>
                 <a
-                  href="http://localhost:5000/robots.txt"
+                  href={`${API_URL}/robots.txt`}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex h-7 w-7 items-center justify-center rounded-full border border-white/10 text-white/50 hover:text-white hover:bg-white/5 transition-colors"

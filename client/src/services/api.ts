@@ -1,8 +1,23 @@
-const BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:5000/api";
+const rawApiUrl = import.meta.env.VITE_API_URL || "http://localhost:5000";
+export const API_URL = rawApiUrl.replace(/\/+$/, "").replace(/\/api$/, "");
+export const BASE_URL = `${API_URL}/api`;
+
+const formatEndpointUrl = (endpoint: string): string => {
+  const cleanEndpoint = endpoint.trim();
+  if (cleanEndpoint.startsWith("http://") || cleanEndpoint.startsWith("https://")) {
+    return cleanEndpoint;
+  }
+  if (cleanEndpoint.startsWith("/api/")) {
+    return `${API_URL}${cleanEndpoint}`;
+  }
+  const relative = cleanEndpoint.startsWith("/") ? cleanEndpoint : `/${cleanEndpoint}`;
+  return `${BASE_URL}${relative}`;
+};
 
 export const api = {
   async request(endpoint: string, options: RequestInit = {}) {
     const token = localStorage.getItem("token") || "";
+    const fullUrl = formatEndpointUrl(endpoint);
     
     const headers: Record<string, string> = {
       ...(token ? { Authorization: `Bearer ${token}` } : {}),
@@ -20,13 +35,15 @@ export const api = {
 
     let response;
     try {
-      response = await fetch(`${BASE_URL}${endpoint}`, {
+      response = await fetch(fullUrl, {
         ...options,
         headers
       });
     } catch (fetchErr: any) {
-      console.error("Network request failed:", fetchErr);
-      throw new Error("Backend unavailable. Please ensure the backend server is running.");
+      if (import.meta.env.DEV) {
+        console.error(`[API Network Error] ${options.method || "GET"} ${fullUrl}:`, fetchErr);
+      }
+      throw new Error("Unable to connect to the backend service. If the Render backend is waking up from a cold start, please wait 30-50 seconds and try again.");
     }
 
     if (response.status === 401) {
@@ -42,7 +59,7 @@ export const api = {
         }
       } catch {
         if (response.status === 404) {
-          errorMessage = "Authentication endpoint not found (404).";
+          errorMessage = "Endpoint not found (404).";
         } else if (response.status === 500) {
           errorMessage = "Internal server error (500). Please check backend logs.";
         } else if (response.status === 503) {
@@ -99,13 +116,11 @@ export const getImageUrl = (url: string | null | undefined, width?: number): str
     }
     return url;
   }
-  const host = BASE_URL.replace(/\/api\/?$/, "");
   const relativePath = url.startsWith("/") ? url : `/${url}`;
-  return `${host}${relativePath}`;
+  return `${API_URL}${relativePath}`;
 };
 
 export const resolveHtmlImages = (html: string | null | undefined): string => {
   if (!html) return "";
-  const host = BASE_URL.replace(/\/api\/?$/, "");
-  return html.replace(/src="\/uploads\//g, `src="${host}/uploads/`);
+  return html.replace(/src="\/uploads\//g, `src="${API_URL}/uploads/`);
 };

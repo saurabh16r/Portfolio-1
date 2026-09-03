@@ -1,6 +1,6 @@
 import { useState, useRef, DragEvent, ChangeEvent, useEffect } from "react";
 import { Upload, X, RefreshCw, AlertCircle, Sparkles } from "lucide-react";
-import { api, getImageUrl } from "../../services/api.js";
+import { api, getImageUrl, API_URL } from "../../services/api.js";
 
 interface ImageUploadProps {
   value: string;
@@ -193,7 +193,7 @@ export function ImageUpload({ value, onChange, label, maxSizeMB = 10 }: ImageUpl
     return new Promise((resolve, reject) => {
       const xhr = new XMLHttpRequest();
       const token = localStorage.getItem("token") || "";
-      const uploadUrl = `${import.meta.env.VITE_API_URL || "http://localhost:5000/api"}/media/upload`;
+      const uploadUrl = `${API_URL}/api/media/upload`;
 
       xhr.open("POST", uploadUrl);
       if (token) {

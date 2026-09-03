@@ -1,5 +1,6 @@
 import { useState, useRef, ChangeEvent } from "react";
 import { Bold, Italic, Link2, Image, Loader2, AlertCircle } from "lucide-react";
+import { api } from "../../services/api.js";
 
 interface RichTextEditorProps {
   value: string;
@@ -78,23 +79,7 @@ export function RichTextEditor({ value, onChange, placeholder = "", className = 
     formData.append("file", file);
 
     try {
-      const token = localStorage.getItem("token") || "";
-      const uploadUrl = `${import.meta.env.VITE_API_URL || "http://localhost:5000/api"}/media/upload`;
-      
-      const response = await fetch(uploadUrl, {
-        method: "POST",
-        headers: {
-          ...(token ? { Authorization: `Bearer ${token}` } : {}),
-        },
-        body: formData,
-      });
-
-      if (!response.ok) {
-        const errData = await response.json().catch(() => ({}));
-        throw new Error(errData.error || `Upload failed with status ${response.status}`);
-      }
-
-      const result = await response.json();
+      const result = await api.post("/media/upload", formData);
       
       // Auto-insert image tag in content
       const imageHtml = `<img src="${result.url}" class="w-full my-6 rounded-[8px] border border-white/5 object-cover" alt="${file.name}" />\n`;

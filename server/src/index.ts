@@ -41,18 +41,24 @@ connectDB();
 app.use(express.json());
 
 // Enable CORS
+const configuredClientUrls = (process.env.CLIENT_URL || "")
+  .split(",")
+  .map((url) => url.trim().replace(/\/+$/, ""))
+  .filter(Boolean);
+
 const allowedOrigins = [
   "http://localhost:3000",
   "http://localhost:5173",
   "http://127.0.0.1:3000",
   "http://127.0.0.1:5173",
-  process.env.CLIENT_URL || ""
+  ...configuredClientUrls
 ].filter(Boolean);
 
 app.use(
   cors({
     origin: (origin, callback) => {
-      if (!origin || allowedOrigins.indexOf(origin) !== -1) {
+      const normalizedOrigin = origin ? origin.replace(/\/+$/, "") : "";
+      if (!origin || allowedOrigins.includes(normalizedOrigin)) {
         callback(null, true);
       } else {
         if (process.env.NODE_ENV === "production") {
