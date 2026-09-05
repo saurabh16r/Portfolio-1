@@ -152,9 +152,20 @@ export function ImageUpload({ value, onChange, label, maxSizeMB = 10 }: ImageUpl
     setError(null);
 
     // Validation
-    const allowedTypes = ["image/jpeg", "image/jpg", "image/png", "image/webp"];
+    const allowedTypes = [
+      "image/jpeg",
+      "image/jpg",
+      "image/png",
+      "image/webp",
+      "image/x-icon",
+      "image/vnd.microsoft.icon",
+      "image/ico",
+      "image/icon",
+      "image/svg+xml",
+      "image/gif"
+    ];
     const fileExt = file.name.split('.').pop()?.toLowerCase();
-    const allowedExts = ["jpg", "jpeg", "png", "webp"];
+    const allowedExts = ["jpg", "jpeg", "png", "webp", "ico", "svg", "gif"];
     if (!allowedTypes.includes(file.type) && (!fileExt || !allowedExts.includes(fileExt))) {
       setError("Unsupported image format.");
       return;
@@ -339,7 +350,7 @@ export function ImageUpload({ value, onChange, label, maxSizeMB = 10 }: ImageUpl
             ref={fileInputRef}
             type="file"
             className="hidden"
-            accept="image/png, image/jpeg, image/jpg, image/webp"
+            accept="image/png, image/jpeg, image/jpg, image/webp, image/x-icon, image/svg+xml, .ico, .svg, .gif"
             onChange={handleChange}
           />
 
@@ -353,7 +364,7 @@ export function ImageUpload({ value, onChange, label, maxSizeMB = 10 }: ImageUpl
           </span>
 
           <div className="mt-4 flex items-center gap-1.5 text-[8px] uppercase tracking-wider text-white/35">
-            <span>PNG • JPG • WEBP</span>
+            <span>PNG • JPG • WEBP • ICO • SVG</span>
             <span>•</span>
             <span>Max {maxSizeMB}MB</span>
           </div>

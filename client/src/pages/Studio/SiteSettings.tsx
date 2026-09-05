@@ -413,21 +413,26 @@ export function SiteSettings() {
 
             <FaviconPreview url={global.favicon || ""} />
 
-            <label className="block">
-              <span className={labelCls}>
-                <Link2 size={10} /> Favicon URL
-              </span>
-              <input
-                type="text"
-                value={global.favicon || ""}
-                onChange={(e) => set("favicon", e.target.value)}
-                placeholder="/favicon.ico or https://cdn.example.com/favicon.png"
-                className={`${inputCls} font-mono`}
-              />
-              <p className="mt-1.5 text-[9px] text-white/25">
-                Accepts .ico, .png, or .svg. Paste a URL or upload via Media Library and copy the URL here.
-              </p>
-            </label>
+            <ImageUpload
+              value={global.favicon || ""}
+              onChange={(url) => set("favicon", url)}
+              label="Upload Favicon Image (.ico, .png, .svg)"
+            />
+
+            <details className="mt-2 text-left">
+              <summary className="text-[9px] uppercase tracking-wider text-white/40 font-semibold cursor-pointer hover:text-white/70 select-none">
+                Or enter custom URL manually
+              </summary>
+              <div className="mt-2">
+                <input
+                  type="text"
+                  value={global.favicon || ""}
+                  onChange={(e) => set("favicon", e.target.value)}
+                  placeholder="/favicon.ico or https://cdn.example.com/favicon.png"
+                  className={`${inputCls} font-mono`}
+                />
+              </div>
+            </details>
           </div>
 
           {/* ── OG Image ── */}
