@@ -9,9 +9,11 @@ export const defaultSEO = {
   global: {
     siteTitle: "Saurabh Rathore — Premium Framer & UI Designer",
     siteDescription: "Clean, motion-first digital design and high-end Webflow & Framer development.",
+    siteUrl: "https://saurabh-rathore.com",
     keywords: "Framer, Webflow, React, UI/UX, Portfolio, Designer, India",
     favicon: "/favicon.ico",
-    openGraphImage: "/opengraph.jpg"
+    openGraphImage: "/opengraph.jpg",
+    twitterCard: "summary_large_image",
   },
   pages: {
     home: {

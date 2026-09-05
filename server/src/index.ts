@@ -51,6 +51,14 @@ const allowedOrigins = [
   ...configuredClientUrls
 ].filter(Boolean);
 
+// Log allowed origins at startup so it's visible in Render logs for easy debugging
+console.log(`[CORS] Allowed origins: ${allowedOrigins.join(", ")}`);
+
+// Warn in production if no external CLIENT_URL was configured
+if (process.env.NODE_ENV === "production" && configuredClientUrls.length === 0) {
+  console.warn("[CORS] WARNING: CLIENT_URL environment variable is not set. Only localhost origins are allowed. Requests from the production Vercel frontend will be CORS-blocked.");
+}
+
 app.use(
   cors({
     origin: (origin, callback) => {
@@ -59,6 +67,7 @@ app.use(
         callback(null, true);
       } else {
         if (process.env.NODE_ENV === "production") {
+          console.error(`[CORS] Blocked request from origin: ${origin}`);
           callback(new Error("CORS request blocked in production: Origin not allowed."));
         } else {
           callback(null, true); // Fallback for ease of local development

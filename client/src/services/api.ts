@@ -43,7 +43,17 @@ export const api = {
       if (import.meta.env.DEV) {
         console.error(`[API Network Error] ${options.method || "GET"} ${fullUrl}:`, fetchErr);
       }
-      throw new Error("Unable to connect to the backend service. If the Render backend is waking up from a cold start, please wait 30-50 seconds and try again.");
+      // A fetch exception means the request never reached the server.
+      // This is caused by: CORS block, backend unreachable, or network issue.
+      const errMsg = fetchErr?.message || "";
+      if (errMsg.includes("Failed to fetch") || errMsg.includes("NetworkError") || fetchErr instanceof TypeError) {
+        throw new Error(
+          "Backend connection error: Unable to reach the API server. " +
+          "This is usually caused by a CORS misconfiguration or the backend being unavailable. " +
+          "If the Render backend is waking from a cold start, wait 30–50 seconds and try again."
+        );
+      }
+      throw new Error(`Network error: ${errMsg || "Unknown connection failure."}`);
     }
 
     if (response.status === 401) {
@@ -58,12 +68,17 @@ export const api = {
           errorMessage = errData.error;
         }
       } catch {
-        if (response.status === 404) {
-          errorMessage = "Endpoint not found (404).";
+        // Could not parse JSON body — use status-based messages
+        if (response.status === 401) {
+          errorMessage = "Authentication failed: Invalid or expired credentials.";
+        } else if (response.status === 403) {
+          errorMessage = "Access denied: You do not have permission to perform this action.";
+        } else if (response.status === 404) {
+          errorMessage = "API route not found (404). The endpoint may be incorrect.";
         } else if (response.status === 500) {
-          errorMessage = "Internal server error (500). Please check backend logs.";
+          errorMessage = "Backend server error (500). Check the Render service logs.";
         } else if (response.status === 503) {
-          errorMessage = "Service unavailable (503). Database connection might be offline.";
+          errorMessage = "Service unavailable (503): Database connection may be offline. Check MongoDB Atlas.";
         }
       }
       throw new Error(errorMessage);

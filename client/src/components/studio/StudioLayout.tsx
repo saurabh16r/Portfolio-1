@@ -12,7 +12,8 @@ import {
   LogOut,
   User,
   ExternalLink,
-  BookOpen
+  BookOpen,
+  Globe2
 } from "lucide-react";
 
 export function StudioLayout({ children }: { children: React.ReactNode }) {
@@ -34,6 +35,7 @@ export function StudioLayout({ children }: { children: React.ReactNode }) {
     { label: "Leads", href: "/studio/leads", icon: Inbox },
     { label: "Content Manager", href: "/studio/content", icon: FileText },
     { label: "SEO Manager", href: "/studio/seo", icon: Search },
+    { label: "Site Settings", href: "/studio/site-settings", icon: Globe2 },
     { label: "Media Library", href: "/studio/media", icon: Image },
     { label: "Settings", href: "/studio/settings", icon: Settings },
   ];
@@ -44,6 +46,7 @@ export function StudioLayout({ children }: { children: React.ReactNode }) {
     if (current) return current.label;
     if (location.pathname.startsWith("/studio/projects/")) return "Edit Case Study";
     if (location.pathname.startsWith("/studio/writing/")) return "Edit Article";
+    if (location.pathname === "/studio/site-settings") return "Site Settings";
     return "Portfolio Studio";
   };
 

@@ -46,10 +46,14 @@ router.post("/login", loginLimiter, async (req, res) => {
     );
 
     // Set cookie
+    // sameSite "none" is required for cross-site requests in production
+    // (Vercel frontend → Render backend are different origins).
+    // "strict" is used in development where both share localhost.
+    const isProduction = process.env.NODE_ENV === "production";
     res.cookie("token", token, {
       httpOnly: true,
-      secure: process.env.NODE_ENV === "production",
-      sameSite: "strict",
+      secure: isProduction,
+      sameSite: isProduction ? "none" : "strict",
       maxAge: rememberMe ? 30 * 24 * 60 * 60 * 1000 : 24 * 60 * 60 * 1000,
     });
 

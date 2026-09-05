@@ -28,6 +28,7 @@ const ContentManager = React.lazy(() => import("@/pages/Studio/ContentManager").
 const SEOManager = React.lazy(() => import("@/pages/Studio/SEOManager").then(m => ({ default: m.SEOManager })));
 const MediaLibrary = React.lazy(() => import("@/pages/Studio/MediaLibrary").then(m => ({ default: m.MediaLibrary })));
 const Settings = React.lazy(() => import("@/pages/Studio/Settings").then(m => ({ default: m.Settings })));
+const SiteSettings = React.lazy(() => import("@/pages/Studio/SiteSettings").then(m => ({ default: m.SiteSettings })));
 const WritingManager = React.lazy(() => import("@/pages/Studio/WritingManager").then(m => ({ default: m.WritingManager })));
 const WritingEdit = React.lazy(() => import("@/pages/Studio/WritingEdit").then(m => ({ default: m.WritingEdit })));
 
@@ -118,6 +119,13 @@ function AppRouter() {
             <ProtectedRoute>
               <StudioLayout>
                 <MediaLibrary />
+              </StudioLayout>
+            </ProtectedRoute>
+          } />
+          <Route path="/studio/site-settings" element={
+            <ProtectedRoute>
+              <StudioLayout>
+                <SiteSettings />
               </StudioLayout>
             </ProtectedRoute>
           } />
