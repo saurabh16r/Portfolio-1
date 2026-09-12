@@ -3,12 +3,13 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "dev:client": "pnpm --filter client dev",
+    "dev:freelance": "pnpm --filter frontend-freelance dev",
+    "dev:job": "pnpm --filter frontend-job dev",
     "dev:server": "pnpm --filter server dev",
-    "dev": "concurrently \"pnpm dev:client\" \"pnpm dev:server\"",
-    "build:client": "pnpm --filter client build",
+    "dev": "concurrently \"pnpm dev:server\" \"pnpm dev:freelance\" \"pnpm dev:job\"",
+    "build:freelance": "pnpm --filter frontend-freelance build",
+    "build:job": "pnpm --filter frontend-job build",
     "build:server": "pnpm --filter server build",
-    "typecheck:client": "pnpm --filter client typecheck",
     "seed": "pnpm --filter server seed"
   },
   "devDependencies": {

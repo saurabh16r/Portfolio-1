@@ -33,6 +33,15 @@ const leadSchema = new Schema(
       type: String,
       required: true,
     },
+    projectType: {
+      type: String,
+      default: "",
+    },
+    type: {
+      type: String,
+      enum: ["freelance", "job"],
+      default: "freelance",
+    },
     sourcePage: {
       type: String,
       default: "Contact",

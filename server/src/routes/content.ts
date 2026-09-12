@@ -48,6 +48,25 @@ export const defaultContent = {
       }
     ]
   },
+  jobHero: {
+    heroTitle: "Digital Product Designer & Frontend Developer",
+    heroSubtitle: "Open to Full-Time & Engineering Roles",
+    heroDescription: "I design & build high-impact digital experiences for products and engineering teams, bringing visual perfection and clean code together.",
+    ctaPrimary: "View Selected Work",
+    ctaSecondary: "Get In Touch",
+  },
+  jobAbout: {
+    title: "About Me",
+    eyebrow: "Background & Focus",
+    heading: "Saurabh Rathore",
+    profileImage: "",
+    profileImagePublicId: "",
+    story: "I am a product designer and frontend engineer with a passion for building intuitive, high-performance web applications and interactive design systems.",
+    designBackground: "Over 3+ years, I've crafted UI/UX systems, high-converting interfaces, and accessible component libraries with Figma and modern design workflows.",
+    devJourney: "Specialized in modern web technologies including React, TypeScript, Node.js, and Framer Motion, writing clean and maintainable code.",
+    currentFocus: "Currently building modern digital products, refining design systems, and seeking high-impact roles in design and engineering teams.",
+    resumeLink: "https://resume.example.com/saurabh-rathore.pdf"
+  },
   about: {
     title: "About Me",
     eyebrow: "Biography",

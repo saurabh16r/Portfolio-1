@@ -80,6 +80,11 @@ const caseStudySchema = new Schema(
       enum: ["draft", "published", "archived"],
       default: "draft",
     },
+    audience: {
+      type: String,
+      enum: ["freelance", "job", "both"],
+      default: "both",
+    },
     blocks: {
       type: [Schema.Types.Mixed],
       default: [],

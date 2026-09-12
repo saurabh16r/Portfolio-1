@@ -8,9 +8,9 @@ const router = Router();
 // Public submission route from client-side ContactForm
 router.post("/", async (req, res) => {
   try {
-    const { name, email, company, phone, budget, timeline, message, sourcePage } = req.body;
+    const { name, email, company, phone, budget, timeline, message, sourcePage, projectType, type } = req.body;
 
-    if (!name || !email || !budget || !timeline || !message) {
+    if (!name || !email || !message) {
       return res.status(400).json({ error: "Missing required fields." });
     }
 
@@ -19,9 +19,11 @@ router.post("/", async (req, res) => {
       email,
       company,
       phone,
-      budget,
-      timeline,
+      budget: budget || "Not specified",
+      timeline: timeline || "Not specified",
       message,
+      projectType: projectType || "",
+      type: type || "freelance",
       sourcePage: sourcePage || "Contact",
       status: "new"
     });

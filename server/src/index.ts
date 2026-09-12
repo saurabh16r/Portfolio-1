@@ -16,6 +16,8 @@ import contentRoutes from "./routes/content.js";
 import seoRoutes, { generateSitemapXML, generateRobotsTXT } from "./routes/seo.js";
 import mediaRoutes from "./routes/media.js";
 import postsRoutes from "./routes/posts.js";
+import skillsRoutes from "./routes/skills.js";
+import experienceRoutes from "./routes/experience.js";
 
 dotenv.config();
 
@@ -127,6 +129,8 @@ app.use("/api/content", checkDbConnection, contentRoutes);
 app.use("/api/seo", checkDbConnection, seoRoutes);
 app.use("/api/media", checkDbConnection, mediaRoutes);
 app.use("/api/posts", checkDbConnection, postsRoutes);
+app.use("/api/skills", checkDbConnection, skillsRoutes);
+app.use("/api/experience", checkDbConnection, experienceRoutes);
 
 // Dynamic sitemap.xml route
 app.get("/sitemap.xml", async (req, res) => {

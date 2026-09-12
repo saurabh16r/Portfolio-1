@@ -5,18 +5,20 @@ import { requireAuth } from "../middleware/auth.js";
 const router = Router();
 
 // GET /api/case-studies
-// Public endpoint, lists all published items or all items if authenticated
+// Public endpoint, lists published items filtered by audience if requested
 router.get("/", async (req, res) => {
   try {
-    const { status, limit } = req.query;
+    const { status, limit, audience } = req.query;
     let query: any = {};
     
-    // If not authenticated, force status to published
     if (status) {
       query.status = status;
     } else {
-      // Default behavior: client gets published case studies, unless requested
       query.status = "published";
+    }
+
+    if (audience && typeof audience === "string") {
+      query.audience = { $in: [audience, "both"] };
     }
 
     let studies = CaseStudy.find(query).sort({ createdAt: -1 });
@@ -77,6 +79,7 @@ router.post("/", requireAuth, async (req, res) => {
       github,
       prototype,
       status,
+      audience,
       blocks
     } = req.body;
 
@@ -104,6 +107,7 @@ router.post("/", requireAuth, async (req, res) => {
       github,
       prototype,
       status: status || "draft",
+      audience: audience || "both",
       blocks: blocks || []
     });
 
@@ -172,6 +176,7 @@ router.post("/:id/duplicate", requireAuth, async (req, res) => {
       github: source.github,
       prototype: source.prototype,
       status: "draft", // Always duplicate as draft
+      audience: (source as any).audience || "both",
       blocks: source.blocks
     });
 
