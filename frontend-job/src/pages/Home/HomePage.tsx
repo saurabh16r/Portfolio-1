@@ -35,8 +35,8 @@ export function HomePage() {
   return (
     <div className="relative min-h-screen bg-background text-white overflow-hidden font-sans">
       <SEOHead
-        title="Saurabh Rathore — Product Designer & Frontend Developer"
-        description="Digital product designer and frontend engineer crafting high-impact software experiences, design systems, and web applications."
+        title="Saurabh Rathore — UI/UX Designer & Framer Developer"
+        description="UI/UX Designer and Framer Developer creating thoughtful, responsive digital experiences with a focus on interface design, interaction and the web."
         canonicalUrl="https://saurabh-rathore.com"
       />
 
@@ -49,8 +49,8 @@ export function HomePage() {
       <QuoteSection
         number="01"
         label="PHILOSOPHY"
-        quote="Good design is not how it looks — it's how it feels."
-        accentWord="looks"
+        quote="Good design is defined by clarity, interaction, and purpose — not decoration."
+        accentWord="clarity"
         author="SAURABH RATHORE"
         variant="left"
       />
@@ -64,8 +64,8 @@ export function HomePage() {
         <QuoteSection
           number="02"
           label="PROCESS"
-          quote="Every pixel should have a purpose."
-          accentWord="purpose"
+          quote="Design shouldn't stop in Figma. Building the interaction reveals how the experience actually feels."
+          accentWord="interaction"
           author="SAURABH RATHORE"
           variant="offset"
         />
@@ -88,8 +88,8 @@ export function HomePage() {
         <QuoteSection
           number="03"
           label="PRINCIPLE"
-          quote="Great products are built through thoughtful design, not decoration."
-          accentWord="thoughtful"
+          quote="A thoughtful interface makes digital products understandable; great execution makes them feel effortless."
+          accentWord="effortless"
           author="SAURABH RATHORE"
           variant="minimal"
         />

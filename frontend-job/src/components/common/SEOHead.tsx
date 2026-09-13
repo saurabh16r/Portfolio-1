@@ -80,16 +80,16 @@ export function SEOHead({
     };
   }, []);
 
-  const finalTitle = title || globalSeo?.siteTitle || "Saurabh Rathore — Product Designer & Developer";
+  const finalTitle = title || globalSeo?.siteTitle || "Saurabh Rathore — UI/UX Designer & Framer Developer";
   const finalDescription =
     description ||
     globalSeo?.siteDescription ||
-    "Digital product designer and frontend engineer specializing in UI/UX systems and React.";
+    "UI/UX Designer and Framer Developer creating thoughtful, responsive digital experiences with a focus on interface design, interaction, and the web.";
   const rawImage = image || globalSeo?.openGraphImage;
   const finalImage = rawImage ? getImageUrl(rawImage) : "";
   const rawFavicon = globalSeo?.favicon;
   const finalFavicon = rawFavicon ? getImageUrl(rawFavicon) : "/favicon.ico";
-  const finalKeywords = keywords || globalSeo?.keywords || "";
+  const finalKeywords = keywords || globalSeo?.keywords || "UI/UX Designer, Framer Developer, Web Designer, Product Designer, Interaction Design, Design Systems, Digital Experiences";
   const twitterCard = globalSeo?.twitterCard || "summary_large_image";
 
   return (

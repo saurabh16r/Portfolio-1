@@ -17,16 +17,16 @@ type FaqItem = {
 
 const faqItems: FaqItem[] = [
   {
-    question: "Do you sign NDA agreements before discussing concepts?",
-    answer: "Yes, I regularly sign standard non-disclosure agreements before reviewing documentation, API references, or mockups.",
+    question: "Do you sign NDA agreements before reviewing role specs or product designs?",
+    answer: "Yes, I regularly sign standard non-disclosure agreements before reviewing internal documentation, Figma design files, or product roadmaps.",
   },
   {
-    question: "What is your baseline starting price for any web layout?",
-    answer: "My baseline project pricing starts at ₹15,000 for standard high-converting landing pages. Custom business architectures start from ₹30,000.",
+    question: "What types of roles are you open to?",
+    answer: "I am primarily focused on UI/UX Designer, Product Designer, Web Designer, UI Designer, UX Designer, and Framer Developer roles (Full-Time or Contract).",
   },
   {
-    question: "Are you open to contract roles or agency whitelabels?",
-    answer: "Yes, I work with digital studios and agency partners on white-label terms to build Figma wireframes and Framer layouts.",
+    question: "Are you available for remote work?",
+    answer: "Yes, I collaborate seamlessly across timezones with design teams, product managers, and founders worldwide.",
   },
 ];
 
@@ -40,8 +40,8 @@ export function ContactPage() {
   return (
     <div className="relative min-h-screen bg-background text-white overflow-hidden font-sans">
       <Helmet>
-        <title>Start a Project — Saurabh Rathore</title>
-        <meta name="description" content="Get in touch to build high-end UI/UX designs, landing pages, and interactive React / Framer websites." />
+        <title>Get in Touch — Saurabh Rathore | UI/UX Designer & Framer Developer</title>
+        <meta name="description" content="Get in touch for UI/UX Designer, Product Designer, Web Designer, and Framer Developer opportunities." />
         <link rel="canonical" href="https://saurabh-rathore.com/contact" />
       </Helmet>
 
@@ -62,15 +62,15 @@ export function ContactPage() {
                 transition={{ duration: 0.8, ease: "easeOut" }}
               >
                 <p className="mb-4 text-[10px] uppercase tracking-[0.35em] text-[#666]">
-                  Start a Project
+                  Get In Touch
                 </p>
                 <h1 className="font-display font-medium text-[clamp(2.5rem,5.5vw,4.5rem)] uppercase leading-[0.95] tracking-tight text-white mb-6">
-                  LET'S BUILD <br />
-                  SOMETHING <br />
-                  <span className="text-accent">EXCEPTIONAL.</span>
+                  LET'S CREATE <br />
+                  SOMETHING WORTH <br />
+                  <span className="text-accent">EXPERIENCING.</span>
                 </h1>
                 <p className="text-sm text-white/50 leading-relaxed max-w-sm">
-                  I'd love to hear about your project. Fill out the brief onboarding form on the right and let's start a premium collaboration.
+                  Looking for a UI/UX Designer or Framer Developer? Fill out the brief form on the right to get in touch.
                 </p>
               </motion.div>
 
@@ -78,7 +78,7 @@ export function ContactPage() {
               <div className="grid grid-cols-2 gap-y-8 gap-x-6 border-t border-white/5 pt-8">
                 <div>
                   <span className="text-[10px] uppercase tracking-[0.2em] text-white/30 font-bold block mb-1">Availability</span>
-                  <span className="text-xs text-white/80 font-medium">Available for new projects</span>
+                  <span className="text-xs text-white/80 font-medium">Open for UI/UX & Framer Roles</span>
                 </div>
                 <div>
                   <span className="text-[10px] uppercase tracking-[0.2em] text-white/30 font-bold block mb-1">Response Time</span>
@@ -89,17 +89,17 @@ export function ContactPage() {
                   <span className="text-xs text-white/80 font-medium">India · Working Worldwide</span>
                 </div>
                 <div>
-                  <span className="text-[10px] uppercase tracking-[0.2em] text-white/30 font-bold block mb-1">Project Budget</span>
-                  <span className="text-xs text-accent font-semibold">Starting from ₹15,000</span>
+                  <span className="text-[10px] uppercase tracking-[0.2em] text-white/30 font-bold block mb-1">Specialization</span>
+                  <span className="text-xs text-accent font-semibold">UI/UX & Framer</span>
                 </div>
               </div>
 
               {/* Core expertise lists */}
               <div className="border-t border-white/5 pt-8 space-y-6">
                 <div>
-                  <span className="text-[10px] uppercase tracking-[0.2em] text-white/30 font-bold block mb-3.5">Services</span>
+                  <span className="text-[10px] uppercase tracking-[0.2em] text-white/30 font-bold block mb-3.5">Focus Areas</span>
                   <div className="flex flex-wrap gap-2.5">
-                    {["UI/UX Design", "React Development", "Framer Development"].map((s) => (
+                    {["UI/UX Design", "Framer Development", "Web Design", "Interaction Design"].map((s) => (
                       <span key={s} className="text-[9px] font-bold uppercase tracking-wider text-white/60 bg-white/[0.03] border border-white/[0.06] rounded-full px-3 py-1">
                         {s}
                       </span>

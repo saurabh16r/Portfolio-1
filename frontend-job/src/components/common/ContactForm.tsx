@@ -10,6 +10,7 @@ type JobContactFormData = {
   email: string;
   company?: string;
   opportunityType: string;
+  linkedin?: string;
   details: string;
 };
 
@@ -33,7 +34,7 @@ export function ContactForm() {
         company: data.company || "",
         budget: "N/A - Job Enquiry",
         timeline: "N/A - Job Enquiry",
-        message: `Opportunity Type: ${data.opportunityType}\n\n${data.details}`,
+        message: `Opportunity Type: ${data.opportunityType}\nLinkedIn/Portfolio: ${data.linkedin || "N/A"}\n\n${data.details}`,
         projectType: data.opportunityType,
         type: "job",
         sourcePage: "Job Contact Page"
@@ -133,24 +134,26 @@ export function ContactForm() {
                 <input
                   type="text"
                   {...register("company")}
-                  placeholder="e.g. Acme Corp / Meta"
+                  placeholder="e.g. Acme Corp / Studio"
                   className="w-full h-[56px] px-5 rounded-[16px] border border-white/[0.08] bg-[#050505] text-xs text-white placeholder-white/20 outline-none transition-all duration-300 hover:border-white/20 focus:border-accent focus:shadow-[0_0_15px_rgba(201,169,106,0.15)] cursor-none"
                 />
               </div>
 
               <div className="flex flex-col">
                 <label className="mb-3 block text-xs font-semibold text-white/50 tracking-wide">
-                  Opportunity Type <span className="text-accent">*</span>
+                  Role / Opportunity <span className="text-accent">*</span>
                 </label>
                 <div className="relative">
                   <select
                     {...register("opportunityType", { required: true })}
                     className="w-full h-[56px] px-5 pr-10 rounded-[16px] border border-white/[0.08] bg-[#050505] text-xs text-white outline-none transition-all duration-300 hover:border-white/20 focus:border-accent focus:shadow-[0_0_15px_rgba(201,169,106,0.15)] cursor-none appearance-none"
                   >
-                    <option value="Full-Time Engineering / Design">Full-Time (Design or Engineering)</option>
-                    <option value="Contract / Senior Advisory">Contract / Fractional Role</option>
-                    <option value="Design System Consulting">Design System Architecture</option>
-                    <option value="General Hiring Inquiry">General Hiring Inquiry</option>
+                    <option value="UI/UX Role">UI/UX Role</option>
+                    <option value="Product Design Role">Product Design Role</option>
+                    <option value="Framer Role">Framer Role</option>
+                    <option value="Web Design Role">Web Design Role</option>
+                    <option value="Freelance / Contract Opportunity">Freelance / Contract Opportunity</option>
+                    <option value="Other">Other</option>
                   </select>
                   <div className="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none text-white/30">
                     <svg width="10" height="6" viewBox="0 0 10 6" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
@@ -161,15 +164,28 @@ export function ContactForm() {
               </div>
             </motion.div>
 
-            {/* Row 3: Role & Opportunity Details */}
+            {/* Optional LinkedIn / Portfolio Row */}
             <motion.div {...inputReveal} className="flex flex-col">
               <label className="mb-3 block text-xs font-semibold text-white/50 tracking-wide">
-                Role & Opportunity Details <span className="text-accent">*</span>
+                LinkedIn / Portfolio Link (Optional)
+              </label>
+              <input
+                type="url"
+                {...register("linkedin")}
+                placeholder="https://linkedin.com/in/username or company website"
+                className="w-full h-[56px] px-5 rounded-[16px] border border-white/[0.08] bg-[#050505] text-xs text-white placeholder-white/20 outline-none transition-all duration-300 hover:border-white/20 focus:border-accent focus:shadow-[0_0_15px_rgba(201,169,106,0.15)] cursor-none"
+              />
+            </motion.div>
+
+            {/* Message Details */}
+            <motion.div {...inputReveal} className="flex flex-col">
+              <label className="mb-3 block text-xs font-semibold text-white/50 tracking-wide">
+                Message / Opportunity Details <span className="text-accent">*</span>
               </label>
               <textarea
                 {...register("details", { required: "Please provide details regarding the opportunity" })}
-                placeholder="Tell me about the role, team, vision, or project opportunity..."
-                className="w-full min-h-[180px] px-5 py-5 rounded-[16px] border border-white/[0.08] bg-[#050505] text-xs text-white placeholder-white/20 outline-none transition-all duration-300 hover:border-white/20 focus:border-accent focus:shadow-[0_0_15px_rgba(201,169,106,0.15)] cursor-none resize-none leading-relaxed"
+                placeholder="Tell me about the role, project, team, or opportunity..."
+                className="w-full min-h-[160px] px-5 py-5 rounded-[16px] border border-white/[0.08] bg-[#050505] text-xs text-white placeholder-white/20 outline-none transition-all duration-300 hover:border-white/20 focus:border-accent focus:shadow-[0_0_15px_rgba(201,169,106,0.15)] cursor-none resize-none leading-relaxed"
               />
               {errors.details && (
                 <span className="text-[10px] text-red-400 mt-1.5 block">{errors.details.message}</span>

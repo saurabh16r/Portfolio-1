@@ -11,13 +11,13 @@ import { api } from "@/services/api.js";
 
 const categories = [
   "All",
-  "Websites",
-  "Landing Pages",
-  "Dashboards",
-  "Mobile Apps",
-  "Branding",
-  "E-Commerce",
-  "FinTech",
+  "UI/UX Design",
+  "Framer Websites",
+  "Web Design",
+  "Healthcare",
+  "Fintech",
+  "D2C Gifting",
+  "Retail / Interiors",
 ];
 
 export function WorkPage() {
@@ -69,16 +69,20 @@ export function WorkPage() {
   });
 
   const filteredProjects = sortedProjects.filter((project) => {
-    const matchesCategory =
-      activeCategory === "All" ||
-      project.category.toLowerCase() === activeCategory.toLowerCase() ||
-      (activeCategory === "Websites" &&
-        (project.category.toLowerCase() === "e-commerce" || project.category.toLowerCase() === "landing page" || project.category.toLowerCase() === "d2c gifting" || project.category.toLowerCase() === "retail / interiors")) ||
-      (activeCategory === "Mobile Apps" && project.category.toLowerCase() === "mobile app") ||
-      (activeCategory === "FinTech" && project.category.toLowerCase() === "fintech") ||
-      (activeCategory === "Landing Pages" && (project.category.toLowerCase() === "landing page" || project.category.toLowerCase() === "d2c gifting" || project.category.toLowerCase() === "retail / interiors"));
+    if (activeCategory === "All") return true;
+    const catLower = project.category.toLowerCase();
+    const techLower = (project.technologies || []).map((t: string) => t.toLowerCase());
 
-    return matchesCategory;
+    if (activeCategory === "UI/UX Design") {
+      return catLower.includes("ui/ux") || techLower.includes("ui/ux design");
+    }
+    if (activeCategory === "Framer Websites") {
+      return techLower.includes("framer");
+    }
+    if (activeCategory === "Web Design") {
+      return catLower.includes("web") || techLower.includes("web design");
+    }
+    return catLower.includes(activeCategory.toLowerCase());
   });
 
   const updateFades = () => {
@@ -149,8 +153,8 @@ export function WorkPage() {
   return (
     <div className="relative min-h-screen bg-background text-white overflow-hidden font-sans">
       <Helmet>
-        <title>Selected Case Studies — Saurabh Rathore</title>
-        <meta name="description" content="Explore my case studies, digital product designs, web layouts, and interactive experiences." />
+        <title>Selected Work — Saurabh Rathore | UI/UX Designer & Framer Developer</title>
+        <meta name="description" content="Explore selected UI/UX case studies, Framer websites, responsive web designs, and digital product experiences by Saurabh Rathore." />
         <link rel="canonical" href="https://saurabh-rathore.com/work" />
       </Helmet>
 
@@ -168,13 +172,13 @@ export function WorkPage() {
             className="max-w-3xl"
           >
             <p className="mb-4 text-[0.62rem] uppercase tracking-[0.35em] text-white/40 font-bold">
-              Project Archive
+              Case Studies & Portfolio
             </p>
             <h1 className="font-display font-medium text-[clamp(3.5rem,10vw,7.5rem)] uppercase leading-[0.88] tracking-tight text-white mb-8">
               Selected <span className="text-accent">Work</span>
             </h1>
             <p className="max-w-xl text-white/60 text-base sm:text-lg leading-relaxed font-sans">
-              Explore my collection of high-end digital interfaces, web products, and software engineering projects shipped for products and engineering teams.
+              Explore my collection of UI/UX case studies, Framer websites, responsive web designs, and interactive digital experiences.
             </p>
           </motion.div>
         </div>

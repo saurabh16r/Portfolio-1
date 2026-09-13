@@ -16,40 +16,39 @@ export const experience: ExperienceItem[] = [
     period: "May 2026 – Present",
     type: "Full-time",
     active: true,
-    description: "Lead visual design systems and high-converting frontend architectures for core SaaS products, establishing premium visual languages and engineering standards.",
+    description: "Designed and developed responsive digital experiences from initial wireframes to final Framer implementation, establishing brand visual languages and interactive component systems.",
     highlights: [
-      "Built scalable React layout systems and optimized component rendering loops.",
-      "Designed pixel-perfect Figma component frameworks and token systems.",
-      "Developed premium interactive Framer websites with high-fidelity transitions.",
-      "Improved performance check metrics and Core Web Vitals scores by 35%.",
-      "Collaborated with product teams to translate conceptual ideas to code."
+      "Designed pixel-perfect Figma components, layout structures, and design tokens.",
+      "Developed responsive Framer websites with smooth micro-interactions and transitions.",
+      "Optimized visual layouts and asset sizes for high Core Web Vitals performance.",
+      "Collaborated with product teams to translate conceptual ideas into interactive digital experiences."
     ],
-    technologies: ["React", "Framer", "Tailwind", "TypeScript", "Figma", "Node.js"]
+    technologies: ["UI/UX Design", "Framer", "Figma", "Web Design", "Interaction Design"]
   },
   {
     role: "UI/UX & Framer Developer Intern",
     company: "Deven",
     period: "Feb 2026 – Apr 2026",
     type: "Internship",
-    description: "Designed landing pages and created interactive prototypes for high-end digital agency clients, ensuring smooth performance and visual fidelity.",
+    description: "Designed landing pages and built interactive prototypes for client projects, ensuring high visual fidelity and responsive layouts.",
     highlights: [
-      "Created custom components and custom motion controllers inside Framer.",
-      "Assisted in visual layout wireframes and user testing protocols.",
-      "Refined CSS animations to increase page responsiveness and loading times."
+      "Created custom interactive components and layout transitions in Framer.",
+      "Assisted in visual layout wireframing, typography hierarchy, and UI audits.",
+      "Refined animations and page responsiveness across mobile and desktop breakpoints."
     ],
-    technologies: ["Framer", "Figma", "CSS", "JavaScript", "HTML5"]
+    technologies: ["UI/UX Design", "Framer", "Figma", "Web Design", "Prototyping"]
   },
   {
     role: "UI/UX Designer · Top Performer",
     company: "Zaalima Development",
     period: "Apr 2025 – Jul 2025",
     type: "Internship",
-    description: "Executed end-to-end UX research and mockups for high-traffic mobile and web applications, winning the top internship performance award.",
+    description: "Executed end-to-end UX research, wireframing, and interface mockups for high-traffic mobile and web applications, winning top internship performance award.",
     highlights: [
-      "Conducted 15+ in-depth user research sessions and usability surveys.",
-      "Designed and delivered high-fidelity mobile mockups for client signoffs.",
-      "Shipped interactive user flows and prototyping assets directly to engineering."
+      "Conducted 15+ in-depth user research sessions and usability studies.",
+      "Designed high-fidelity mobile and web mockups for product sign-offs.",
+      "Shipped interactive user flows and UI asset kits directly to engineering."
     ],
-    technologies: ["Figma", "UI/UX Design", "User Research", "Adobe Illustrator"]
+    technologies: ["UI/UX Design", "Figma", "User Research", "Wireframing", "Prototyping"]
   }
 ];

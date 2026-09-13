@@ -5,37 +5,55 @@ import { Layout, Code, Wrench, Sparkles } from "lucide-react";
 import { motion } from "framer-motion";
 
 const defaultSkills = [
-  // DESIGN
-  { name: "UI/UX Design", category: "DESIGN" },
-  { name: "Figma", category: "DESIGN" },
-  { name: "Design Systems", category: "DESIGN" },
-  { name: "Prototyping", category: "DESIGN" },
-  { name: "Interaction Design", category: "DESIGN" },
-  { name: "Wireframing", category: "DESIGN" },
+  // UI/UX DESIGN
+  { name: "User Interface Design", category: "UI/UX DESIGN" },
+  { name: "User Experience Design", category: "UI/UX DESIGN" },
+  { name: "Visual Design", category: "UI/UX DESIGN" },
+  { name: "Responsive Design", category: "UI/UX DESIGN" },
+  { name: "Interaction Design", category: "UI/UX DESIGN" },
+  { name: "Prototyping", category: "UI/UX DESIGN" },
+  { name: "Design Systems", category: "UI/UX DESIGN" },
+  { name: "Information Architecture", category: "UI/UX DESIGN" },
   
-  // DEVELOPMENT
-  { name: "React", category: "DEVELOPMENT" },
-  { name: "TypeScript", category: "DEVELOPMENT" },
-  { name: "JavaScript", category: "DEVELOPMENT" },
-  { name: "HTML5 / CSS3", category: "DEVELOPMENT" },
-  { name: "Node.js", category: "DEVELOPMENT" },
-  { name: "Tailwind CSS", category: "DEVELOPMENT" },
-  { name: "Framer Motion", category: "DEVELOPMENT" },
+  // WEB DESIGN
+  { name: "Landing Pages", category: "WEB DESIGN" },
+  { name: "Marketing Websites", category: "WEB DESIGN" },
+  { name: "Portfolio Websites", category: "WEB DESIGN" },
+  { name: "Responsive Web Design", category: "WEB DESIGN" },
+  { name: "Conversion-focused Experiences", category: "WEB DESIGN" },
+  { name: "Interaction & Motion", category: "WEB DESIGN" },
+
+  // FRAMER
+  { name: "Framer Development", category: "FRAMER" },
+  { name: "Responsive Framer Websites", category: "FRAMER" },
+  { name: "Framer CMS", category: "FRAMER" },
+  { name: "Framer Animations", category: "FRAMER" },
+  { name: "Interactive Prototypes", category: "FRAMER" },
+  { name: "Custom Components", category: "FRAMER" },
+  { name: "Advanced Layouts", category: "FRAMER" },
+  { name: "SEO & Performance", category: "FRAMER" },
   
   // TOOLS
+  { name: "Figma", category: "TOOLS" },
   { name: "Framer", category: "TOOLS" },
   { name: "Git & GitHub", category: "TOOLS" },
-  { name: "MongoDB", category: "TOOLS" },
-  { name: "Cloudinary", category: "TOOLS" },
-  { name: "Vercel", category: "TOOLS" },
-  { name: "REST APIs", category: "TOOLS" },
+
+  // SUPPORTING DEVELOPMENT
+  { name: "HTML5 / CSS3", category: "SUPPORTING DEVELOPMENT" },
+  { name: "JavaScript", category: "SUPPORTING DEVELOPMENT" },
+  { name: "React", category: "SUPPORTING DEVELOPMENT" },
+  { name: "Tailwind CSS", category: "SUPPORTING DEVELOPMENT" },
+  { name: "Framer Motion", category: "SUPPORTING DEVELOPMENT" },
 ];
 
 const categoryConfig: Record<string, { label: string; icon: any }> = {
-  DESIGN: { label: "Design Capabilities", icon: Layout },
-  DEVELOPMENT: { label: "Development & Engineering", icon: Code },
-  TOOLS: { label: "Tools & Infrastructure", icon: Wrench },
-  OTHER: { label: "Additional Competencies", icon: Sparkles },
+  "UI/UX DESIGN": { label: "Core Interface & Systems", icon: Layout },
+  "WEB DESIGN": { label: "Digital & Marketing Web", icon: Sparkles },
+  "FRAMER": { label: "Framer & Interactive Build", icon: Wrench },
+  "TOOLS": { label: "Design & Workflow Tools", icon: Wrench },
+  "SUPPORTING DEVELOPMENT": { label: "Secondary Frontend Stack", icon: Code },
+  "DESIGN": { label: "Design Capabilities", icon: Layout },
+  "DEVELOPMENT": { label: "Supporting Stack", icon: Code },
 };
 
 export function SkillsSection() {
@@ -55,14 +73,14 @@ export function SkillsSection() {
     fetchSkills();
   }, []);
 
-  const categories = Array.from(new Set(skillsList.map((s) => s.category || "DESIGN")));
+  const categories = Array.from(new Set(skillsList.map((s) => s.category || "UI/UX DESIGN")));
 
   return (
     <section id="skills" className="px-6 pt-0 pb-[160px] sm:px-8 lg:px-12 bg-transparent">
       <div className="mx-auto max-w-7xl">
-        <SectionHeading eyebrow="Capabilities" title="Skills & Stack" number="04" className="mb-16" />
+        <SectionHeading eyebrow="Capabilities" title="Skills & Expertise" number="04" className="mb-16" />
 
-        <div className="grid gap-8 md:grid-cols-3">
+        <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
           {categories.map((catKey) => {
             const config = categoryConfig[catKey] || { label: catKey, icon: Sparkles };
             const Icon = config.icon;

@@ -41,8 +41,8 @@ export function AboutPage() {
   return (
     <div className="relative min-h-screen bg-background text-white overflow-hidden font-sans">
       <SEOHead
-        title="About Me — Saurabh Rathore"
-        description="Read my story, design education history, freelance achievements, and core toolkit skills."
+        title="About Me — Saurabh Rathore | UI/UX Designer & Framer Developer"
+        description="UI/UX Designer and Framer Developer creating thoughtful, responsive digital experiences with a focus on interface design, interaction, and the web."
         canonicalUrl="https://saurabh-rathore.com/about"
       />
 
@@ -80,10 +80,10 @@ export function AboutPage() {
                 Saurabh <span className="text-accent">Rathore</span>
               </h1>
               <p className="text-lg leading-8 text-white max-w-xl mb-6">
-                Based in India, I design digital layouts and build front-end architectures. I pair high-end interactive aesthetics with performance engineering.
+                Based in India, I design digital experiences and build them in Framer. I work at the intersection of interface design and interactive development.
               </p>
               <p className="text-sm leading-relaxed text-white/60 max-w-lg mb-8">
-                I help startups bridge the gap between creative visual designs and clean React code. I focus on motion-first, accessible interface details that elevate user engagement.
+                I started with interfaces. Then I wanted to understand what happened after the design was handed off. That curiosity led me into building websites, experimenting with interactions and eventually discovering Framer.
               </p>
               <LuxuryButton href="/resume.pdf">
                 Download Resume
@@ -101,8 +101,8 @@ export function AboutPage() {
             {[
               { value: "20+", label: "Completed Projects" },
               { value: "3+", label: "Years Experience" },
-              { value: "98%", label: "Happy Clients" },
-              { value: "100%", label: "Clean Code Guarantee" },
+              { value: "98%", label: "Client Satisfaction" },
+              { value: "100%", label: "Pixel-Perfect Focus" },
             ].map((stat, i) => (
               <div key={i} className="p-4">
                 <div className="font-display font-medium text-5xl text-white tracking-[0.05em] mb-2">
@@ -278,7 +278,7 @@ export function AboutPage() {
             Let's work together.
           </h2>
           <p className="text-white/60 text-sm mb-10 max-w-md mx-auto leading-relaxed">
-            I'm currently accepting new freelance projects and contract design arrangements. Let's build.
+            Looking for a UI/UX Designer or Framer Developer for your team or project? Let's connect.
           </p>
           <LuxuryButton to="/contact">
             Get In Touch

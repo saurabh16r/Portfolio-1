@@ -104,7 +104,7 @@ export function HomeHero() {
             <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-accent"></span>
           </span>
           <p className="text-[0.6rem] uppercase tracking-[0.35em] text-white/55 font-bold">
-            Open for Product Design & Engineering Roles
+            Open for UI/UX & Framer Roles
           </p>
         </motion.div>
 
@@ -113,8 +113,8 @@ export function HomeHero() {
           style={{ x: parallaxX, y: parallaxY }}
           className="font-display font-medium text-[clamp(3.3rem,8vw,6.3rem)] uppercase leading-[0.9] tracking-tight text-white select-none text-left"
         >
-          <LineText text="Product Designer &" delayOffset={0.3} />
-          <LineText text="Frontend Engineer" delayOffset={0.65} isAccent />
+          <LineText text="UI/UX Designer &" delayOffset={0.3} />
+          <LineText text="Framer Developer" delayOffset={0.65} isAccent />
         </motion.h1>
 
         {/* Description */}
@@ -124,7 +124,7 @@ export function HomeHero() {
           transition={{ duration: 1.2, ease: "easeOut", delay: 1.15 }}
           className="mt-12 max-w-[580px] text-white/60 text-base sm:text-lg leading-relaxed font-sans text-left"
         >
-          I design and build high-impact digital experiences, intuitive user interfaces, and scalable web applications for product and engineering teams.
+          I design thoughtful, high-quality digital experiences and turn them into polished, responsive websites in Framer.
         </motion.p>
 
         {/* Action Buttons */}

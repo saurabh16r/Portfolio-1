@@ -9,10 +9,10 @@ export function AboutSection() {
     eyebrow: "Background & Focus",
     heading: "Saurabh Rathore",
     profileImage: "",
-    story: "I am a product designer and frontend engineer with a passion for building intuitive, high-performance web applications and interactive design systems.",
-    designBackground: "Over 3+ years, I've crafted UI/UX systems, high-converting interfaces, and accessible component libraries with Figma and modern design workflows.",
-    devJourney: "Specialized in modern web technologies including React, TypeScript, Node.js, and Framer Motion, writing clean and maintainable code.",
-    currentFocus: "Currently building modern digital products, refining design systems, and seeking high-impact roles in design and engineering teams.",
+    story: "I started with interfaces. Then I wanted to understand what happened after the design was handed off. That curiosity led me into building websites, experimenting with interactions and eventually discovering Framer. Today, I work at the intersection of UI/UX design and web development — designing the experience and building it myself.",
+    designBackground: "Crafting thoughtful user interface systems, high-converting layouts, design systems, and responsive components with Figma and Framer workflows.",
+    devJourney: "Translating static visual designs into polished, responsive Framer websites with interactive components, smooth animations, and optimized web performance.",
+    currentFocus: "Creating polished digital experiences across UI/UX Design and Framer Development — seeking opportunities as a UI/UX Designer, Product Designer, Web Designer, or Framer Developer.",
   });
 
   useEffect(() => {
@@ -60,7 +60,7 @@ export function AboutSection() {
                   {aboutData.heading || "Saurabh Rathore"}
                 </h4>
                 <p className="text-[9px] uppercase tracking-[0.25em] text-accent font-bold mt-0.5">
-                  Designer & Developer
+                  UI/UX Designer & Framer Developer
                 </p>
               </div>
               <Sparkles size={16} className="text-accent/60" />
@@ -79,7 +79,7 @@ export function AboutSection() {
               </p>
             </div>
 
-            {/* Design Background & Dev Journey Grid */}
+            {/* Design Background & Framer Journey Grid */}
             <div className="grid gap-6 sm:grid-cols-2">
               <div className="rounded-[6px] border border-white/[0.06] bg-[#0B0B0B] p-6">
                 <h4 className="text-[10px] uppercase tracking-[0.25em] text-white/40 font-bold mb-3 flex items-center gap-2">
@@ -92,7 +92,7 @@ export function AboutSection() {
 
               <div className="rounded-[6px] border border-white/[0.06] bg-[#0B0B0B] p-6">
                 <h4 className="text-[10px] uppercase tracking-[0.25em] text-white/40 font-bold mb-3 flex items-center gap-2">
-                  <Code2 size={13} className="text-accent" /> Engineering Journey
+                  <Code2 size={13} className="text-accent" /> Framer & Execution
                 </h4>
                 <p className="text-xs leading-relaxed text-white/60">
                   {aboutData.devJourney}

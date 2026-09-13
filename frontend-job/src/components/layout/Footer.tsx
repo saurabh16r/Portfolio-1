@@ -28,9 +28,9 @@ export function Footer() {
           </div>
 
           <h2 className="font-display font-medium text-[clamp(2.5rem,7.5vw,5.5rem)] uppercase leading-[1.0] tracking-tight text-white mb-14">
-            {/* Row 1: LET'S BUILD */}
+            {/* Row 1: LET'S CREATE */}
             <span className="block overflow-hidden h-[1.1em]">
-              {"LET'S BUILD".split("").map((char, index) => (
+              {"LET'S CREATE".split("").map((char, index) => (
                 <motion.span
                   key={`let-${index}`}
                   initial={{ y: "105%", opacity: 0, rotate: 2 }}
@@ -48,9 +48,9 @@ export function Footer() {
                 </motion.span>
               ))}
             </span>
-            {/* Row 2: SOMETHING */}
+            {/* Row 2: SOMETHING WORTH */}
             <span className="block overflow-hidden h-[1.1em] text-accent">
-              {"SOMETHING".split("").map((char, index) => (
+              {"SOMETHING WORTH".split("").map((char, index) => (
                 <motion.span
                   key={`some-${index}`}
                   initial={{ y: "105%", opacity: 0, rotate: 2 }}
@@ -68,11 +68,11 @@ export function Footer() {
                 </motion.span>
               ))}
             </span>
-            {/* Row 3: UNFORGETTABLE. */}
+            {/* Row 3: EXPERIENCING. */}
             <span className="block overflow-hidden h-[1.1em]">
-              {"UNFORGETTABLE.".split("").map((char, index) => (
+              {"EXPERIENCING.".split("").map((char, index) => (
                 <motion.span
-                  key={`unforget-${index}`}
+                  key={`exp-${index}`}
                   initial={{ y: "105%", opacity: 0, rotate: 2 }}
                   whileInView={{ y: 0, opacity: 1, rotate: 0 }}
                   viewport={{ once: true, margin: "-50px" }}

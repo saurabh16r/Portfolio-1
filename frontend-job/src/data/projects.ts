@@ -44,7 +44,7 @@ export const projects: Project[] = [
     description: "Bringing a 49-year legacy of trust online for the first time",
     image: "/opengraph.jpg",
     heroImage: "/opengraph.jpg",
-    technologies: ["Healthcare", "Framer", "UI/UX Design", "Client Work"],
+    technologies: ["UI/UX Design", "Framer", "Web Design", "Responsive Design"],
     caseStudy: "/work/mamta-superspeciality-hospital",
     accent: "from-emerald-500/20 to-slate-900/80",
     intro: "Bringing a 49-year legacy of trust online for the first time",
@@ -83,7 +83,7 @@ export const projects: Project[] = [
     description: "India's 1st plant-based wedding return gift — designed and built to convert",
     image: "/opengraph.jpg",
     heroImage: "/opengraph.jpg",
-    technologies: ["D2C", "Framer", "UI/UX Design", "Client Work", "Conversion Design"],
+    technologies: ["UI/UX Design", "Framer", "Web Design", "Conversion Design"],
     caseStudy: "/work/royal-flosss",
     accent: "from-rose-500/20 to-slate-900/80",
     intro: "India's 1st plant-based wedding return gift — designed and built to convert",
@@ -122,7 +122,7 @@ export const projects: Project[] = [
     description: "Safe Motherhood Begins Here — a full hospital presence, built as a single-page experience",
     image: "/opengraph.jpg",
     heroImage: "/opengraph.jpg",
-    technologies: ["Healthcare", "Framer", "UI/UX Design", "Client Work", "Single-Page Architecture"],
+    technologies: ["UI/UX Design", "Framer", "Web Design", "Single-Page Architecture"],
     caseStudy: "/work/dadi-sati-hospital",
     accent: "from-blue-500/20 to-slate-900/80",
     intro: "Safe Motherhood Begins Here — a full hospital presence, built as a single-page experience",
@@ -160,7 +160,7 @@ export const projects: Project[] = [
     description: "Track. Save. Grow. — an AI-guided personal finance app",
     image: "/opengraph.jpg",
     heroImage: "/opengraph.jpg",
-    technologies: ["Fintech", "Team Project", "UI/UX Design", "Internship"],
+    technologies: ["UI/UX Design", "Interaction Design", "Product Design", "Prototyping"],
     caseStudy: "/work/finovo",
     accent: "from-teal-500/20 to-slate-900/80",
     intro: "Track. Save. Grow. — an AI-guided personal finance app",
@@ -198,7 +198,7 @@ export const projects: Project[] = [
     description: "Building digital trust for a small-town premium interiors brand, from zero",
     image: "/opengraph.jpg",
     heroImage: "/opengraph.jpg",
-    technologies: ["Retail", "D2C", "Framer", "UI/UX Design", "Client Work"],
+    technologies: ["UI/UX Design", "Framer", "Web Design", "Visual Design"],
     caseStudy: "/work/gattani-tiles",
     accent: "from-amber-500/20 to-slate-900/80",
     intro: "Building digital trust for a small-town premium interiors brand, from zero",
@@ -236,16 +236,16 @@ export const projects: Project[] = [
     description: "Tumhara Personal Financial Dost — designed and independently developed",
     image: "/opengraph.jpg",
     heroImage: "/opengraph.jpg",
-    technologies: ["Fintech", "AI-Assisted Development", "UI/UX Design", "Client Work", "Solo Build"],
+    technologies: ["UI/UX Design", "Web Design", "Interaction Design", "Framer"],
     caseStudy: "/work/bharosa-bhai",
     accent: "from-orange-500/20 to-slate-900/80",
     intro: "Tumhara Personal Financial Dost — designed and independently developed",
     year: "2026",
-    role: "Solo UI/UX Designer & Developer",
+    role: "UI/UX Designer & Web Developer",
     duration: "5 Weeks",
     liveLink: "https://www.bharosabhai.com/",
     overview: [
-      "Bharosa Bhai is a Hindi-first personal finance platform built for a practicing Chartered Accountant, centered on a free 2-minute financial health test, SIP calculator, and 6-month roadmap, delivered through a warm 'financial dost' persona. Client project where I owned the process end-to-end — from UI/UX design through to a fully built, live product — using AI-assisted development (Antigravity) instead of a traditional dev handoff."
+      "Bharosa Bhai is a Hindi-first personal finance platform built for a practicing Chartered Accountant, centered on a free 2-minute financial health test, SIP calculator, and 6-month roadmap, delivered through a warm 'financial dost' persona. Client project where I owned the process end-to-end — from UI/UX design through to a fully built, live product."
     ],
     problem: [
       "The CA needed to assess users' financial health and deliver personalized advice, but most advisory sites feel too corporate, jargon-heavy, or sales-driven for a Hindi-first, non-expert audience."
@@ -256,14 +256,14 @@ export const projects: Project[] = [
       "Interactive SIP calculator",
       "Clear 6-month roadmap",
       "Hinglish copy throughout",
-      "Build and ship solo via AI-assisted development"
+      "Build and ship solo"
     ],
     challenge: [
       "Making a CA's advisory process approachable without losing credibility — solved via the bias-free 'Bharosa Bhai' persona and transparent Hinglish voice.",
-      "Owning design-to-build solo through AI-assisted development — built the interactive calculator, multi-step test, and roadmap system independently using Antigravity, compressing the typical design-to-launch timeline."
+      "Owning design-to-build solo — built the interactive calculator, multi-step test, and roadmap system independently, compressing the typical design-to-launch timeline."
     ],
     solution: [
-      "Used Antigravity to build and launch an interactive React-based site solo, integrating an illustrated friendly mascot and custom multi-step financial diagnostics."
+      "Designed and built an interactive web experience solo, integrating an illustrated friendly mascot and custom multi-step financial diagnostics."
     ],
     results: [
       "Delivered a fully designed and built product solo, concept to live site; gave the CA a scalable way to pre-qualify clients via the free test; replaced an intimidating pitch with an approachable Hinglish-first experience."
@@ -276,36 +276,35 @@ export const projects: Project[] = [
     description: "The smartest startup insights in 5 minutes — designed and independently developed from concept to launch",
     image: "/opengraph.jpg",
     heroImage: "/opengraph.jpg",
-    technologies: ["Content Platform", "AI-Assisted Development", "UI/UX Design", "Full-Time Role", "Solo Build"],
+    technologies: ["UI/UX Design", "Web Design", "Design System", "Editorial UX"],
     caseStudy: "/work/deven",
     accent: "from-purple-500/20 to-slate-900/80",
     intro: "The smartest startup insights in 5 minutes — designed and independently developed from concept to launch",
     year: "2026",
-    role: "UI/UX Designer & Visual Engineer",
+    role: "UI/UX Designer & Framer Developer",
     duration: "8 Weeks",
     liveLink: "https://www.thedeven.in/",
     overview: [
-      "Deven is a startup insights platform delivering articles and a newsletter on AI, startup growth, fundraising, product strategy, and operations for founders and operators. The product was repositioned mid-project from an India-first, subscription-priced concept to a global, English-first editorial platform. As a full-time UI/UX Designer at Deven, I designed the platform and independently developed it using AI-assisted development (Antigravity), from concept through repositioning to a live product."
+      "Deven is a startup insights platform delivering articles and a newsletter on AI, startup growth, fundraising, product strategy, and operations for founders and operators. As a full-time UI/UX Designer at Deven, I designed the platform and independently developed the web experience, from concept through repositioning to a live product."
     ],
     problem: [
-      "Needed a fast, credible way for founders to consume startup-relevant content without noise — while also repositioning mid-project from a narrow India-first, subscription model to a broader global audience, without a lengthy dev handoff cycle."
+      "Needed a fast, credible way for founders to consume startup-relevant content without noise — while also repositioning mid-project from a narrow India-first, subscription model to a broader global audience."
     ],
     goals: [
       "Clean, fast, editorial-feeling platform from scratch",
       "Clear content taxonomy (Startups, AI, Marketing, Fundraising, Operations, Growth)",
       "Natural newsletter capture flow",
-      "Rebuild positioning around a global founder audience",
-      "Move from design to live product quickly via AI-assisted development"
+      "Rebuild positioning around a global founder audience"
     ],
     challenge: [
-      "Building a clean, fast-loading content/newsletter platform from scratch, solo, via AI-assisted development.",
+      "Building a clean, fast-loading content/newsletter platform from scratch.",
       "Repositioning mid-project from India-first to a global audience — adapting the existing foundation efficiently rather than restarting."
     ],
     solution: [
-      "Developed the platform using Antigravity for solo speed-to-live execution, allowing rapid visual modifications during a mid-project repositioning pivot."
+      "Designed and built the editorial web platform solo, executing rapid visual modifications during a mid-project repositioning pivot."
     ],
     results: [
-      "Took Deven from concept through a full repositioning to a live, working platform; designed and built the entire product solo without a separate dev handoff; established a scalable content structure for ongoing publishing."
+      "Took Deven from concept through a full repositioning to a live, working platform; designed and built the entire product experience; established a scalable content structure for ongoing publishing."
     ]
   }
 ];

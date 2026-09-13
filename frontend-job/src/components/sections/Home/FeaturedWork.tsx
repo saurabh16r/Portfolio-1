@@ -49,7 +49,7 @@ export function FeaturedWork() {
     <section className="px-6 pt-0 pb-[180px] sm:px-8 lg:px-12 bg-transparent">
       <div className="mx-auto max-w-7xl">
         <div className="flex flex-col md:flex-row md:items-end md:justify-between mb-12">
-          <SectionHeading eyebrow="Selected Cases" title="Featured Work" number="01" />
+          <SectionHeading eyebrow="Portfolio" title="Selected Work" number="01" />
           
           <Link
             to="/work"

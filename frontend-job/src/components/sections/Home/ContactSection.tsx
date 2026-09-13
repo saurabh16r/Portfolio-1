@@ -14,12 +14,12 @@ export function ContactSection() {
                 Get In Touch
               </p>
               <h2 className="font-display font-medium text-[clamp(2.5rem,5.5vw,4.5rem)] uppercase leading-[0.95] tracking-tight text-white mb-6">
-                LET'S BUILD <br />
-                SOMETHING <br />
-                <span className="text-accent">EXCEPTIONAL.</span>
+                LET'S CREATE <br />
+                SOMETHING WORTH <br />
+                <span className="text-accent">EXPERIENCING.</span>
               </h2>
               <p className="text-sm text-white/50 leading-relaxed max-w-sm">
-                I'd love to hear about your project. Let's start the onboarding process and establish a premium collaboration.
+                Looking for a UI/UX Designer or Framer Developer? Let's discuss open roles, team opportunities, or project collaborations.
               </p>
             </div>
 
@@ -27,7 +27,7 @@ export function ContactSection() {
             <div className="grid grid-cols-2 gap-y-8 gap-x-6 border-t border-white/5 pt-8">
               <div>
                 <span className="text-[10px] uppercase tracking-[0.2em] text-white/30 font-bold block mb-1">Availability</span>
-                <span className="text-xs text-white/80 font-medium">Available for new projects</span>
+                <span className="text-xs text-white/80 font-medium">Open for UI/UX & Framer Roles</span>
               </div>
               <div>
                 <span className="text-[10px] uppercase tracking-[0.2em] text-white/30 font-bold block mb-1">Response Time</span>
@@ -38,17 +38,17 @@ export function ContactSection() {
                 <span className="text-xs text-white/80 font-medium">India · Working Worldwide</span>
               </div>
               <div>
-                <span className="text-[10px] uppercase tracking-[0.2em] text-white/30 font-bold block mb-1">Project Budget</span>
-                <span className="text-xs text-accent font-semibold">Starting from ₹15,000</span>
+                <span className="text-[10px] uppercase tracking-[0.2em] text-white/30 font-bold block mb-1">Specialization</span>
+                <span className="text-xs text-accent font-semibold">UI/UX & Framer</span>
               </div>
             </div>
 
             {/* Core expertise lists */}
             <div className="border-t border-white/5 pt-8 space-y-6">
               <div>
-                <span className="text-[10px] uppercase tracking-[0.2em] text-white/30 font-bold block mb-3.5">Services</span>
+                <span className="text-[10px] uppercase tracking-[0.2em] text-white/30 font-bold block mb-3.5">Focus Areas</span>
                 <div className="flex flex-wrap gap-2.5">
-                  {["UI/UX Design", "React Development", "Framer Development"].map((s) => (
+                  {["UI/UX Design", "Framer Development", "Web Design", "Interaction Design"].map((s) => (
                     <span key={s} className="text-[9px] font-bold uppercase tracking-wider text-white/60 bg-white/[0.03] border border-white/[0.06] rounded-full px-3 py-1">
                       {s}
                     </span>
