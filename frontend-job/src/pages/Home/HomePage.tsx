@@ -1,5 +1,5 @@
 import React from "react";
-import { Helmet } from "react-helmet-async";
+import { SEOHead } from "@/components/common/SEOHead";
 import { motion } from "framer-motion";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
@@ -34,14 +34,11 @@ export function HomePage() {
 
   return (
     <div className="relative min-h-screen bg-background text-white overflow-hidden font-sans">
-      <Helmet>
-        <title>Saurabh Rathore — Product Designer & Frontend Developer</title>
-        <meta name="description" content="Digital product designer and frontend engineer crafting high-impact software experiences, design systems, and web applications." />
-        <meta property="og:title" content="Saurabh Rathore — Product Designer & Frontend Developer" />
-        <meta property="og:description" content="Digital product designer and frontend engineer crafting high-impact software experiences, design systems, and web applications." />
-        <meta property="og:type" content="website" />
-        <link rel="canonical" href="https://saurabh-rathore.com" />
-      </Helmet>
+      <SEOHead
+        title="Saurabh Rathore — Product Designer & Frontend Developer"
+        description="Digital product designer and frontend engineer crafting high-impact software experiences, design systems, and web applications."
+        canonicalUrl="https://saurabh-rathore.com"
+      />
 
       <SmoothScroll />
       <CinematicBackground />

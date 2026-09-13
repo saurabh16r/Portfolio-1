@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Helmet } from "react-helmet-async";
+import { SEOHead } from "@/components/common/SEOHead";
 import { motion } from "framer-motion";
 import {
   Briefcase,
@@ -40,11 +40,11 @@ export function AboutPage() {
 
   return (
     <div className="relative min-h-screen bg-background text-white overflow-hidden font-sans">
-      <Helmet>
-        <title>About Me — Saurabh Rathore</title>
-        <meta name="description" content="Read my story, design education history, freelance achievements, and core toolkit skills." />
-        <link rel="canonical" href="https://saurabh-rathore.com/about" />
-      </Helmet>
+      <SEOHead
+        title="About Me — Saurabh Rathore"
+        description="Read my story, design education history, freelance achievements, and core toolkit skills."
+        canonicalUrl="https://saurabh-rathore.com/about"
+      />
 
       <SmoothScroll />
       <CinematicBackground />

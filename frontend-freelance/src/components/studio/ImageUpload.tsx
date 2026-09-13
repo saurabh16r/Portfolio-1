@@ -1,5 +1,5 @@
 import { useState, useRef, DragEvent, ChangeEvent, useEffect } from "react";
-import { Upload, X, RefreshCw, AlertCircle, Sparkles } from "lucide-react";
+import { Upload, RefreshCw, AlertCircle } from "lucide-react";
 import { api, getImageUrl, API_URL } from "../../services/api.js";
 
 interface ImageUploadProps {
@@ -269,9 +269,12 @@ export function ImageUpload({ value, onChange, label, maxSizeMB = 10 }: ImageUpl
 
   const displayImage = previewUrl || (isValidImageUrl(value) ? getImageUrl(value) : "");
 
+  const isFavicon = label?.toLowerCase().includes("favicon") || label?.toLowerCase().includes("icon");
+  const isAvatar = label?.toLowerCase().includes("avatar") || label?.toLowerCase().includes("profile") || label?.toLowerCase().includes("square");
+  const isSquare = isFavicon || isAvatar;
   const isHeader = label?.toLowerCase().includes("featured") || label?.toLowerCase().includes("banner") || label?.toLowerCase().includes("hero") || label?.toLowerCase().includes("header");
   const isThumbnail = label?.toLowerCase().includes("thumbnail") || label?.toLowerCase().includes("gallery");
-  const aspectClass = isHeader ? "aspect-video" : isThumbnail ? "aspect-[4/3]" : "aspect-[16/9]";
+  const aspectClass = isSquare ? "aspect-square max-w-[140px] mx-auto p-2 object-contain" : isHeader ? "aspect-video" : isThumbnail ? "aspect-[4/3]" : "aspect-[16/9]";
 
   return (
     <div className="space-y-2.5 w-full">

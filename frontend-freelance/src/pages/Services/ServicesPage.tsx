@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Helmet } from "react-helmet-async";
+import { SEOHead } from "@/components/common/SEOHead";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   Monitor,
@@ -52,11 +52,11 @@ export function ServicesPage() {
 
   return (
     <div className="relative min-h-screen bg-background text-white overflow-hidden font-sans">
-      <Helmet>
-        <title>Design & Development Services — Saurabh Rathore</title>
-        <meta name="description" content="Premium UI/UX design, custom landing pages, dashboard applications, and high-fidelity Framer development." />
-        <link rel="canonical" href="https://saurabh-rathore.com/services" />
-      </Helmet>
+      <SEOHead
+        title="Design & Development Services — Saurabh Rathore"
+        description="Premium UI/UX design, custom landing pages, dashboard applications, and high-fidelity Framer development."
+        canonicalUrl="https://saurabh-rathore.com/services"
+      />
 
       <SmoothScroll />
       <CinematicBackground />

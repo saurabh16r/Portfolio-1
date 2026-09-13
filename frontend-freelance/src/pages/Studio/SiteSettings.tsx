@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { api, getImageUrl } from "../../services/api.js";
 import { ImageUpload } from "../../components/studio/ImageUpload.js";
 import {
@@ -6,7 +6,6 @@ import {
   Globe,
   ShieldAlert,
   Twitter,
-  Link2,
   Image as ImageIcon,
   Type,
   AlignLeft,
@@ -14,17 +13,12 @@ import {
 } from "lucide-react";
 
 // ─────────────────────────────────────────────────────────────
+import { updateSEOCache, applyFaviconTag } from "../../components/common/SEOHead.js";
+
 // Helper — dynamically swap the favicon in the browser tab
-// ─────────────────────────────────────────────────────────────
 function applyFavicon(url: string) {
   if (!url) return;
-  const link: HTMLLinkElement =
-    (document.querySelector("link[rel*='icon']") as HTMLLinkElement) ||
-    document.createElement("link");
-  link.type = "image/x-icon";
-  link.rel = "shortcut icon";
-  link.href = url;
-  document.head.appendChild(link);
+  applyFaviconTag(getImageUrl(url));
 }
 
 // ─────────────────────────────────────────────────────────────
@@ -43,6 +37,12 @@ function TwitterPreview({
   siteUrl: string;
   cardType: string;
 }) {
+  const [imgErr, setImgErr] = useState(false);
+
+  useEffect(() => {
+    setImgErr(false);
+  }, [imageUrl]);
+
   const domain = (() => {
     try {
       return new URL(siteUrl || "https://example.com").hostname;
@@ -52,25 +52,25 @@ function TwitterPreview({
   })();
 
   const isLarge = cardType === "summary_large_image";
+  const resolvedImg = getImageUrl(imageUrl);
 
   return (
     <div className="rounded-[12px] border border-white/10 bg-[#16181c] overflow-hidden text-white font-sans max-w-[500px]">
       {isLarge ? (
         <>
           {/* Large image on top */}
-          <div className="w-full aspect-[1200/630] bg-[#0e0f12] overflow-hidden">
-            {imageUrl ? (
+          <div className="w-full aspect-[1200/630] bg-[#0e0f12] overflow-hidden flex items-center justify-center">
+            {resolvedImg && !imgErr ? (
               <img
-                src={getImageUrl(imageUrl)}
+                src={resolvedImg}
                 alt="OG Preview"
                 className="w-full h-full object-cover"
-                onError={(e) => {
-                  (e.target as HTMLImageElement).style.display = "none";
-                }}
+                onError={() => setImgErr(true)}
               />
             ) : (
-              <div className="w-full h-full flex items-center justify-center">
-                <ImageIcon size={32} className="text-white/10" />
+              <div className="w-full h-full flex flex-col items-center justify-center gap-1.5 text-white/20">
+                <ImageIcon size={32} />
+                <span className="text-[9px] uppercase tracking-wider">No Social Image</span>
               </div>
             )}
           </div>
@@ -87,19 +87,17 @@ function TwitterPreview({
       ) : (
         /* Small summary card */
         <div className="flex gap-0 h-[120px]">
-          <div className="w-[120px] shrink-0 bg-[#0e0f12] overflow-hidden">
-            {imageUrl ? (
+          <div className="w-[120px] shrink-0 bg-[#0e0f12] overflow-hidden flex items-center justify-center">
+            {resolvedImg && !imgErr ? (
               <img
-                src={getImageUrl(imageUrl)}
+                src={resolvedImg}
                 alt="OG Preview"
                 className="w-full h-full object-cover"
-                onError={(e) => {
-                  (e.target as HTMLImageElement).style.display = "none";
-                }}
+                onError={() => setImgErr(true)}
               />
             ) : (
-              <div className="w-full h-full flex items-center justify-center">
-                <ImageIcon size={20} className="text-white/10" />
+              <div className="w-full h-full flex flex-col items-center justify-center gap-1 text-white/20">
+                <ImageIcon size={20} />
               </div>
             )}
           </div>
@@ -132,6 +130,12 @@ function OGPreview({
   imageUrl: string;
   siteUrl: string;
 }) {
+  const [imgErr, setImgErr] = useState(false);
+
+  useEffect(() => {
+    setImgErr(false);
+  }, [imageUrl]);
+
   const domain = (() => {
     try {
       return new URL(siteUrl || "https://example.com").hostname.toUpperCase();
@@ -140,21 +144,22 @@ function OGPreview({
     }
   })();
 
+  const resolvedImg = getImageUrl(imageUrl);
+
   return (
     <div className="border border-white/10 overflow-hidden max-w-[500px]">
-      <div className="w-full aspect-[1200/630] bg-[#1c1e21] overflow-hidden">
-        {imageUrl ? (
+      <div className="w-full aspect-[1200/630] bg-[#1c1e21] overflow-hidden flex items-center justify-center">
+        {resolvedImg && !imgErr ? (
           <img
-            src={getImageUrl(imageUrl)}
+            src={resolvedImg}
             alt="OG Preview"
             className="w-full h-full object-cover"
-            onError={(e) => {
-              (e.target as HTMLImageElement).style.display = "none";
-            }}
+            onError={() => setImgErr(true)}
           />
         ) : (
-          <div className="w-full h-full flex items-center justify-center">
-            <ImageIcon size={32} className="text-white/10" />
+          <div className="w-full h-full flex flex-col items-center justify-center gap-1.5 text-white/20">
+            <ImageIcon size={32} />
+            <span className="text-[9px] uppercase tracking-wider">No Social Image</span>
           </div>
         )}
       </div>
@@ -189,21 +194,26 @@ function FaviconPreview({ url }: { url: string }) {
 
   return (
     <div className="flex items-center gap-3">
-      <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-[6px] border border-white/10 bg-[#050505]">
+      <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-[8px] border border-white/10 bg-[#050505] p-2">
         {resolved && !err ? (
           <img
             src={resolved}
             alt="Favicon preview"
-            className="h-6 w-6 object-contain"
+            className="h-full w-full object-contain"
             onError={() => setErr(true)}
           />
         ) : (
-          <Globe size={14} className="text-white/20" />
+          <Globe size={18} className="text-white/20" />
         )}
       </div>
-      <span className="text-[9px] uppercase tracking-wider text-white/30 font-bold">
-        Browser tab icon preview
-      </span>
+      <div>
+        <span className="block text-[10px] uppercase tracking-wider text-white/70 font-bold">
+          Browser Tab Icon Preview
+        </span>
+        <span className="text-[9px] text-white/30 truncate max-w-[220px] block font-mono">
+          {url || "Default /favicon.ico"}
+        </span>
+      </div>
     </div>
   );
 }
@@ -225,6 +235,9 @@ export function SiteSettings() {
       setLoading(true);
       const res = await api.get("/seo");
       setGlobal(res?.global || {});
+      if (res?.global?.favicon) {
+        applyFavicon(res.global.favicon);
+      }
     } catch (err: any) {
       setError(err.message || "Failed to load site settings.");
     } finally {
@@ -235,6 +248,12 @@ export function SiteSettings() {
   useEffect(() => {
     fetchSettings();
   }, []);
+
+  useEffect(() => {
+    if (global.favicon) {
+      applyFavicon(global.favicon);
+    }
+  }, [global.favicon]);
 
   // ── Field updater
   const set = (key: string, value: any) =>
@@ -249,8 +268,9 @@ export function SiteSettings() {
       const current = await api.get("/seo");
       const updated = { ...current, global };
       await api.put("/seo", updated);
+      updateSEOCache(global);
+      if (global.favicon) applyFavicon(global.favicon);
       setSuccess("Site settings saved successfully.");
-      if (global.favicon) applyFavicon(getImageUrl(global.favicon));
       window.scrollTo({ top: 0, behavior: "smooth" });
     } catch (err: any) {
       setError(err.message || "Failed to save site settings.");
