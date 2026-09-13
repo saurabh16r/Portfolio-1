@@ -73,7 +73,7 @@ export function ProjectCard({ project }: ProjectCardProps) {
         y: isHovered && !isMobile ? -10 : 0,
       }}
       transition={{ type: "spring", stiffness: 280, damping: 24 }}
-      className="group relative flex flex-col justify-between overflow-hidden rounded-[6px] bg-card p-5 sm:p-6 md:p-8 lg:p-12 cursor-none w-full lg:aspect-[16/14] border border-transparent"
+      className="group relative flex flex-col justify-between overflow-hidden rounded-[6px] bg-card p-5 sm:p-6 md:p-8 lg:p-10 cursor-none w-full lg:aspect-[16/14] border border-transparent"
       data-cursor="project"
       data-cursor-text="VIEW"
     >
@@ -96,10 +96,14 @@ export function ProjectCard({ project }: ProjectCardProps) {
         />
       )}
 
-      {/* Split height container */}
-      <div className="flex w-full lg:h-full flex-col justify-between" style={{ transform: isMobile ? "none" : "translateZ(15px)" }}>
-        {/* Upper Preview Image: Responsive aspect ratio on mobile, 66% height on desktop */}
-        <div className="w-full aspect-[16/9] sm:aspect-[16/10] lg:aspect-none lg:h-[66%] overflow-hidden rounded-[4px] border border-white/5 relative shrink-0">
+      {/* Full card clickable link wrapper */}
+      <Link
+        to={`/work/${project.slug}`}
+        className="flex w-full lg:h-full flex-col justify-between z-10"
+        style={{ transform: isMobile ? "none" : "translateZ(15px)" }}
+      >
+        {/* Upper Preview Image: Responsive aspect ratio on mobile, 64% height on desktop */}
+        <div className="w-full aspect-[16/9] sm:aspect-[16/10] lg:aspect-none lg:h-[62%] overflow-hidden rounded-[4px] border border-white/5 relative shrink-0">
           <motion.div
             animate={{ scale: isHovered ? 1.07 : 1 }}
             transition={{ type: "spring", stiffness: 100, damping: 18 }}
@@ -110,34 +114,42 @@ export function ProjectCard({ project }: ProjectCardProps) {
         </div>
 
         {/* Lower Project Details */}
-        <div className="mt-5 sm:mt-6 lg:mt-8 flex flex-col justify-between flex-grow">
+        <div className="mt-4 sm:mt-5 lg:mt-6 flex flex-col justify-between flex-grow">
           <div>
-            <div className="flex flex-wrap items-center gap-2 sm:gap-3">
+            <div className="flex flex-wrap items-center gap-2 sm:gap-2.5">
               <Badge label={project.category} glow={isHovered} />
-              <span className="text-[10px] font-bold text-white/30 uppercase tracking-[0.25em]">
+              {project.technologies && project.technologies.slice(0, 2).map((tech, idx) => (
+                <span
+                  key={idx}
+                  className="inline-flex items-center rounded-[3px] border border-white/[0.08] bg-white/[0.03] px-2 py-0.5 text-[9px] font-mono text-white/50 uppercase tracking-wider"
+                >
+                  {tech}
+                </span>
+              ))}
+              <span className="ml-auto text-[10px] font-bold text-white/30 uppercase tracking-[0.25em]">
                 {project.year}
               </span>
             </div>
             
             {/* Responsive project title */}
             <motion.h3 
-              animate={{ y: isHovered ? -5 : 0 }}
+              animate={{ y: isHovered ? -4 : 0 }}
               transition={{ type: "spring", stiffness: 220, damping: 20 }}
-              className="mt-3 font-display font-medium text-[clamp(1.4rem,5.5vw,2.25rem)] lg:text-4xl uppercase tracking-[0.05em] sm:tracking-[0.08em] leading-[1.05] sm:leading-tight text-white origin-left"
+              className="mt-3 font-display font-medium text-[clamp(1.3rem,4.5vw,2rem)] lg:text-3xl uppercase tracking-[0.04em] sm:tracking-[0.06em] leading-[1.1] text-white origin-left"
             >
               {project.title}
             </motion.h3>
 
-            <p className="mt-2.5 sm:mt-3 text-xs text-white/60 leading-relaxed line-clamp-2 sm:line-clamp-2 lg:line-clamp-1">
+            <p className="mt-2 text-xs text-white/60 leading-relaxed line-clamp-2">
               {project.description}
             </p>
           </div>
 
-          <Link to={`/work/${project.slug}`} className="block mt-5 sm:mt-6 lg:mt-8">
+          <div className="mt-4 sm:mt-5 lg:mt-6">
             <CardFooter label="View Case Study" isHovered={isHovered} />
-          </Link>
+          </div>
         </div>
-      </div>
+      </Link>
     </motion.div>
   );
 }

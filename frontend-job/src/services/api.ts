@@ -131,8 +131,11 @@ export const getImageUrl = (url: string | null | undefined, width?: number): str
     }
     return url;
   }
-  const relativePath = url.startsWith("/") ? url : `/${url}`;
-  return `${API_URL}${relativePath}`;
+  if (url.startsWith("/uploads/") || url.startsWith("uploads/")) {
+    const relativePath = url.startsWith("/") ? url : `/${url}`;
+    return `${API_URL}${relativePath}`;
+  }
+  return url;
 };
 
 export const resolveHtmlImages = (html: string | null | undefined): string => {
