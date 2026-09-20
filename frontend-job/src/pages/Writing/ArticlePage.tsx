@@ -6,7 +6,8 @@ import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { SmoothScroll } from "@/components/layout/SmoothScroll";
 import { CinematicBackground } from "@/components/layout/CinematicBackground";
-import { api, getImageUrl, resolveHtmlImages } from "@/services/api.js";
+import { api, getImageUrl } from "@/services/api.js";
+import { ArticleContentRenderer } from "@/components/common/ArticleContentRenderer";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 
 interface PostType {
@@ -106,7 +107,7 @@ export function ArticlePage() {
       <Navbar />
 
       {/* Article Header & Title Block */}
-      <section className="px-6 pt-36 pb-12 sm:px-8 sm:pt-44 lg:px-12 lg:pt-48 bg-transparent text-left relative z-10">
+      <section className="px-6 pt-36 pb-10 sm:px-8 sm:pt-44 lg:px-12 lg:pt-48 bg-transparent text-left relative z-10">
         <div className="mx-auto max-w-[760px]">
           {/* Back link */}
           <Link
@@ -159,7 +160,7 @@ export function ArticlePage() {
 
       {/* Large Cover Image Banner */}
       {post.coverImage && (
-        <section className="px-6 py-6 sm:px-8 lg:px-12 bg-transparent relative z-10">
+        <section className="px-6 py-6 sm:px-8 lg:px-12 bg-transparent relative z-10 mb-6">
           <div className="mx-auto max-w-[840px]">
             <motion.div
               initial={{ opacity: 0, scale: 0.99 }}
@@ -178,35 +179,20 @@ export function ArticlePage() {
         </section>
       )}
 
-      {/* Reading Canvas (Comfortable Width ~720px) */}
-      <section className="px-6 py-12 sm:px-8 lg:px-12 bg-transparent relative z-10">
-        <div className="mx-auto max-w-[720px] text-left">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, ease: "easeOut", delay: 0.2 }}
-            className="prose prose-invert max-w-none text-[#F5F2EB]/80 font-sans leading-relaxed text-sm sm:text-base
-              prose-headings:font-display prose-headings:font-medium prose-headings:uppercase prose-headings:tracking-wide prose-headings:text-[#F5F2EB]
-              prose-h2:text-xl sm:prose-h2:text-2xl prose-h2:mt-12 prose-h2:mb-5 prose-h2:border-b prose-h2:border-white/[0.08] prose-h2:pb-3
-              prose-h3:text-lg prose-h3:mt-8 prose-h3:mb-4
-              prose-p:mb-6 prose-p:leading-relaxed
-              prose-strong:text-[#F5F2EB] prose-strong:font-bold
-              prose-em:text-[#F5F2EB]/95
-              prose-a:text-[#C9A96A] prose-a:underline hover:prose-a:text-[#F5F2EB] transition-colors
-              prose-blockquote:border-l-2 prose-blockquote:border-[#C9A96A] prose-blockquote:pl-6 prose-blockquote:italic prose-blockquote:my-8 prose-blockquote:text-[#F5F2EB]/90
-              prose-ul:list-disc prose-ul:pl-6 prose-ul:my-6 prose-ul:space-y-2
-              prose-ol:list-decimal prose-ol:pl-6 prose-ol:my-6 prose-ol:space-y-2
-              prose-pre:bg-[#0E0E0E] prose-pre:border prose-pre:border-white/[0.08] prose-pre:p-5 prose-pre:rounded-[6px] prose-pre:my-8
-              prose-code:text-[#C9A96A] prose-code:bg-white/5 prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded prose-code:text-xs prose-code:font-mono
-              prose-img:rounded-[6px] prose-img:border prose-img:border-white/[0.08] prose-img:w-full"
-            dangerouslySetInnerHTML={{ __html: resolveHtmlImages(post.content) }}
-          />
-        </div>
+      {/* Reading Canvas using ArticleContentRenderer */}
+      <section className="px-5 py-10 sm:px-8 lg:px-12 bg-transparent relative z-10">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, ease: "easeOut", delay: 0.2 }}
+        >
+          <ArticleContentRenderer content={post.content} />
+        </motion.div>
       </section>
 
       {/* Author & Footer Note */}
       <section className="px-6 py-10 sm:px-8 lg:px-12 bg-transparent relative z-10">
-        <div className="mx-auto max-w-[720px] text-left">
+        <div className="mx-auto max-w-[740px] text-left">
           <div className="flex items-center gap-5 p-6 rounded-[6px] border border-white/[0.08] bg-[#0C0C0C]">
             <div className="flex h-12 w-12 items-center justify-center rounded-full bg-[#C9A96A]/10 text-[#C9A96A] text-sm font-mono font-bold border border-[#C9A96A]/30 flex-shrink-0">
               SR
