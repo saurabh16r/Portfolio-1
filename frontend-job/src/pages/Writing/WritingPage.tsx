@@ -7,7 +7,7 @@ import { Footer } from "@/components/layout/Footer";
 import { SmoothScroll } from "@/components/layout/SmoothScroll";
 import { CinematicBackground } from "@/components/layout/CinematicBackground";
 import { api, getImageUrl } from "@/services/api.js";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, Sparkles } from "lucide-react";
 
 const CATEGORIES = ["ALL", "JOURNEY", "DESIGN", "BUILD", "EXPERIMENTS"];
 
@@ -118,28 +118,29 @@ export function WritingPage() {
   };
 
   // Find featured post
-  const featuredPost = posts.find((p) => p.featured);
+  const featuredPost = posts.find((p) => p.featured) || (posts.length > 0 ? posts[0] : null);
   
   // Filter non-featured posts by category
   const filteredPosts = posts.filter((p) => {
     if (featuredPost && p._id === featuredPost._id) return false;
     if (activeCategory === "ALL") return true;
-    return p.category.toLowerCase() === activeCategory.toLowerCase();
+    return p.category?.toLowerCase() === activeCategory.toLowerCase();
   });
 
   const formattedDate = (dateStr: string) => {
+    if (!dateStr) return "DRAFT";
     return new Date(dateStr).toLocaleDateString("en-US", {
       day: "numeric",
       month: "short",
       year: "numeric"
-    });
+    }).toUpperCase();
   };
 
   return (
     <div className="relative min-h-screen bg-[#0A0A0A] text-[#F5F2EB] overflow-hidden font-sans">
       <Helmet>
-        <title>Writing & Insights — Saurabh Rathore</title>
-        <meta name="description" content="Thoughts, design experiments, build guides, and technical lessons from software engineering and visual design." />
+        <title>Journal & Archive — Writing & Thoughts</title>
+        <meta name="description" content="Thoughts, design experiments, build tutorials, and lessons learned while creating digital products." />
         <link rel="canonical" href="https://saurabh-rathore.com/writing" />
       </Helmet>
 
@@ -147,114 +148,122 @@ export function WritingPage() {
       <CinematicBackground />
       <Navbar />
 
-      {/* Hero Section */}
-      <section className="px-6 pb-[110px] pt-40 sm:px-8 lg:px-12 bg-transparent">
-        <div className="mx-auto max-w-5xl">
+      {/* 1. EDITORIAL BLOG HERO */}
+      <section className="px-6 pt-36 pb-16 sm:px-8 sm:pt-44 sm:pb-20 lg:px-12 lg:pt-48 lg:pb-24 bg-transparent relative z-10">
+        <div className="mx-auto max-w-6xl">
           <motion.div
-            initial={{ opacity: 0, y: 25 }}
+            initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
             className="text-left"
           >
-            <p className="mb-4 text-[0.62rem] uppercase tracking-[0.35em] text-[#F5F2EB]/40 font-bold">
-              Journal & Archive
-            </p>
-            <h1 className="font-display font-medium text-[clamp(2.8rem,7vw,5.5rem)] uppercase leading-[0.9] tracking-tight text-[#F5F2EB] mb-8">
-              Writ<span className="text-[#C9A96A]">ing</span>
+            {/* Eyebrow */}
+            <div className="flex items-center gap-3 mb-6">
+              <span className="h-1.5 w-1.5 rounded-full bg-[#C9A96A]" />
+              <p className="text-[10px] sm:text-[11px] uppercase tracking-[0.35em] text-[#F5F2EB]/50 font-mono font-semibold">
+                JOURNAL & ARCHIVE
+              </p>
+            </div>
+
+            {/* Headline */}
+            <h1 className="font-display font-medium text-[clamp(3.5rem,8.5vw,7.5rem)] uppercase leading-[0.88] tracking-tight text-[#F5F2EB] mb-8">
+              WRIT<span className="text-[#C9A96A]">ING</span>
             </h1>
 
-            {/* Description & Explore interaction Row */}
-            <div className="mt-8 flex flex-col sm:flex-row sm:items-end justify-between gap-6 max-w-4xl border-t border-white/[0.06] pt-8">
-              <p className="text-[#F5F2EB]/65 text-xs sm:text-sm leading-relaxed font-sans max-w-xl">
-                Thoughts, design experiments, build tutorials, and life lessons learned along the journey of crafting visual products.
+            {/* Horizontal Divider & Description Block */}
+            <div className="border-t border-white/[0.08] pt-8 flex flex-col md:flex-row md:items-end justify-between gap-6">
+              <p className="text-[#F5F2EB]/70 text-sm sm:text-base leading-relaxed font-sans max-w-2xl">
+                Thoughts, design experiments, build tutorials, and lessons learned while creating digital products.
               </p>
-              
-              <button
-                onClick={() => {
-                  const el = document.getElementById("featured-section");
-                  if (el) {
-                    el.scrollIntoView({ behavior: "smooth" });
-                  }
-                }}
-                className="self-start sm:self-auto flex-shrink-0 border border-[#F5F2EB]/10 hover:border-[#C9A96A] hover:text-[#C9A96A] px-5 py-2.5 rounded-full text-[9px] font-bold tracking-[0.2em] uppercase transition-all duration-300 flex items-center gap-1.5 cursor-none"
-              >
-                Explore <ArrowRight size={10} className="rotate-90 text-[#C9A96A]" />
-              </button>
+
+              <div className="flex items-center gap-6 text-[10px] font-mono text-[#F5F2EB]/40 uppercase tracking-widest shrink-0">
+                <span>VOL. {new Date().getFullYear()}</span>
+                <span>•</span>
+                <span>{posts.length} {posts.length === 1 ? "ARTICLE" : "ARTICLES"}</span>
+              </div>
             </div>
           </motion.div>
         </div>
       </section>
 
-      {/* Featured Section */}
+      {/* 2. FEATURED ARTICLE CARD */}
       {featuredPost && (
-        <section id="featured-section" className="px-6 py-4 sm:px-8 lg:px-12 bg-transparent">
-          <div className="mx-auto max-w-5xl">
+        <section id="featured-section" className="px-6 py-6 sm:px-8 lg:px-12 bg-transparent relative z-10 mb-20 lg:mb-24">
+          <div className="mx-auto max-w-6xl">
             <motion.div
-              initial={{ opacity: 0, y: 30 }}
+              initial={{ opacity: 0, y: 25 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1], delay: 0.1 }}
-              className="group relative flex flex-col md:flex-row md:items-stretch rounded-[12px] border border-white/[0.06] bg-white/[0.01] hover:bg-white/[0.02] hover:border-white/12 transition-all duration-500 overflow-hidden min-h-[420px] md:h-[460px] cursor-none"
+              transition={{ duration: 0.85, ease: [0.16, 1, 0.3, 1], delay: 0.1 }}
+              className="group relative flex flex-col lg:flex-row items-stretch rounded-[8px] border border-white/[0.08] bg-[#0D0D0D] hover:border-white/20 transition-all duration-500 overflow-hidden"
             >
-              {/* Cover Image Block (40-45% width) */}
-              <div className="relative w-full md:w-[42%] overflow-hidden bg-black/20 border-b md:border-b-0 md:border-r border-white/[0.06]">
-                {featuredPost.coverImage ? (
-                  <img
-                    src={getImageUrl(featuredPost.coverImage, 800)}
-                    alt={featuredPost.title}
-                    className="w-full h-full object-cover transition-all duration-[600ms] ease-[0.16,1,0.3,1] group-hover:scale-[1.03] filter grayscale contrast-[1.05] group-hover:grayscale-0 opacity-70 group-hover:opacity-85"
-                  />
-                ) : (
-                  <div className="w-full h-full flex flex-col items-center justify-center p-6 text-center text-[#F5F2EB]/20 bg-gradient-to-br from-white/[0.02] to-transparent">
-                    <span className="text-[9px] uppercase tracking-widest font-mono">No Cover Image</span>
-                  </div>
-                )}
-                <div className="absolute inset-0 bg-gradient-to-t from-background/25 via-transparent to-transparent pointer-events-none" />
-              </div>
-
-              {/* Content Block (55-60% width) */}
-              <div className="flex flex-col justify-between p-6 sm:p-8 md:p-10 flex-1 text-left">
+              {/* Left Column: Article Information (55% width on desktop) */}
+              <div className="flex flex-col justify-between p-8 sm:p-10 lg:p-12 lg:w-[55%] z-10 text-left">
                 <div>
-                  <span className="text-[9px] uppercase tracking-[0.25em] text-[#C9A96A] font-bold mb-4 block">
-                    Featured • {featuredPost.category}
-                  </span>
+                  <div className="flex items-center gap-2.5 mb-6">
+                    <span className="px-2.5 py-1 rounded-full text-[9px] font-mono font-bold uppercase tracking-[0.2em] bg-[#C9A96A]/15 text-[#C9A96A] border border-[#C9A96A]/30">
+                      FEATURED
+                    </span>
+                    <span className="text-[10px] font-mono font-semibold uppercase tracking-[0.2em] text-[#F5F2EB]/40">
+                      {featuredPost.category}
+                    </span>
+                  </div>
 
-                  <Link to={`/writing/${featuredPost.slug}`}>
-                    <h2 className="font-display font-medium text-xl sm:text-2xl lg:text-3xl uppercase tracking-wide text-white group-hover:text-[#C9A96A] transition-colors leading-[1.2] mb-4">
+                  <Link to={`/writing/${featuredPost.slug}`} className="block group/title">
+                    <h2 className="font-display font-medium text-2xl sm:text-3xl lg:text-4xl uppercase tracking-wide text-[#F5F2EB] group-hover/title:text-[#C9A96A] transition-colors leading-[1.1] mb-5">
                       {featuredPost.title}
                     </h2>
                   </Link>
 
-                  <p className="text-[#F5F2EB]/60 text-xs sm:text-sm font-sans leading-relaxed max-w-xl">
+                  <p className="text-[#F5F2EB]/65 text-xs sm:text-sm font-sans leading-relaxed line-clamp-3 mb-8 max-w-xl">
                     {featuredPost.excerpt}
                   </p>
                 </div>
 
-                <div className="mt-8 pt-6 border-t border-white/[0.04] flex items-center justify-between text-[9px] uppercase tracking-widest text-[#F5F2EB]/40 font-bold">
-                  <div className="flex items-center gap-3">
-                    <span>{featuredPost.publishedAt ? formattedDate(featuredPost.publishedAt) : "Draft"}</span>
-                    <span className="text-white/20">•</span>
+                <div className="pt-6 border-t border-white/[0.06] flex items-center justify-between text-[10px] uppercase font-mono tracking-widest">
+                  <div className="flex items-center gap-3 text-[#F5F2EB]/40 font-semibold">
+                    <span>{formattedDate(featuredPost.publishedAt)}</span>
+                    <span>•</span>
                     <span>{featuredPost.readingTime}</span>
                   </div>
+
                   <Link
                     to={`/writing/${featuredPost.slug}`}
-                    className="flex items-center gap-1.5 text-[#F5F2EB]/60 group-hover:text-[#C9A96A] transition-colors duration-300"
+                    className="inline-flex items-center gap-2 font-mono font-bold text-[#F5F2EB] group-hover:text-[#C9A96A] transition-colors cursor-pointer"
                   >
-                    Read Article <ArrowRight size={10} className="group-hover:translate-x-1 transition-transform duration-300" />
+                    <span>READ ARTICLE</span>
+                    <ArrowRight size={12} className="group-hover:translate-x-1 transition-transform duration-300" />
                   </Link>
                 </div>
+              </div>
+
+              {/* Right Column: Large Editorial Cover Image (45% width on desktop) */}
+              <div className="relative lg:w-[45%] min-h-[260px] sm:min-h-[340px] lg:min-h-full overflow-hidden bg-black/40 border-t lg:border-t-0 lg:border-l border-white/[0.08]">
+                {featuredPost.coverImage ? (
+                  <img
+                    src={getImageUrl(featuredPost.coverImage, 1000)}
+                    alt={featuredPost.title}
+                    className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.03] opacity-85 group-hover:opacity-100"
+                  />
+                ) : (
+                  <div className="w-full h-full flex flex-col items-center justify-center p-8 text-center bg-gradient-to-br from-[#141414] to-[#0A0A0A]">
+                    <Sparkles className="w-8 h-8 text-[#C9A96A]/40 mb-3" />
+                    <span className="text-[10px] uppercase tracking-widest font-mono text-[#F5F2EB]/30">Editorial Feature</span>
+                  </div>
+                )}
+                <div className="absolute inset-0 bg-gradient-to-t from-[#0D0D0D]/60 via-transparent to-transparent pointer-events-none lg:hidden" />
               </div>
             </motion.div>
           </div>
         </section>
       )}
 
-      {/* Categories Filter (Repositioned below the Featured article card with 100px margin) */}
-      <section className="px-6 sm:px-8 lg:px-12 bg-transparent mt-[100px] mb-[60px]">
+      {/* 3. CATEGORY FILTER NAVIGATION */}
+      <section className="px-6 sm:px-8 lg:px-12 bg-transparent relative z-10 mb-14 lg:mb-20">
         <style>{`
           .no-scrollbar::-webkit-scrollbar { display: none; }
           .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
         `}</style>
-        <div className="mx-auto max-w-5xl relative border-y border-white/[0.04] py-6">
+        <div className="mx-auto max-w-6xl relative border-y border-white/[0.08] py-5">
           <div className={`absolute left-0 top-0 bottom-0 w-12 bg-gradient-to-r from-[#0A0A0A] to-transparent pointer-events-none z-20 transition-opacity duration-300 ${showLeftFade ? "opacity-100" : "opacity-0"}`} />
           <div className={`absolute right-0 top-0 bottom-0 w-12 bg-gradient-to-l from-[#0A0A0A] to-transparent pointer-events-none z-20 transition-opacity duration-300 ${showRightFade ? "opacity-100" : "opacity-0"}`} />
 
@@ -264,7 +273,7 @@ export function WritingPage() {
             onMouseLeave={handleMouseLeave}
             onMouseUp={handleMouseUp}
             onMouseMove={handleMouseMove}
-            className={`no-scrollbar overflow-x-auto flex items-center gap-2.5 px-2 py-1 w-full select-none cursor-grab active:cursor-grabbing ${
+            className={`no-scrollbar overflow-x-auto flex items-center gap-3 px-1 py-0.5 w-full select-none cursor-grab active:cursor-grabbing ${
               isOverflowing ? "justify-start" : "justify-start md:justify-center"
             }`}
           >
@@ -274,10 +283,10 @@ export function WritingPage() {
                 <button
                   key={cat}
                   onClick={() => setActiveCategory(cat)}
-                  className={`flex-shrink-0 h-10 px-5 text-[0.62rem] font-bold uppercase tracking-[0.2em] transition-colors duration-300 rounded-full border relative ${
+                  className={`flex-shrink-0 h-9 px-5 text-[10px] font-mono font-bold uppercase tracking-[0.2em] transition-colors duration-300 rounded-full border relative ${
                     isActive
                       ? "border-transparent text-black"
-                      : "border-white/10 text-[#F5F2EB]/50 hover:border-white/30 hover:text-white"
+                      : "border-white/10 text-[#F5F2EB]/50 hover:border-white/30 hover:text-[#F5F2EB]"
                   }`}
                 >
                   {isActive && (
@@ -296,67 +305,81 @@ export function WritingPage() {
         </div>
       </section>
 
-      {/* Articles Archive (with 140px bottom spacing before footer) */}
-      <section className="px-6 pb-[140px] sm:px-8 lg:px-12 bg-transparent min-h-[25vh]">
-        <div className="mx-auto max-w-5xl">
+      {/* 4. ARTICLE GRID / LIST */}
+      <section className="px-6 pb-28 sm:px-8 lg:px-12 lg:pb-36 bg-transparent relative z-10 min-h-[30vh]">
+        <div className="mx-auto max-w-6xl">
           {loading ? (
-            <div className="flex h-32 items-center justify-center">
-              <div className="h-6 w-6 animate-spin rounded-full border border-white/20 border-t-white" />
+            <div className="flex h-40 items-center justify-center">
+              <div className="h-6 w-6 animate-spin rounded-full border-2 border-white/10 border-t-[#C9A96A]" />
             </div>
           ) : filteredPosts.length > 0 ? (
-            <div className="flex flex-col w-full divide-y divide-white/[0.04] border-t border-white/[0.04]">
-              {filteredPosts.map((post, idx) => {
-                const count = String(idx + 1).padStart(2, "0");
-                return (
-                  <motion.div
-                    key={post._id}
-                    initial={{ opacity: 0, y: 25 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true, margin: "-40px" }}
-                    transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-                    className="group py-8 flex flex-col md:flex-row md:items-center justify-between gap-6 hover:bg-white/[0.01] px-4 -mx-4 rounded-[6px] transition-colors duration-300"
-                  >
-                    <div className="flex items-start gap-5 md:gap-8 flex-1">
-                      <span className="text-[10px] font-mono text-[#F5F2EB]/20 font-bold group-hover:text-[#C9A96A] transition-colors pt-1">
-                        {count}
-                      </span>
-                      
-                      <div className="flex flex-col text-left">
-                        <Link to={`/writing/${post.slug}`}>
-                          <h3 className="font-display font-medium text-base sm:text-lg uppercase tracking-wide text-[#F5F2EB]/95 group-hover:text-white transition-colors leading-tight mb-2 max-w-xl">
-                            {post.title}
-                          </h3>
-                        </Link>
-                        
-                        <p className="text-[9px] uppercase tracking-widest text-[#F5F2EB]/40 font-semibold font-sans mt-0.5">
-                          <span className="text-[#C9A96A] font-bold">{post.category}</span>
-                          <span className="mx-2">•</span>
-                          <span>{post.readingTime}</span>
-                        </p>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-10">
+              {filteredPosts.map((post) => (
+                <motion.article
+                  key={post._id}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, margin: "-40px" }}
+                  transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+                  className="group flex flex-col rounded-[6px] border border-white/[0.06] bg-[#0C0C0C] p-6 hover:border-white/20 transition-all duration-300"
+                >
+                  {/* Cover Image */}
+                  <Link to={`/writing/${post.slug}`} className="block overflow-hidden rounded-[4px] aspect-[16/10] w-full bg-[#121212] mb-5 border border-white/[0.04]">
+                    {post.coverImage ? (
+                      <img
+                        src={getImageUrl(post.coverImage, 700)}
+                        alt={post.title}
+                        className="w-full h-full object-cover transition-transform duration-500 ease-out group-hover:scale-[1.03] opacity-80 group-hover:opacity-100"
+                        loading="lazy"
+                      />
+                    ) : (
+                      <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-white/[0.03] to-transparent">
+                        <span className="text-[9px] uppercase tracking-widest font-mono text-[#F5F2EB]/20">No Cover Image</span>
                       </div>
-                    </div>
+                    )}
+                  </Link>
 
-                    <div className="flex items-center justify-between md:justify-end gap-6 md:gap-12">
-                      <span className="text-[9px] font-sans text-[#F5F2EB]/30 uppercase tracking-widest font-bold">
-                        {post.publishedAt ? formattedDate(post.publishedAt) : "Draft"}
-                      </span>
+                  {/* Metadata */}
+                  <div className="flex items-center justify-between text-[10px] font-mono font-semibold uppercase tracking-widest text-[#F5F2EB]/40 mb-3">
+                    <span className="text-[#C9A96A] font-bold">{post.category}</span>
+                    <span>{formattedDate(post.publishedAt)}</span>
+                  </div>
 
-                      <Link
-                        to={`/writing/${post.slug}`}
-                        className="flex h-8 w-8 items-center justify-center rounded-full border border-white/10 text-white/40 hover:text-white hover:border-white/30 hover:bg-white/5 transition-all cursor-none"
-                      >
-                        <ArrowRight size={12} className="group-hover:translate-x-0.5 transition-transform duration-300" />
-                      </Link>
-                    </div>
-                  </motion.div>
-                );
-              })}
+                  {/* Title */}
+                  <Link to={`/writing/${post.slug}`} className="block mb-3">
+                    <h3 className="font-display font-medium text-lg sm:text-xl uppercase tracking-wide text-[#F5F2EB] group-hover:text-[#C9A96A] transition-colors leading-snug">
+                      {post.title}
+                    </h3>
+                  </Link>
+
+                  {/* Excerpt */}
+                  <p className="text-xs sm:text-sm text-[#F5F2EB]/60 leading-relaxed font-sans line-clamp-2 mb-6 flex-grow">
+                    {post.excerpt}
+                  </p>
+
+                  {/* Footer */}
+                  <div className="pt-4 border-t border-white/[0.06] flex items-center justify-between text-[10px] font-mono uppercase tracking-widest text-[#F5F2EB]/40">
+                    <span>{post.readingTime}</span>
+                    <Link
+                      to={`/writing/${post.slug}`}
+                      className="inline-flex items-center gap-1.5 font-bold text-[#F5F2EB]/70 group-hover:text-[#C9A96A] transition-colors cursor-pointer"
+                    >
+                      <span>READ ARTICLE</span>
+                      <ArrowRight size={10} className="group-hover:translate-x-1 transition-transform duration-300" />
+                    </Link>
+                  </div>
+                </motion.article>
+              ))}
             </div>
           ) : (
-            // Refined compact empty state box (200px height)
-            <div className="text-center h-[200px] flex flex-col items-center justify-center border border-white/[0.06] rounded-[6px] bg-white/[0.01]">
-              <span className="text-[9px] uppercase tracking-widest text-[#F5F2EB]/30 font-bold">No entries</span>
-              <h3 className="text-xs font-display font-medium tracking-wide mt-2 text-[#F5F2EB]/50">No additional articles in this category yet.</h3>
+            /* 6. COMPACT EDITORIAL EMPTY STATE */
+            <div className="text-center py-16 px-6 border border-white/[0.06] rounded-[6px] bg-[#0C0C0C] max-w-md mx-auto my-12">
+              <span className="text-[10px] uppercase font-mono tracking-[0.3em] text-[#C9A96A] font-bold block mb-2">
+                NO ENTRIES
+              </span>
+              <p className="text-xs font-sans text-[#F5F2EB]/50">
+                No articles found in this category.
+              </p>
             </div>
           )}
         </div>
