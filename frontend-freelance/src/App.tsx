@@ -5,6 +5,8 @@ import { HelmetProvider } from "react-helmet-async";
 import { HomePage } from "@/pages/Home/HomePage";
 import { ScrollToTop } from "@/components/layout/ScrollToTop";
 import { CustomCursor } from "@/components/layout/CustomCursor";
+import { RouteTransition } from "@/components/layout/RouteTransition";
+import { ScrollProgress } from "@/components/layout/ScrollProgress";
 
 // Lazy-loaded pages
 const WorkPage = React.lazy(() => import("@/pages/Work/WorkPage").then(m => ({ default: m.WorkPage })));
@@ -40,6 +42,8 @@ function AppRouter() {
     <>
       <CustomCursor />
       <ScrollToTop />
+      <ScrollProgress />
+      <RouteTransition />
       <Suspense fallback={<div className="min-h-screen bg-background" />}>
         <Routes>
           {/* Public Routes */}
