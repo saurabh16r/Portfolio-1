@@ -1,0 +1,103 @@
+.route-transition {
+  position: fixed;
+  inset: 0;
+  z-index: 99999;
+  overflow: hidden;
+  pointer-events: none;
+  isolation: isolate;
+}
+
+.route-transition__panels {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+}
+
+.route-transition__panel {
+  min-width: 0;
+  height: 100%;
+  background: rgba(10, 10, 10, 0.97);
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
+  will-change: transform;
+}
+
+.route-transition__panel:nth-child(2),
+.route-transition__panel:nth-child(4) {
+  background: rgba(14, 14, 14, 0.97);
+}
+
+.route-transition__identity {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 14px;
+  color: #f5f2eb;
+  text-align: center;
+}
+
+.route-transition__wordmark {
+  font-family: var(--font-display, "Clash Display", sans-serif);
+  font-size: clamp(2.5rem, 6vw, 5.5rem);
+  font-weight: 500;
+  line-height: 0.9;
+  letter-spacing: -0.08em;
+}
+
+.route-transition__wordmark > span {
+  display: inline-block;
+  margin-left: 4px;
+  font-family: var(--font-sans, sans-serif);
+  font-size: 0.22em;
+  letter-spacing: 0;
+  vertical-align: top;
+}
+
+.route-transition__line {
+  display: block;
+  width: clamp(72px, 10vw, 132px);
+  height: 1px;
+  background: #c9a96a;
+  transform-origin: center;
+}
+
+.route-transition__label {
+  font-family: var(--font-mono, monospace);
+  font-size: 9px;
+  letter-spacing: 0.22em;
+  color: rgba(245, 242, 235, 0.62);
+}
+
+.scroll-progress {
+  position: fixed;
+  inset: 0 0 auto;
+  z-index: 9998;
+  height: 2px;
+  background: #c9a96a;
+  pointer-events: none;
+}
+
+@media (max-width: 640px) {
+  .route-transition__panels {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .route-transition__panel:nth-child(n + 4) {
+    display: none;
+  }
+
+  .route-transition__label {
+    font-size: 8px;
+    letter-spacing: 0.16em;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .route-transition {
+    display: none !important;
+  }
+}
