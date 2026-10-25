@@ -17,7 +17,7 @@
 .route-transition__panel {
   min-width: 0;
   height: 100%;
-  background: rgba(10, 10, 10, 0.97);
+  background: rgba(10, 10, 10, 0.86);
   -webkit-backdrop-filter: blur(12px);
   backdrop-filter: blur(12px);
   will-change: transform;
@@ -25,7 +25,7 @@
 
 .route-transition__panel:nth-child(2),
 .route-transition__panel:nth-child(4) {
-  background: rgba(14, 14, 14, 0.97);
+  background: rgba(14, 14, 14, 0.9);
 }
 
 .route-transition__identity {
