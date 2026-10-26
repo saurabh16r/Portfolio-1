@@ -10,7 +10,6 @@ import {
   Image,
   Settings,
   LogOut,
-  User,
   ExternalLink,
   BookOpen,
   Globe2

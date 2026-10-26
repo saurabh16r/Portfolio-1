@@ -1,11 +1,16 @@
 import { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
-import { Check, Sparkles, ArrowRight } from "lucide-react";
+import { Check, Sparkles } from "lucide-react";
 import { motion } from "framer-motion";
 import { SectionHeading } from "@/components/common/SectionHeading";
 import { LuxuryButton } from "@/components/common/LuxuryButton";
 import { Magnetic } from "@/components/common/Magnetic";
 import { api } from "@/services/api.js";
+import {
+  sectionStaggerContainer,
+  headingRevealVariants,
+  descriptionRevealVariants,
+  cardRevealVariants,
+} from "@/lib/motionVariants";
 
 const defaultPricingPlans = [
   {
@@ -78,21 +83,33 @@ export function PricingSection() {
   return (
     <section id="pricing" className="px-6 pt-0 pb-[160px] sm:px-8 lg:px-12 bg-transparent">
       <div className="mx-auto max-w-7xl">
-        <div className="flex flex-col md:flex-row md:items-end md:justify-between mb-16">
-          <SectionHeading eyebrow="Investment" title="Project Pricing" number="04" />
-          <p className="mt-4 md:mt-0 text-xs text-white/50 max-w-xs font-sans">
+        <motion.div
+          variants={sectionStaggerContainer}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.2 }}
+          className="flex flex-col md:flex-row md:items-end md:justify-between mb-16"
+        >
+          <motion.div variants={headingRevealVariants}>
+            <SectionHeading eyebrow="Investment" title="Project Pricing" number="04" />
+          </motion.div>
+          <motion.p
+            variants={descriptionRevealVariants}
+            className="mt-4 md:mt-0 text-xs text-white/50 max-w-xs font-sans"
+          >
             Transparent pricing packages tailored for high-growth startups and established brands.
-          </p>
-        </div>
+          </motion.p>
+        </motion.div>
 
         <div className="grid gap-8 lg:grid-cols-3 items-stretch">
           {plans.map((plan, idx) => (
             <motion.div
               key={plan.name || idx}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: idx * 0.12 }}
+              variants={cardRevealVariants}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, amount: 0.15 }}
+              transition={{ duration: 0.75, delay: idx * 0.12, ease: [0.16, 1, 0.3, 1] }}
               className={`relative rounded-[16px] border p-8 flex flex-col justify-between overflow-hidden transition-all duration-300 ${
                 plan.popular
                   ? "border-accent/40 bg-[#0E0E0E] shadow-[0_0_30px_rgba(201,169,106,0.08)]"

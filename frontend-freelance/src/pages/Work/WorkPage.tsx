@@ -260,16 +260,16 @@ export function WorkPage() {
                 layout
                 className="grid gap-5 md:grid-cols-2 lg:gap-6"
               >
-                {filteredProjects.map((project) => (
+                {filteredProjects.map((project, idx) => (
                   <motion.div
                     key={project.slug}
                     layout
-                    initial={{ opacity: 0, scale: 0.98 }}
+                    initial={{ opacity: 0, scale: 0.985 }}
                     animate={{ opacity: 1, scale: 1 }}
-                    exit={{ opacity: 0, scale: 0.98 }}
-                    transition={{ duration: 0.6 }}
+                    exit={{ opacity: 0, scale: 0.985 }}
+                    transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1], delay: (idx % 4) * 0.08 }}
                   >
-                    <ProjectCard project={project} />
+                    <ProjectCard project={project} index={idx} />
                   </motion.div>
                 ))}
               </motion.div>

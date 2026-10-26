@@ -5,6 +5,7 @@ import { HelmetProvider } from "react-helmet-async";
 import { HomePage } from "@/pages/Home/HomePage";
 import { ScrollToTop } from "@/components/layout/ScrollToTop";
 import { CustomCursor } from "@/components/layout/CustomCursor";
+import { TransitionProvider, TransitionOverlay } from "@/components/transition";
 
 // Lazy-loaded pages
 const WorkPage = React.lazy(() => import("@/pages/Work/WorkPage").then(m => ({ default: m.WorkPage })));
@@ -49,6 +50,7 @@ function AppRouter() {
           <Route path="/services" element={<ServicesPage />} />
           <Route path="/pricing" element={<PricingPage />} />
           <Route path="/contact" element={<ContactPage />} />
+          <Route path="/about" element={<AboutPage />} />
           <Route path="/writing" element={<WritingPage />} />
           <Route path="/writing/:slug" element={<ArticlePage />} />
           
@@ -152,7 +154,10 @@ function App() {
       <HelmetProvider>
         <AuthProvider>
           <BrowserRouter>
-            <AppRouter />
+            <TransitionProvider>
+              <TransitionOverlay />
+              <AppRouter />
+            </TransitionProvider>
           </BrowserRouter>
         </AuthProvider>
       </HelmetProvider>

@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { api } from "../../services/api.js";
-import { Save, FileText, ShieldAlert, Plus, Trash2, User } from "lucide-react";
+import { Save, ShieldAlert, Plus, Trash2 } from "lucide-react";
 import { ImageUpload } from "../../components/studio/ImageUpload.js";
 
 export function ContentManager() {

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { Plus, Trash2, ArrowUp, ArrowDown, ChevronDown, ChevronUp, Copy, Layers } from "lucide-react";
 import { ImageUpload } from "./ImageUpload.js";
 import { RichTextEditor } from "./RichTextEditor.js";

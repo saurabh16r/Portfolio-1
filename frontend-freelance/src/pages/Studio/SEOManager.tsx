@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { api, API_URL } from "../../services/api.js";
-import { Save, Search, ShieldAlert, Globe, ExternalLink } from "lucide-react";
+import { Save, ShieldAlert, Globe, ExternalLink } from "lucide-react";
 
 export function SEOManager() {
   const [seo, setSeo] = useState<any>(null);

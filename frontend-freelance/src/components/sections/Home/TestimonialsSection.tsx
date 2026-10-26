@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { motion } from "framer-motion";
 import { testimonials } from "@/data/testimonials";
 import { SectionHeading } from "@/components/common/SectionHeading";
+import { headingRevealVariants } from "@/lib/motionVariants";
 
 export function TestimonialsSection() {
   const [spotlightPos, setSpotlightPos] = useState({ x: 0, y: 0 });
@@ -30,11 +31,18 @@ export function TestimonialsSection() {
     <section className="pt-0 pb-[120px] sm:pb-[140px] lg:pb-[160px] bg-transparent overflow-hidden">
       {/* Container header wrapper matching global alignment padding */}
       <div className="mx-auto max-w-7xl px-6 sm:px-8 lg:px-12 mb-16">
-        <SectionHeading 
-          eyebrow="Testimonials" 
-          title="What People Say" 
-          number="02" 
-        />
+        <motion.div
+          variants={headingRevealVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.2 }}
+        >
+          <SectionHeading 
+            eyebrow="Testimonials" 
+            title="What People Say" 
+            number="02" 
+          />
+        </motion.div>
       </div>
 
       {/* Full-width visual edge fade mask */}

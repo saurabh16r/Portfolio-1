@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { api, getImageUrl, API_URL } from "../../services/api.js";
-import { Image, Upload, Copy, Trash2, RefreshCw, Check, ShieldAlert } from "lucide-react";
+import { Upload, Copy, Trash2, RefreshCw, Check, ShieldAlert } from "lucide-react";
 
 interface MediaItemType {
   id: string;

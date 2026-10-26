@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { Link, NavLink, useLocation } from "react-router-dom";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, useScroll, useSpring, useReducedMotion } from "framer-motion";
 import { Menu, X, ArrowUpRight, ArrowRight } from "lucide-react";
 import { navItems } from "@/data/navigation";
 import { LuxuryButton } from "@/components/common/LuxuryButton";
@@ -11,6 +11,16 @@ export function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [ctaHovered, setCtaHovered] = useState(false);
   const location = useLocation();
+
+  // Scroll Progress Tracking
+  const { scrollYProgress } = useScroll();
+  const shouldReduceMotion = useReducedMotion();
+  const smoothProgress = useSpring(scrollYProgress, {
+    stiffness: 140,
+    damping: 26,
+    mass: 0.1,
+    restDelta: 0.001,
+  });
 
   useEffect(() => {
     const handleScroll = () => {
@@ -195,6 +205,15 @@ export function Navbar() {
           </motion.div>
         )}
       </AnimatePresence>
+
+      {/* Subtle Editorial Scroll Progress Indicator */}
+      <motion.div
+        className="absolute bottom-0 left-0 right-0 h-[1.5px] bg-[#C9A96A] origin-left pointer-events-none z-50 opacity-90 shadow-[0_0_10px_rgba(201,169,106,0.6)]"
+        style={{
+          scaleX: shouldReduceMotion ? scrollYProgress : smoothProgress,
+          transformOrigin: "0% 50%",
+        }}
+      />
     </motion.header>
   );
 }

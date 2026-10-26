@@ -1,5 +1,5 @@
-import { useEffect } from "react";
-import { motion, useMotionValue, useSpring } from "framer-motion";
+import { useEffect, useRef } from "react";
+import { motion, useMotionValue, useSpring, useScroll, useTransform, useReducedMotion } from "framer-motion";
 import { LuxuryButton } from "@/components/common/LuxuryButton";
 import { Magnetic } from "@/components/common/Magnetic";
 import LiquidHeroBackground from "@/components/LiquidHeroBackground";
@@ -9,7 +9,6 @@ interface LineTextProps {
   delayOffset: number;
   isAccent?: boolean;
 }
-
 
 // Letter reveal with separation and settling into place
 function LineText({ text, delayOffset, isAccent = false }: LineTextProps) {
@@ -25,7 +24,6 @@ function LineText({ text, delayOffset, isAccent = false }: LineTextProps) {
                 opacity: 0,
                 y: 80,
                 filter: "blur(8px)",
-                // Subtle horizontal separation: letters start spread out from word center
                 x: (cIdx - word.length / 2) * 6,
               }}
               animate={{
@@ -36,7 +34,7 @@ function LineText({ text, delayOffset, isAccent = false }: LineTextProps) {
               }}
               transition={{
                 duration: 1.4,
-                ease: [0.16, 1, 0.3, 1], // premium custom ease
+                ease: [0.16, 1, 0.3, 1],
                 delay: delayOffset + wIdx * 0.15 + cIdx * 0.04,
               }}
               className="inline-block"
@@ -51,8 +49,21 @@ function LineText({ text, delayOffset, isAccent = false }: LineTextProps) {
 }
 
 export function HomeHero() {
+  const heroRef = useRef<HTMLElement>(null);
   const mouseX = useMotionValue(0);
   const mouseY = useMotionValue(0);
+  const shouldReduceMotion = useReducedMotion();
+
+  // Scroll tracking for restrained editorial depth
+  const { scrollYProgress } = useScroll({
+    target: heroRef,
+    offset: ["start start", "end start"],
+  });
+
+  const heroScrollY = useTransform(scrollYProgress, [0, 1], [0, 60]);
+  const heroScrollOpacity = useTransform(scrollYProgress, [0, 0.85], [1, 0.45]);
+  const bgLightY = useTransform(scrollYProgress, [0, 1], [0, 140]);
+  const scrollIndicatorOpacity = useTransform(scrollYProgress, [0, 0.15], [0.4, 0]);
 
   // Smooth custom spring mechanics for mouse parallax
   const springConfig = { stiffness: 90, damping: 20 };
@@ -62,11 +73,8 @@ export function HomeHero() {
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
       const { innerWidth, innerHeight } = window;
-      // Calculate normalized cursor offset from screen center (-0.5 to 0.5)
       const xOffset = e.clientX / innerWidth - 0.5;
       const yOffset = e.clientY / innerHeight - 0.5;
-      
-      // Maximum displacement offset of 18px
       mouseX.set(xOffset * 18);
       mouseY.set(yOffset * 18);
     };
@@ -76,12 +84,18 @@ export function HomeHero() {
   }, [mouseX, mouseY]);
 
   return (
-    <section className="relative flex min-h-[85vh] items-center justify-start px-6 pb-20 pt-36 sm:px-8 lg:px-12 overflow-hidden bg-transparent">
+    <section
+      ref={heroRef}
+      className="relative flex min-h-[88vh] items-center justify-start px-6 pb-20 pt-36 sm:px-8 lg:px-12 overflow-hidden bg-transparent"
+    >
       {/* Dynamic Liquid/3D Animated WebGL Background */}
       <LiquidHeroBackground />
 
-      {/* Slow Shifting Ambient Background Light (Hero-specific) */}
-      <div className="absolute inset-0 pointer-events-none -z-10">
+      {/* Slow Shifting Ambient Background Light with Scroll Depth */}
+      <motion.div
+        style={{ y: shouldReduceMotion ? 0 : bgLightY }}
+        className="absolute inset-0 pointer-events-none -z-10"
+      >
         <motion.div
           animate={{
             x: [0, 30, -20, 0],
@@ -92,11 +106,17 @@ export function HomeHero() {
             repeat: Infinity,
             ease: "easeInOut",
           }}
-          className="absolute top-[25%] left-[15%] w-[350px] h-[350px] rounded-full bg-accent/5 blur-[100px]"
+          className="absolute top-[25%] left-[15%] w-[420px] h-[420px] rounded-full bg-accent/6 blur-[120px]"
         />
-      </div>
+      </motion.div>
 
-      <div className="relative mx-auto flex w-full max-w-7xl flex-col items-start text-left z-10">
+      <motion.div
+        style={{
+          y: shouldReduceMotion ? 0 : heroScrollY,
+          opacity: shouldReduceMotion ? 1 : heroScrollOpacity,
+        }}
+        className="relative mx-auto flex w-full max-w-7xl flex-col items-start text-left z-10"
+      >
         {/* Availability Badge */}
         <motion.div
           initial={{ opacity: 0, y: 15 }}
@@ -159,13 +179,14 @@ export function HomeHero() {
             </div>
           </Magnetic>
         </motion.div>
-      </div>
+      </motion.div>
 
       {/* Scroll Indicator (Positioned at bottom center, isolated) */}
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 0.4 }}
         transition={{ delay: 1.8, duration: 1.0 }}
+        style={{ opacity: shouldReduceMotion ? 0.4 : scrollIndicatorOpacity }}
         className="absolute bottom-6 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 pointer-events-none"
       >
         <span className="text-[0.55rem] uppercase tracking-[0.4em] text-white/30">Scroll</span>

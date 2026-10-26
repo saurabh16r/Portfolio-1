@@ -1,30 +1,55 @@
+import { motion } from "framer-motion";
 import { ContactForm } from "@/components/common/ContactForm";
 import { Magnetic } from "@/components/common/Magnetic";
+import {
+  sectionStaggerContainer,
+  headingRevealVariants,
+  descriptionRevealVariants,
+  cardRevealVariants,
+} from "@/lib/motionVariants";
 
 export function ContactSection() {
   return (
-    <section className="px-6 pt-0 pb-[160px] sm:px-8 lg:px-12 bg-transparent border-t border-white/[0.04]">
+    <section className="px-6 pt-0 pb-[160px] sm:px-8 lg:px-12 bg-transparent border-t border-white/[0.04] relative">
+      {/* Background ambient lighting pool */}
+      <div className="pointer-events-none absolute bottom-0 right-0 w-[500px] h-[500px] rounded-full bg-accent/[0.025] blur-[160px] -z-10" />
+
       <div className="mx-auto max-w-7xl">
         <div className="grid gap-[80px] lg:gap-[120px] lg:grid-cols-[0.95fr_1.05fr] items-start pt-[120px]">
           
           {/* Left Column: Trust Panel & Editorial Heading */}
-          <div className="space-y-10 text-left select-none">
+          <motion.div
+            variants={sectionStaggerContainer}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.2 }}
+            className="space-y-10 text-left select-none"
+          >
             <div>
               <p className="mb-4 text-[10px] uppercase tracking-[0.35em] text-[#666]">
                 Get In Touch
               </p>
-              <h2 className="font-display font-medium text-[clamp(2.5rem,5.5vw,4.5rem)] uppercase leading-[0.95] tracking-tight text-white mb-6">
+              <motion.h2
+                variants={headingRevealVariants}
+                className="font-display font-medium text-[clamp(2.5rem,5.5vw,4.5rem)] uppercase leading-[0.95] tracking-tight text-white mb-6"
+              >
                 LET'S BUILD <br />
                 SOMETHING <br />
                 <span className="text-accent">EXCEPTIONAL.</span>
-              </h2>
-              <p className="text-sm text-white/50 leading-relaxed max-w-sm">
+              </motion.h2>
+              <motion.p
+                variants={descriptionRevealVariants}
+                className="text-sm text-white/50 leading-relaxed max-w-sm"
+              >
                 I'd love to hear about your project. Let's start the onboarding process and establish a premium collaboration.
-              </p>
+              </motion.p>
             </div>
 
             {/* Quick Metrics */}
-            <div className="grid grid-cols-2 gap-y-8 gap-x-6 border-t border-white/5 pt-8">
+            <motion.div
+              variants={cardRevealVariants}
+              className="grid grid-cols-2 gap-y-8 gap-x-6 border-t border-white/5 pt-8"
+            >
               <div>
                 <span className="text-[10px] uppercase tracking-[0.2em] text-white/30 font-bold block mb-1">Availability</span>
                 <span className="text-xs text-white/80 font-medium">Available for new projects</span>
@@ -41,10 +66,13 @@ export function ContactSection() {
                 <span className="text-[10px] uppercase tracking-[0.2em] text-white/30 font-bold block mb-1">Project Budget</span>
                 <span className="text-xs text-accent font-semibold">Starting from ₹15,000</span>
               </div>
-            </div>
+            </motion.div>
 
             {/* Core expertise lists */}
-            <div className="border-t border-white/5 pt-8 space-y-6">
+            <motion.div
+              variants={cardRevealVariants}
+              className="border-t border-white/5 pt-8 space-y-6"
+            >
               <div>
                 <span className="text-[10px] uppercase tracking-[0.2em] text-white/30 font-bold block mb-3.5">Services</span>
                 <div className="flex flex-wrap gap-2.5">
@@ -92,13 +120,19 @@ export function ContactSection() {
                   </Magnetic>
                 </div>
               </div>
-            </div>
-          </div>
+            </motion.div>
+          </motion.div>
 
           {/* Right Column: Form Panel */}
-          <div className="w-full flex justify-start lg:justify-end">
+          <motion.div
+            initial={{ opacity: 0, y: 35 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.15 }}
+            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: 0.1 }}
+            className="w-full flex justify-start lg:justify-end"
+          >
             <ContactForm />
-          </div>
+          </motion.div>
         </div>
       </div>
     </section>

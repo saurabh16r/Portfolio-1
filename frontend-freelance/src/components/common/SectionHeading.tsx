@@ -20,7 +20,7 @@ export function SectionHeading({ eyebrow, title, number, className = "" }: Secti
       y: [0, -4, 3, 0],
       transition: {
         duration: 0.5,
-        ease: "easeInOut",
+        ease: "easeInOut" as const,
         delay: i * 0.025,
       },
     }),

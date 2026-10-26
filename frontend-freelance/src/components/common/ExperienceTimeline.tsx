@@ -1,5 +1,5 @@
 import React, { useRef, useState } from "react";
-import { motion, useScroll, useSpring, useTransform } from "framer-motion";
+import { motion, useScroll, useSpring } from "framer-motion";
 import { experience } from "@/data/experience";
 import { useIsMobile } from "@/hooks/useMobile";
 
@@ -98,7 +98,7 @@ interface TimelineCardProps {
   onHoverStateChange: (hovered: boolean) => void;
 }
 
-function TimelineCard({ item, index, onHoverStateChange }: TimelineCardProps) {
+function TimelineCard({ item, index: _index, onHoverStateChange }: TimelineCardProps) {
   const [spotlightPos, setSpotlightPos] = useState({ x: 0, y: 0 });
   const [isHovered, setIsHovered] = useState(false);
   const cardRef = useRef<HTMLDivElement>(null);

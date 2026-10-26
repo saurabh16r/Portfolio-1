@@ -9,6 +9,7 @@ import { getImageUrl } from "@/services/api";
 
 interface ProjectCardProps {
   project: Project;
+  index?: number;
 }
 
 export function ProjectCard({ project }: ProjectCardProps) {
@@ -105,7 +106,9 @@ export function ProjectCard({ project }: ProjectCardProps) {
         {/* Upper Preview Image: Responsive aspect ratio on mobile, 62% height on desktop */}
         <div className="w-full aspect-[16/9] sm:aspect-[16/10] lg:aspect-none lg:h-[62%] overflow-hidden rounded-[4px] border border-white/5 relative shrink-0">
           <motion.div
-            animate={{ scale: isHovered ? 1.07 : 1 }}
+            initial={{ scale: 1.05 }}
+            whileInView={{ scale: isHovered ? 1.07 : 1 }}
+            viewport={{ once: true, amount: 0.2 }}
             transition={{ type: "spring", stiffness: 100, damping: 18 }}
             className="absolute inset-0 bg-cover bg-center"
             style={{ backgroundImage: `url(${getImageUrl(project.image, 800)})` }}

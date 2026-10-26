@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate, useParams, Link } from "react-router-dom";
 import { api, getImageUrl } from "../../services/api.js";
 import { BlockBuilder } from "../../components/studio/BlockBuilder.js";
-import { Save, ArrowLeft, Eye, ShieldAlert, Image, Plus, Trash2 } from "lucide-react";
+import { Save, ArrowLeft, Eye, ShieldAlert } from "lucide-react";
 import { ImageUpload } from "../../components/studio/ImageUpload.js";
 import { RichTextEditor } from "../../components/studio/RichTextEditor.js";
 

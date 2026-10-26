@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { api } from "../../services/api.js";
-import { Inbox, Search, Download, Trash2, Eye, ShieldAlert, Plus } from "lucide-react";
+import { Search, Download, Trash2, Eye, ShieldAlert } from "lucide-react";
 
 interface LeadType {
   _id: string;

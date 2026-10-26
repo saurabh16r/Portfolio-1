@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { useAuth } from "../../contexts/AuthContext.js";
 import { api } from "../../services/api.js";
 import { Save, User, ShieldAlert } from "lucide-react";
@@ -6,7 +6,7 @@ import { Save, User, ShieldAlert } from "lucide-react";
 export function Settings() {
   const { user } = useAuth();
   const [name, setName] = useState(user?.name || "Saurabh Rathore");
-  const [email, setEmail] = useState(user?.email || "admin@portfolio.studio");
+  const [email] = useState(user?.email || "admin@portfolio.studio");
   
   const [currentPassword, setCurrentPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");

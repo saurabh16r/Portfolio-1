@@ -1,5 +1,4 @@
-import React from "react";
-import { getImageUrl, resolveHtmlImages } from "@/services/api.js";
+import { resolveHtmlImages } from "@/services/api.js";
 
 interface ArticleContentRendererProps {
   content: string;

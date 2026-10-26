@@ -1,6 +1,5 @@
 import React from "react";
 import { SEOHead } from "@/components/common/SEOHead";
-import { motion } from "framer-motion";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { SmoothScroll } from "@/components/layout/SmoothScroll";
@@ -25,13 +24,6 @@ const ContactSection = React.lazy(() =>
 );
 
 export function HomePage() {
-  const sectionReveal = {
-    initial: { opacity: 0, y: 45, filter: "blur(4px)" },
-    whileInView: { opacity: 1, y: 0, filter: "blur(0px)" },
-    viewport: { once: true, amount: 0.12 },
-    transition: { duration: 1.0, ease: [0.16, 1, 0.3, 1] as const }
-  };
-
   return (
     <div className="relative min-h-screen bg-background text-white overflow-hidden font-sans">
       <SEOHead
@@ -40,12 +32,17 @@ export function HomePage() {
         canonicalUrl="https://saurabh-rathore.com"
       />
 
+      {/* Unified singleton smooth scrolling and ambient depth system */}
       <SmoothScroll />
       <CinematicBackground />
 
+      {/* Global Navigation with Realtime Cinematic Scroll Progress */}
       <Navbar />
+
+      {/* Act I: Hero Experience */}
       <HomeHero />
       
+      {/* Chapter Transition 01: Philosophy */}
       <QuoteSection
         number="01"
         label="PHILOSOPHY"
@@ -55,12 +52,11 @@ export function HomePage() {
         variant="left"
       />
       
-      <React.Suspense fallback={null}>
-        {/* Works / Case Studies */}
-        <motion.div {...sectionReveal}>
-          <FeaturedWork />
-        </motion.div>
+      <React.Suspense fallback={<div className="min-h-[400px]" />}>
+        {/* Act II: Selected Works with Staggered Depth */}
+        <FeaturedWork />
 
+        {/* Chapter Transition 02: Process */}
         <QuoteSection
           number="02"
           label="PROCESS"
@@ -70,16 +66,13 @@ export function HomePage() {
           variant="offset"
         />
 
-        {/* Services */}
-        <motion.div {...sectionReveal}>
-          <HomeServices />
-        </motion.div>
+        {/* Act III: Services & Capabilities */}
+        <HomeServices />
 
-        {/* Pricing */}
-        <motion.div {...sectionReveal}>
-          <PricingSection />
-        </motion.div>
+        {/* Act IV: Investment & Pricing Packages */}
+        <PricingSection />
 
+        {/* Chapter Transition 03: Principle */}
         <QuoteSection
           number="03"
           label="PRINCIPLE"
@@ -89,15 +82,11 @@ export function HomePage() {
           variant="minimal"
         />
 
-        {/* Client Testimonials */}
-        <motion.div {...sectionReveal}>
-          <TestimonialsSection />
-        </motion.div>
+        {/* Act V: Client Testimonials Marquee Flow */}
+        <TestimonialsSection />
 
-        {/* Client / Project Contact Form & Final CTA */}
-        <motion.div {...sectionReveal}>
-          <ContactSection />
-        </motion.div>
+        {/* Act VI: Dialogue & Project Initiation */}
+        <ContactSection />
       </React.Suspense>
 
       <Footer />

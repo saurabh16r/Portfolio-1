@@ -1,7 +1,8 @@
 import { Link, useParams } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import { ArrowLeft } from "lucide-react";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
+import { motion, useScroll, useTransform, useReducedMotion } from "framer-motion";
 import { projects } from "@/data/projects";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
@@ -18,6 +19,15 @@ import { api, getImageUrl } from "@/services/api.js";
 
 export function CaseStudyPage() {
   const { slug } = useParams<{ slug: string }>();
+  const bannerRef = useRef<HTMLDivElement>(null);
+  const shouldReduceMotion = useReducedMotion();
+
+  const { scrollYProgress } = useScroll({
+    target: bannerRef,
+    offset: ["start end", "end start"],
+  });
+
+  const bannerImageY = useTransform(scrollYProgress, [0, 1], [-30, 30]);
 
   const projectIndex = projects.findIndex((item) => item.slug === slug);
   const fallbackProject = projects[projectIndex];
@@ -151,14 +161,18 @@ export function CaseStudyPage() {
 
       {/* Large Hero Image Banner */}
       {project.heroImage && (
-        <section className="px-6 sm:px-8 lg:px-12 bg-transparent">
+        <section ref={bannerRef} className="px-6 sm:px-8 lg:px-12 bg-transparent">
           <div className="mx-auto max-w-7xl">
             <div
               className={`h-[40vh] md:h-[60vh] w-full rounded-[2rem] bg-gradient-to-br ${project.accent} overflow-hidden relative border border-white/[0.08]`}
             >
-              <div
+              <motion.div
                 className="absolute inset-0 bg-cover bg-center mix-blend-overlay"
-                style={{ backgroundImage: `url(${getImageUrl(project.heroImage, 1600)})` }}
+                style={{
+                  backgroundImage: `url(${getImageUrl(project.heroImage, 1600)})`,
+                  y: shouldReduceMotion ? 0 : bannerImageY,
+                  scale: 1.08,
+                }}
               />
               <div className="absolute inset-0 bg-black/10" />
             </div>

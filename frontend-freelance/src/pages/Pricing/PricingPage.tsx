@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { Helmet } from "react-helmet-async";
 import { motion, AnimatePresence } from "framer-motion";
 import { ChevronDown, Sparkles, HelpCircle, ShieldCheck, Zap, Clock } from "lucide-react";
@@ -7,7 +7,6 @@ import { Footer } from "@/components/layout/Footer";
 import { SmoothScroll } from "@/components/layout/SmoothScroll";
 import { CinematicBackground } from "@/components/layout/CinematicBackground";
 import { PricingSection } from "@/components/sections/Home/PricingSection";
-import { SectionHeading } from "@/components/common/SectionHeading";
 import { LuxuryButton } from "@/components/common/LuxuryButton";
 
 const faqs = [

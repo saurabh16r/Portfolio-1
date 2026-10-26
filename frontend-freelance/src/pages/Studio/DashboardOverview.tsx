@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { api } from "../../services/api.js";
-import { Briefcase, Inbox, Eye, ShieldAlert, ArrowUpRight, Clock } from "lucide-react";
+import { Briefcase, Inbox, ShieldAlert, ArrowUpRight, Clock } from "lucide-react";
 
 interface CaseStudyType {
   _id: string;
